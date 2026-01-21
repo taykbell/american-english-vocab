@@ -16,6 +16,7 @@
   --green: #9d174d;
   --border: #f2d5e3;
   --shadow: 0 4px 12px rgba(219,39,119,.08);
+  --example-bg: rgba(251, 113, 133, 0.05); /* Светлый фон для примеров */
 }
 
 [data-theme="dark"] {
@@ -28,6 +29,7 @@
   --green: #f472b6;
   --border: #3b1423;
   --shadow: 0 4px 12px rgba(0,0,0,.25);
+  --example-bg: rgba(251, 113, 133, 0.08); /* Темный фон для примеров */
 }
 
 * { box-sizing: border-box; }
@@ -274,8 +276,10 @@ input[type="range"] {
 /* ===== АНГЛИЙСКОЕ СЛОВО И ПЕРЕВОД ===== */
 .word-line { 
   font-size: 21px; 
-  margin-bottom: 14px;
+  margin-bottom: 20px;
   margin-top: 28px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
 }
 
 .word-en {
@@ -288,32 +292,47 @@ input[type="range"] {
   cursor: pointer;
 }
 
+/* ===== ПРИМЕРЫ С ФОНОВЫМИ БЛОКАМИ ===== */
+.example {
+  margin-bottom: 14px;
+  background: var(--example-bg);
+  border-radius: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.example:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
 .en {
   cursor: pointer;
   color: var(--green);
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  line-height: 1.4;
 }
 
 .ipa {
   font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif;
   color: var(--accent);
   font-size: 13px;
-  margin-bottom: 6px;
-  padding-left: 10px;
-  border-left: 2px solid var(--border);
+  margin-bottom: 8px;
+  padding-left: 8px;
+  border-left: 2px solid var(--accent);
   font-style: italic;
-  opacity: 0.8;
+  opacity: 0.9;
+  line-height: 1.3;
 }
 
 .ru {
   cursor: pointer;
   color: var(--muted);
-  margin-bottom: 14px;
-  padding-left: 6px;
+  margin-bottom: 0;
+  line-height: 1.4;
 }
-
-.example { margin-bottom: 10px; }
 
 .hide-ru .ru {
   display: none;
@@ -454,19 +473,28 @@ input[type="range"] {
   .word-line {
     font-size: 18px;
     margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+  }
+  
+  .example {
+    margin-bottom: 12px;
+    padding: 12px 14px;
+    border-radius: 8px;
   }
   
   .en {
     font-size: 15px;
+    margin-bottom: 6px;
   }
   
-  .ipa, .ru {
+  .ipa {
     font-size: 13px;
+    margin-bottom: 6px;
   }
   
-  .example {
-    margin-bottom: 8px;
+  .ru {
+    font-size: 13px;
   }
   
   /* ИКОНКИ СЕРВИСОВ НА МОБИЛЬНОМ */
@@ -546,8 +574,21 @@ input[type="range"] {
     font-size: 16px;
   }
   
+  .example {
+    margin-bottom: 10px;
+    padding: 10px 12px;
+  }
+  
   .en {
     font-size: 14px;
+  }
+  
+  .ipa {
+    font-size: 12px;
+  }
+  
+  .ru {
+    font-size: 12px;
   }
   
   .control-buttons {
