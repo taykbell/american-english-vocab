@@ -16,7 +16,7 @@
   --green: #9d174d;
   --border: #f2d5e3;
   --shadow: 0 4px 12px rgba(219,39,119,.08);
-  --example-bg: rgba(251, 113, 133, 0.05); /* Светлый фон для примеров */
+  --example-bg: rgba(251, 113, 133, 0.05);
 }
 
 [data-theme="dark"] {
@@ -29,7 +29,7 @@
   --green: #f472b6;
   --border: #3b1423;
   --shadow: 0 4px 12px rgba(0,0,0,.25);
-  --example-bg: rgba(251, 113, 133, 0.08); /* Темный фон для примеров */
+  --example-bg: rgba(251, 113, 133, 0.08);
 }
 
 * { box-sizing: border-box; }
@@ -44,30 +44,34 @@ body {
   text-align: center;
 }
 
-h1 { margin: 0 0 20px; font-weight: 700; font-size: 2rem; }
+h1 { margin: 0 0 8px; font-weight: 700; font-size: 2rem; }
 
-/* ===== ПОИСК И СТАТИСТИКА ===== */
-.stats-bar {
+.header-subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* ===== СЕКЦИЯ ПОИСКА ===== */
+.search-section {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   margin-bottom: 20px;
-  padding: 0 10px;
-  max-width: 680px;
+  max-width: 720px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.stats {
+.search-section .stats {
   font-size: 14px;
   color: var(--muted);
   padding: 6px 12px;
   background: var(--panel);
   border-radius: 8px;
   border: 1px solid var(--border);
-  white-space: nowrap;
 }
 
 .search-container {
@@ -93,75 +97,290 @@ h1 { margin: 0 0 20px; font-weight: 700; font-size: 2rem; }
   box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
 }
 
-/* ===== КНОПКИ УПРАВЛЕНИЯ ===== */
-.control-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
+/* ===== СЕКЦИЯ ФИЛЬТРОВ ===== */
+.filter-section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 0 auto 20px;
+  max-width: 720px;
+  box-shadow: var(--shadow);
 }
 
-.test-toggle, .ipa-toggle {
+.filter-section h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--accent);
+  text-align: left;
+  padding-left: 8px;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.filter-container {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-container label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+  text-align: left;
+}
+
+#tagFilter, #themeFilter {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#tagFilter:hover, #themeFilter:hover {
+  border-color: var(--accent);
+}
+
+#tagFilter:focus, #themeFilter:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(219,39,119,0.1);
+}
+
+#tagFilter[multiple] {
+  height: auto;
+  min-height: 44px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#tagFilter option {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#tagFilter option:hover {
+  background-color: var(--accent);
+  color: white;
+}
+
+.selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.tag-badge {
+  background: var(--accent);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tag-badge:hover {
+  background: var(--green);
+  transform: translateY(-1px);
+}
+
+.tag-count {
+  font-size: 10px;
+  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1px 4px;
+  border-radius: 8px;
+  margin-left: 4px;
+}
+
+.remove-tag {
+  font-size: 14px;
+  line-height: 1;
+  margin-left: 3px;
+}
+
+.filter-stats {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+  text-align: left;
+}
+
+.clear-filters {
   padding: 8px 14px;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--panel);
   color: var(--text);
   cursor: pointer;
-  box-shadow: var(--shadow);
   font-size: 14px;
+  transition: all 0.2s;
+  white-space: nowrap;
+  margin-top: 12px;
+}
+
+.clear-filters:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* Отображение тегов в карточках */
+.word-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.word-tag {
+  background: rgba(219, 39, 119, 0.1);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  border: 1px solid rgba(219, 39, 119, 0.2);
+  cursor: pointer;
   transition: all 0.2s;
 }
 
-.test-toggle:hover, .ipa-toggle:hover {
+.word-tag:hover {
+  background: rgba(219, 39, 119, 0.2);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(219,39,119,.15);
 }
 
-/* Верхняя панель - ДЕСКТОПНАЯ ВЕРСИЯ */
-.top-bar {
+/* ===== КНОПКИ УПРАВЛЕНИЯ ===== */
+.control-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 0 auto 20px;
   max-width: 720px;
-  margin: 0 auto 24px;
+  flex-wrap: wrap;
+}
+
+.test-toggle, .ipa-toggle {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+
+.test-toggle:hover, .ipa-toggle:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* ===== СЕКЦИЯ НАСТРОЙКИ ОЗВУЧКИ ===== */
+.voice-section {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 12px 14px;
+  padding: 16px;
+  margin: 0 auto 20px;
+  max-width: 720px;
   box-shadow: var(--shadow);
+}
 
+.voice-section h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--accent);
+  text-align: left;
+  padding-left: 8px;
+}
+
+.voice-controls {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  gap: 15px;
   align-items: center;
-  gap: 14px;
 }
 
-.controls {
+.voice-row {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
 }
 
-.control-item {
+.voice-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  font-size: 13px;
+  align-items: flex-start;
+  min-width: 120px;
 }
 
-#voiceSelect, #voiceSelectSide {
-  padding: 6px 10px;
+.voice-item label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+#voiceSelect {
+  width: 100%;
+  padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--card);
   color: var(--text);
-  min-width: 240px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.slider-with-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.slider-value {
+  min-width: 40px;
+  font-size: 13px;
+  text-align: right;
+  color: var(--text);
+  font-weight: 500;
 }
 
 input[type="range"] {
   accent-color: var(--accent);
-  width: 140px;
+  width: 100%;
+  flex: 1;
 }
 
 /* ===== КНОПКИ СПРАВА ===== */
@@ -191,17 +410,16 @@ input[type="range"] {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 12px 14px;
+  padding: 20px;
   box-shadow: var(--shadow);
   display: none;
   z-index: 99;
-  width: 280px;
+  width: 320px;
   flex-direction: column;
-  align-items: center;
-  gap: 14px;
+  gap: 18px;
   opacity: 0;
   transform: translateX(20px);
-  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .side-panel.open {
@@ -209,9 +427,136 @@ input[type="range"] {
   transform: translateX(0);
 }
 
+.side-panel > div {
+  width: 100%;
+}
+
+.side-panel label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 500;
+  text-align: left;
+}
+
+.side-panel select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 8px;
+}
+
+.side-panel select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
+}
+
+/* Голосовые контролы внутри боковой панели */
+.side-panel .voice-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.side-panel .voice-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.side-panel .voice-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.side-panel .slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.side-panel .slider-with-value {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.side-panel .slider-value {
+  min-width: 40px;
+  font-size: 14px;
+  text-align: right;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.side-panel input[type="range"] {
+  accent-color: var(--accent);
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  outline: none;
+}
+
+.side-panel input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: 2px solid var(--card);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Кнопки внутри боковой панели */
+.side-panel .control-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin: 5px 0 0 0;
+}
+
+.side-panel .test-toggle,
+.side-panel .ipa-toggle {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  text-align: center;
+  width: 100%;
+}
+
+.side-panel .test-toggle:hover,
+.side-panel .ipa-toggle:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
 /* ===== КАРТОЧКА ===== */
 #container {
-  max-width: 680px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
@@ -244,7 +589,6 @@ input[type="range"] {
   vertical-align: middle;
 }
 
-/* Стили для изображений иконок */
 .service-icon {
   width: 20px;
   height: 20px;
@@ -274,10 +618,9 @@ input[type="range"] {
 }
 
 /* ===== АНГЛИЙСКОЕ СЛОВО И ПЕРЕВОД ===== */
-.word-line { 
-  font-size: 21px; 
+.word-line {
+  font-size: 21px;
   margin-bottom: 20px;
-  margin-top: 28px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
 }
@@ -376,13 +719,18 @@ input[type="range"] {
   body {
     padding: 20px 10px 40px;
   }
-  
+
   h1 {
     font-size: 1.5rem;
-    margin: 0 0 15px;
+    margin: 0 0 8px;
     padding-top: 40px;
   }
-  
+
+  .header-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+  }
+
   .theme-toggle, .settings-toggle {
     position: fixed;
     top: 10px;
@@ -390,107 +738,109 @@ input[type="range"] {
     padding: 6px 10px;
     font-size: 12px;
   }
-  
+
   .settings-toggle {
     top: 50px;
   }
-  
-  .stats-bar {
+
+  .search-section {
     flex-direction: column;
     gap: 10px;
     margin-bottom: 15px;
   }
-  
-  .stats {
+
+  .search-section .stats {
     width: 100%;
     text-align: center;
     font-size: 12px;
     padding: 5px 10px;
   }
-  
+
   .search-container {
     width: 100%;
     max-width: 100%;
   }
-  
-  .control-buttons {
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  
-  .test-toggle, .ipa-toggle {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-  
-  /* МОБИЛЬНАЯ ВЕРСИЯ ПАНЕЛИ УПРАВЛЕНИЯ */
-  .top-bar {
+
+  .filter-bar {
     flex-direction: column;
-    padding: 10px;
     gap: 10px;
-    margin-bottom: 15px;
+    margin: 15px auto 10px;
+  }
+
+  .filter-container {
+    width: 100%;
     max-width: 100%;
   }
-  
-  .top-bar > div:first-child {
-    width: 100%;
+
+  #tagFilter, #themeFilter {
+    font-size: 13px;
+    padding: 8px 12px;
   }
-  
-  #voiceSelect, #voiceSelectSide {
-    min-width: 100%;
+
+  .clear-filters {
     width: 100%;
-    font-size: 14px;
+    padding: 10px;
+    margin-top: 10px;
   }
-  
-  .controls {
-    width: 100%;
+
+  .filter-container label {
+    text-align: center;
+  }
+
+  .filter-stats {
+    text-align: center;
+  }
+
+  .voice-row {
     flex-direction: column;
     gap: 10px;
   }
-  
-  .control-item {
+
+  .voice-item {
     width: 100%;
+    max-width: 100%;
   }
-  
-  input[type="range"] {
-    width: 100%;
-    max-width: 250px;
-  }
-  
+
   /* МОБИЛЬНАЯ КАРТОЧКА */
   .card {
     padding: 16px;
     margin-bottom: 15px;
     border-radius: 12px;
   }
-  
+
   .word-line {
     font-size: 18px;
     margin-top: 20px;
     margin-bottom: 16px;
     padding-bottom: 10px;
   }
-  
+
+  .word-tags {
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
   .example {
     margin-bottom: 12px;
     padding: 12px 14px;
     border-radius: 8px;
   }
-  
+
   .en {
     font-size: 15px;
     margin-bottom: 6px;
   }
-  
+
   .ipa {
     font-size: 13px;
     margin-bottom: 6px;
   }
-  
+
   .ru {
     font-size: 13px;
   }
-  
+
   /* ИКОНКИ СЕРВИСОВ НА МОБИЛЬНОМ */
   .card-index {
     position: relative;
@@ -500,47 +850,49 @@ input[type="range"] {
     margin-bottom: 10px;
     padding-bottom: 0;
   }
-  
+
   .card-index a {
     margin: 0 3px;
   }
-  
+
   .service-icon {
     width: 18px;
     height: 18px;
     padding: 1px;
   }
-  
+
   .index-num {
     display: block;
     margin-top: 5px;
     margin-left: 0;
     font-size: 11px;
   }
-  
+
   /* БОКОВАЯ ПАНЕЛЬ НА МОБИЛЬНОМ */
   .side-panel {
     top: 70px;
     right: 10px;
     width: calc(100vw - 20px);
     max-width: 300px;
-    padding: 10px;
+    padding: 16px;
+    gap: 14px;
   }
   
-  /* ПАГИНАЦИЯ НА МОБИЛЬНОМ */
-  .pagination {
-    gap: 5px;
+  .side-panel .voice-controls {
+    gap: 12px;
   }
   
-  .page-btn {
-    padding: 6px 8px;
+  .side-panel .voice-row {
+    gap: 12px;
+  }
+  
+  .side-panel .slider-with-value {
+    gap: 8px;
+  }
+  
+  .side-panel .slider-value {
     font-size: 13px;
-    min-width: 36px;
-  }
-  
-  .word-count {
-    font-size: 12px;
-    padding: 0 10px;
+    min-width: 35px;
   }
 }
 
@@ -550,71 +902,93 @@ input[type="range"] {
     font-size: 1.3rem;
     padding-top: 50px;
   }
-  
+
   .theme-toggle, .settings-toggle {
     top: 5px;
     right: 5px;
   }
-  
+
   .settings-toggle {
     top: 45px;
   }
-  
+
   .card {
     padding: 12px;
   }
-  
+
   .word-line {
     font-size: 16px;
   }
-  
+
   .example {
     margin-bottom: 10px;
     padding: 10px 12px;
   }
-  
+
   .en {
     font-size: 14px;
   }
-  
+
   .ipa {
     font-size: 12px;
   }
-  
+
   .ru {
     font-size: 12px;
   }
-  
+
   .control-buttons {
     flex-direction: column;
   }
-  
+
   .test-toggle, .ipa-toggle {
     width: 100%;
     margin-bottom: 5px;
   }
-  
+
   .pagination {
     gap: 3px;
   }
-  
+
   .page-btn {
     padding: 5px 6px;
     font-size: 12px;
     min-width: 32px;
   }
+
+  /* БОКОВАЯ ПАНЕЛЬ НА ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНАХ */
+  .side-panel {
+    padding: 14px;
+    gap: 12px;
+    max-width: 280px;
+  }
+  
+  .side-panel label {
+    font-size: 13px;
+  }
+  
+  .side-panel select {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  
+  .side-panel .test-toggle,
+  .side-panel .ipa-toggle {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
 }
 
 /* Для планшетов */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .top-bar {
+  .voice-section, .filter-section {
     max-width: 90%;
   }
-  
+
   #container {
     max-width: 90%;
   }
-  
+
   .card {
     padding: 20px;
   }
@@ -626,73 +1000,122 @@ input[type="range"] {
 
 <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙</button>
 <button class="settings-toggle" id="settingsBtn" onclick="toggleSettings()">🎙️</button>
-
 <h1>🇺🇸 American English Vocabulary</h1>
+<div class="header-subtitle">Изучение американского английского по словам и фразам</div>
 
-<!-- ===== ПОИСК И СТАТИСТИКА ===== -->
-<div class="stats-bar">
-  <div class="stats" id="totalStats">Всего слов: 0</div>
+<!-- ===== СЕКЦИЯ ПОИСКА ===== -->
+<div class="search-section">
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="🔍 Поиск слова или перевода...">
+  </div>
+  <div class="stats" id="totalStats">Всего слов: 0</div>
+</div>
+
+<!-- ===== СЕКЦИЯ ФИЛЬТРОВ ===== -->
+<div class="filter-section">
+  <h3>🔍 Фильтры</h3>
+  <div class="filter-bar">
+    <div class="filter-container">
+      <label>Теги</label>
+      <select id="tagFilter" multiple size="1">
+        <option value="">Все теги</option>
+      </select>
+      <div class="filter-stats" id="tagStats">
+        Всего уникальных тегов: 0
+      </div>
+      <div class="selected-tags" id="selectedTags"></div>
+    </div>
+
+    <div class="filter-container">
+      <label>Темы</label>
+      <select id="themeFilter">
+        <option value="">Все темы</option>
+      </select>
+      <div class="filter-stats" id="themeStats">
+        Всего уникальных тем: 0
+      </div>
+    </div>
+
+    <button class="clear-filters" id="clearFilters" onclick="clearAllFilters()">
+      ✕ Очистить фильтры
+    </button>
+  </div>
+</div>
+
+<!-- ===== СЕКЦИЯ НАСТРОЙКИ ОЗВУЧКИ ===== -->
+<div class="voice-section">
+  <h3>🔊 Настройка озвучки</h3>
+  <div class="voice-controls">
+    <div class="voice-row">
+      <div class="voice-item">
+        <label>Голос:</label>
+        <select id="voiceSelect"></select>
+      </div>
+      <div class="voice-item">
+        <div class="slider-container">
+          <label>Скорость:</label>
+          <div class="slider-with-value">
+            <input id="rateSlider" type="range" min="0.30" max="1.2" step="0.05">
+            <span class="slider-value" id="rateLabel"></span>
+          </div>
+        </div>
+      </div>
+      <div class="voice-item">
+        <div class="slider-container">
+          <label>Высота голоса:</label>
+          <div class="slider-with-value">
+            <input id="pitchSlider" type="range" min="0.7" max="1.3" step="0.05">
+            <span class="slider-value" id="pitchLabel"></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- ===== КНОПКИ УПРАВЛЕНИЯ ===== -->
 <div class="control-buttons">
   <button class="test-toggle" id="testBtn" onclick="toggleTestMode()">
-    🧠 Включить режим самопроверки
+    🧠 Самопроверка
   </button>
   <button class="ipa-toggle" id="ipaBtn" onclick="toggleIpaMode()">
     👁️ Показать IPA
   </button>
 </div>
 
-<!-- ===== ВЕРХНЯЯ ПАНЕЛЬ ===== -->
-<div class="top-bar">
-  <div>
-    <label>🎙️ Голос:</label>
-    <select id="voiceSelect"></select>
-  </div>
-
-  <div class="controls">
-    <div class="control-item">
-      <label for="rateSlider">🐢 Скорость → 🚀</label>
-      <input id="rateSlider" type="range" min="0.30" max="1.2" step="0.05">
-      <span id="rateLabel"></span>
-    </div>
-
-    <div class="control-item">
-      <label for="pitchSlider">🔊 Высота голоса</label>
-      <input id="pitchSlider" type="range" min="0.7" max="1.3" step="0.05">
-      <span id="pitchLabel"></span>
-    </div>
-  </div>
-</div>
-
 <!-- ===== БОКОВАЯ ПАНЕЛЬ ===== -->
 <div class="side-panel" id="sidePanel">
   <div>
-    <label>🎙️ Голос:</label>
+    <label>Голос:</label>
     <select id="voiceSelectSide"></select>
   </div>
 
-  <div class="controls">
-    <div class="control-item">
-      <label>🐢 Скорость → 🚀</label>
-      <input id="rateSliderSide" type="range" min="0.30" max="1.2" step="0.05">
-      <span id="rateLabelSide"></span>
-    </div>
-
-    <div class="control-item">
-      <label>🔊 Высота голоса</label>
-      <input id="pitchSliderSide" type="range" min="0.7" max="1.3" step="0.05">
-      <span id="pitchLabelSide"></span>
+  <div class="voice-controls">
+    <div class="voice-row">
+      <div class="voice-item">
+        <div class="slider-container">
+          <label>Скорость:</label>
+          <div class="slider-with-value">
+            <input id="rateSliderSide" type="range" min="0.30" max="1.2" step="0.05">
+            <span class="slider-value" id="rateLabelSide"></span>
+          </div>
+        </div>
+      </div>
+      <div class="voice-item">
+        <div class="slider-container">
+          <label>Высота голоса:</label>
+          <div class="slider-with-value">
+            <input id="pitchSliderSide" type="range" min="0.7" max="1.3" step="0.05">
+            <span class="slider-value" id="pitchLabelSide"></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="control-buttons">
     <button class="test-toggle" id="testBtnSide" onclick="toggleTestMode()">
-      🧠 Включить режим самопроверки
+      🧠 Самопроверка
     </button>
     <button class="ipa-toggle" id="ipaBtnSide" onclick="toggleIpaMode()">
       👁️ Показать IPA
@@ -708,7 +1131,6 @@ input[type="range"] {
 </div>
 
 <script>
-// ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
 const PAGE_SIZE = 100;
 let allData = [];
 let filteredData = [];
@@ -717,46 +1139,157 @@ let currentSearch = '';
 let showIpa = false;
 let isAndroid = false;
 let isMobileView = false;
+let currentTags = [];
+let currentTheme = '';
+let allTags = new Set();
+let allThemes = new Set();
+let tagCounts = {};
+let themeCounts = {};
 
-// ===== ОПРЕДЕЛЕНИЕ УСТРОЙСТВА И ВЬЮПОРТА =====
 function detectPlatform() {
   const userAgent = navigator.userAgent.toLowerCase();
   isAndroid = /android/.test(userAgent);
-  
-  // Определяем мобильный вьюпорт
   isMobileView = window.innerWidth <= 768;
-  
-  // Для разработки можно принудительно включить Android режим
-  // isAndroid = true; // Раскомментируйте для тестирования на ПК
-  // isMobileView = true; // Раскомментируйте для тестирования мобильной версии на ПК
-}
-
-// ===== ОБНОВЛЕНИЕ ПРИ ИЗМЕНЕНИИ РАЗМЕРА ОКНА =====
-function handleResize() {
-  const wasMobile = isMobileView;
-  isMobileView = window.innerWidth <= 768;
-  
-  // Если переключились между мобильной и десктопной версией
-  if (wasMobile !== isMobileView) {
-    // Перерисовываем текущую страницу для применения новых стилей
-    renderPage(currentPage);
-  }
 }
 
 window.addEventListener('resize', handleResize);
 
-// ===== СТАТИСТИКА =====
+function handleResize() {
+  const wasMobile = isMobileView;
+  isMobileView = window.innerWidth <= 768;
+
+  if (wasMobile !== isMobileView) {
+    renderPage(currentPage);
+  }
+}
+
 function updateStats() {
   const total = allData.length;
   const filtered = filteredData.length;
   const start = (currentPage - 1) * PAGE_SIZE + 1;
   const end = Math.min(start + PAGE_SIZE - 1, filtered);
-  
-  document.getElementById('totalStats').textContent = 
+
+  document.getElementById('totalStats').textContent =
     `Всего слов: ${total} (найдено: ${filtered})`;
-  
-  document.getElementById('wordCount').textContent = 
+
+  document.getElementById('wordCount').textContent =
     filtered > 0 ? `Показаны слова ${start}-${end} из ${filtered}` : 'Слова не найдены';
+}
+
+function extractTagsAndThemes() {
+  allTags.clear();
+  allThemes.clear();
+  tagCounts = {};
+  themeCounts = {};
+
+  allData.forEach(item => {
+    if (item.tags) {
+      item.tags.forEach(tag => {
+        allTags.add(tag);
+        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+      });
+    }
+
+    if (item.theme) {
+      allThemes.add(item.theme);
+      themeCounts[item.theme] = (themeCounts[item.theme] || 0) + 1;
+    }
+  });
+
+  document.getElementById('tagStats').textContent =
+    `Всего уникальных тегов: ${allTags.size}`;
+  document.getElementById('themeStats').textContent =
+    `Всего уникальных тем: ${allThemes.size}`;
+
+  populateFilterDropdowns();
+}
+
+function populateFilterDropdowns() {
+  const tagFilter = document.getElementById('tagFilter');
+  const themeFilter = document.getElementById('themeFilter');
+
+  const sortedTags = Array.from(allTags).sort();
+  tagFilter.innerHTML = '<option value="">Все теги</option>';
+
+  sortedTags.forEach(tag => {
+    const option = document.createElement('option');
+    option.value = tag;
+    const count = tagCounts[tag] || 0;
+    option.textContent = `${tag} (${count})`;
+    option.title = `${tag} — ${count} слов`;
+    tagFilter.appendChild(option);
+  });
+
+  tagFilter.setAttribute('multiple', 'multiple');
+
+  const sortedThemes = Array.from(allThemes).sort();
+  themeFilter.innerHTML = '<option value="">Все темы</option>';
+
+  sortedThemes.forEach(theme => {
+    const option = document.createElement('option');
+    option.value = theme;
+    const count = themeCounts[theme] || 0;
+    const displayName = theme.length > 35 ? theme.substring(0, 35) + '...' : theme;
+    option.textContent = `${displayName} (${count})`;
+    option.title = `${theme} — ${count} слов`;
+    themeFilter.appendChild(option);
+  });
+}
+
+function updateSelectedTagsDisplay() {
+  const container = document.getElementById('selectedTags');
+  container.innerHTML = '';
+
+  const filterTitle = document.querySelector('.filter-container:first-child label');
+  if (filterTitle) {
+    filterTitle.textContent = `Теги (выбрано: ${currentTags.length})`;
+  }
+
+  currentTags.forEach(tag => {
+    const count = tagCounts[tag] || 0;
+
+    const badge = document.createElement('div');
+    badge.className = 'tag-badge';
+    badge.innerHTML = `${tag} <span class="tag-count">${count}</span> <span class="remove-tag" onclick="removeTag('${tag}')">×</span>`;
+    container.appendChild(badge);
+  });
+}
+
+function removeTag(tagToRemove) {
+  currentTags = currentTags.filter(tag => tag !== tagToRemove);
+
+  const tagFilter = document.getElementById('tagFilter');
+  Array.from(tagFilter.options).forEach(option => {
+    if (option.value === tagToRemove) {
+      option.selected = false;
+    }
+  });
+
+  updateSelectedTagsDisplay();
+  applyFilters();
+}
+
+function clearAllFilters() {
+  currentTags = [];
+  currentTheme = '';
+
+  const tagFilter = document.getElementById('tagFilter');
+  const themeFilter = document.getElementById('themeFilter');
+
+  Array.from(tagFilter.options).forEach(option => {
+    option.selected = false;
+  });
+  tagFilter.selectedIndex = 0;
+
+  themeFilter.selectedIndex = 0;
+
+  const filterTitle = document.querySelector('.filter-container:first-child label');
+  if (filterTitle) {
+    filterTitle.textContent = 'Теги';
+  }
+
+  updateSelectedTagsDisplay();
+  applyFilters();
 }
 
 function applyFilters() {
@@ -765,39 +1298,66 @@ function applyFilters() {
       const searchLower = currentSearch.toLowerCase();
       const inWord = item.word.toLowerCase().includes(searchLower);
       const inTranslation = item.translation.toLowerCase().includes(searchLower);
-      const inExamples = item.examples.some(ex => 
-        ex.en.toLowerCase().includes(searchLower) || 
+      const inExamples = item.examples.some(ex =>
+        ex.en.toLowerCase().includes(searchLower) ||
         ex.ru.toLowerCase().includes(searchLower) ||
         (ex.ipa && ex.ipa.toLowerCase().includes(searchLower))
       );
-      
+
       if (!inWord && !inTranslation && !inExamples) return false;
     }
-    
+
+    if (currentTags.length > 0) {
+      if (!item.tags || !item.tags.length) return false;
+      const hasAllTags = currentTags.every(tag => item.tags.includes(tag));
+      if (!hasAllTags) return false;
+    }
+
+    if (currentTheme) {
+      if (!item.theme || item.theme !== currentTheme) return false;
+    }
+
     return true;
   });
-  
+
   updateStats();
   renderPage(currentPage);
   buildPagination();
 }
 
-// ===== РЕЖИМ IPA =====
+function initFilters() {
+  const tagFilter = document.getElementById('tagFilter');
+  const themeFilter = document.getElementById('themeFilter');
+
+  tagFilter.addEventListener('change', function() {
+    currentTags = Array.from(this.selectedOptions)
+      .map(opt => opt.value)
+      .filter(val => val !== "");
+
+    updateSelectedTagsDisplay();
+    applyFilters();
+  });
+
+  themeFilter.addEventListener('change', function() {
+    currentTheme = this.value;
+    applyFilters();
+  });
+}
+
 function toggleIpaMode() {
   showIpa = !showIpa;
   document.body.classList.toggle("hide-ipa", !showIpa);
-  
+
   const txt = showIpa
     ? "🙈 Скрыть IPA"
     : "👁️ Показать IPA";
-  
+
   document.getElementById("ipaBtn").textContent = txt;
   document.getElementById("ipaBtnSide").textContent = txt;
-  
+
   localStorage.setItem("show_ipa", showIpa);
 }
 
-// ===== УТИЛИТЫ ВЫДЕЛЕНИЯ =====
 function selectNode(el){
   const range = document.createRange();
   range.selectNodeContents(el);
@@ -836,7 +1396,6 @@ function selectSingleWordFromEvent(e, el){
   return text.slice(L, R).trim();
 }
 
-// ===== ПАГИНАЦИЯ =====
 function renderPage(page){
   currentPage = page;
   const container = document.getElementById("container");
@@ -871,8 +1430,13 @@ function renderPage(page){
     const card=document.createElement("div");
     card.className="card";
 
-    const examplesHTML = item.examples.map(ex => {
-      const ipaHTML = ex.ipa ? `<div class="ipa">/${ex.ipa}/</div>` : '';
+    const examplesToShow = (currentTags.length === 0 && !currentTheme && !currentSearch)
+      ? item.examples.slice(0, 4)
+      : item.examples;
+
+    const examplesHTML = examplesToShow.map(ex => {
+      const ipaText = ex.ipa ? ex.ipa : '';
+      const ipaHTML = ipaText ? `<div class="ipa">${ipaText}</div>` : '';
       return `
         <div class="example">
           <div class="en" data-speak="${ex.en}">${ex.en}</div>
@@ -882,8 +1446,15 @@ function renderPage(page){
       `;
     }).join("");
 
-    // Разная верстка для мобильной и десктопной версии
-    const cardIndexHTML = isMobileView 
+    const tagsHTML = item.tags && item.tags.length > 0 ? `
+      <div class="word-tags">
+        ${item.tags.map(tag => `
+          <span class="word-tag" onclick="addTagFromCard('${tag.replace(/'/g, "\\'")}')">${tag}</span>
+        `).join('')}
+      </div>
+    ` : '';
+
+    const cardIndexHTML = isMobileView
       ? `
         <div class="card-index">
           <div>
@@ -953,7 +1524,7 @@ function renderPage(page){
 
     card.innerHTML=`
       ${cardIndexHTML}
-
+      ${tagsHTML}
       <div class="word-line">
         <span class="word-en" data-speak="${item.word}">${item.word}</span>
         –
@@ -967,7 +1538,6 @@ function renderPage(page){
     container.appendChild(card);
   });
 
-  // Назначение обработчиков для озвучки
   document.querySelectorAll(".word-en, .en").forEach(el=>{
     el.onclick = e => {
       selectNode(el);
@@ -987,6 +1557,22 @@ function renderPage(page){
 
   updateStats();
   updatePaginationUI();
+}
+
+function addTagFromCard(tag) {
+  if (!currentTags.includes(tag)) {
+    currentTags.push(tag);
+
+    const tagFilter = document.getElementById('tagFilter');
+    Array.from(tagFilter.options).forEach(option => {
+      if (option.value === tag) {
+        option.selected = true;
+      }
+    });
+
+    updateSelectedTagsDisplay();
+    applyFilters();
+  }
 }
 
 function buildPagination(){
@@ -1010,19 +1596,17 @@ function updatePaginationUI(){
     });
 }
 
-// ===== РЕЖИМ САМОПРОВЕРКИ =====
 let testMode = false;
 function toggleTestMode(){
   testMode = !testMode;
   document.body.classList.toggle("hide-ru", testMode);
   const txt = testMode
     ? "👀 Показать переводы"
-    : "🧠 Включить режим самопроверки";
+    : "🧠 Самопроверка";
   document.getElementById("testBtn").textContent = txt;
   document.getElementById("testBtnSide").textContent = txt;
 }
 
-// ===== ТЕМА =====
 const saved = localStorage.getItem("theme");
 if (saved) document.documentElement.setAttribute("data-theme", saved);
 
@@ -1033,7 +1617,6 @@ function toggleTheme(){
   localStorage.setItem("theme", next);
 }
 
-// ===== БОКОВАЯ ПАНЕЛЬ =====
 let isSettingsOpen = false;
 function toggleSettings(){
   const panel = document.getElementById("sidePanel");
@@ -1047,7 +1630,6 @@ function toggleSettings(){
   isSettingsOpen = !isSettingsOpen;
 }
 
-// ===== ПОЛЗУНКИ + ПОДПИСИ =====
 const rateSlider = document.getElementById("rateSlider");
 const pitchSlider = document.getElementById("pitchSlider");
 const rateLabel = document.getElementById("rateLabel");
@@ -1095,7 +1677,6 @@ pitchSliderSide.oninput = () => {
   updateLabels();
 };
 
-// ===== ГОЛОСА =====
 const voiceSelect = document.getElementById("voiceSelect");
 const voiceSelectSide = document.getElementById("voiceSelectSide");
 let VOICES = [];
@@ -1119,7 +1700,6 @@ const DISPLAY_ORDER = [
   "Никки","Саманта","Зои","Ava","Сьюзен","Элисон"
 ];
 
-// ===== ДВЕ РАЗНЫЕ ФУНКЦИИ ДЛЯ ЗАПОЛНЕНИЯ ГОЛОСОВ =====
 function populateDesktopVoices(){
   const allVoices = window.speechSynthesis.getVoices();
   if (!allVoices.length) return;
@@ -1174,38 +1754,31 @@ function populateDesktopVoices(){
 }
 
 function populateAndroidVoices(){
-  // Для Android используем простой список
   voiceSelect.innerHTML = "";
   voiceSelectSide.innerHTML = "";
-  
-  // Добавляем опцию "Без озвучки"
+
   const mute = document.createElement("option");
   mute.value="mute";
   mute.textContent="🔇 Без озвучки";
   voiceSelect.appendChild(mute);
   voiceSelectSide.appendChild(mute.cloneNode(true));
-  
-  // Для Android показываем только системный голос
+
   const systemOption = document.createElement("option");
   systemOption.value="system";
   systemOption.textContent="📱 Системный Google TTS (Android)";
   voiceSelect.appendChild(systemOption);
   voiceSelectSide.appendChild(systemOption.cloneNode(true));
-  
-  // Выбираем системный голос по умолчанию
+
   voiceSelect.value = "system";
   voiceSelectSide.value = "system";
-  
-  // Сохраняем настройку
+
   localStorage.setItem("tts_voice", "system");
 }
 
-// ===== ИНИЦИАЛИЗАЦИЯ ГОЛОСОВ =====
 function initVoices() {
   if (isAndroid) {
     populateAndroidVoices();
   } else {
-    // Для десктопа используем стандартную логику
     window.addEventListener("load", () => {
       const warmup = new SpeechSynthesisUtterance(" ");
       warmup.volume = 0;
@@ -1227,7 +1800,6 @@ voiceSelectSide.onchange = () => {
   localStorage.setItem("tts_voice", voiceSelect.value);
 };
 
-// ===== TTS ДЛЯ РАЗНЫХ ПЛАТФОРМ =====
 function speakText(text){
   if(voiceSelect.value==="mute") return;
 
@@ -1235,7 +1807,6 @@ function speakText(text){
   synth.cancel();
 
   if (isAndroid) {
-    // Для Android используем стандартный голос
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "en-US";
     u.rate = parseFloat(rateSlider.value);
@@ -1243,7 +1814,6 @@ function speakText(text){
     u.volume = 1.0;
     synth.speak(u);
   } else {
-    // Для десктопа используем выбранный голос
     const idx = parseInt(voiceSelect.value,10);
     const voice = VOICES[idx] || VOICES[0];
 
@@ -1257,47 +1827,44 @@ function speakText(text){
   }
 }
 
-// ===== ПОИСК =====
 document.getElementById('searchInput').addEventListener('input', function(e) {
   currentSearch = e.target.value.trim();
   currentPage = 1;
   applyFilters();
 });
 
-// ===== ЗАГРУЗКА ДАННЫХ =====
 fetch("data.json")
   .then(r=>r.json())
   .then(data=>{
     allData = data;
     filteredData = [...allData];
-    
-    // Сначала определяем платформу и вьюпорт
+
     detectPlatform();
-    
-    // Затем инициализируем голоса
     initVoices();
-    
-    // Восстанавливаем настройку IPA из localStorage
+
+    extractTagsAndThemes();
+    initFilters();
+
     const savedIpa = localStorage.getItem("show_ipa");
     if (savedIpa !== null) {
       showIpa = savedIpa === "true";
       document.body.classList.toggle("hide-ipa", !showIpa);
-      
+
       const txt = showIpa
         ? "🙈 Скрыть IPA"
         : "👁️ Показать IPA";
-      
+
       document.getElementById("ipaBtn").textContent = txt;
       document.getElementById("ipaBtnSide").textContent = txt;
     }
-    
+
     updateStats();
     renderPage(1);
     buildPagination();
   })
   .catch(err => {
     console.error('Ошибка загрузки данных:', err);
-    document.getElementById('container').innerHTML = 
+    document.getElementById('container').innerHTML =
       '<div style="text-align: center; padding: 40px; color: var(--muted);">⚠️ Ошибка загрузки данных. Проверьте наличие файла data.json</div>';
   });
 </script>
