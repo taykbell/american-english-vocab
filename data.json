@@ -2,6 +2,8 @@
   {
     "word": "get away with",
     "translation": "избежать наказания, сойти с рук",
+    "tags": ["phrasal_verb", "informal", "crime"],
+    "theme": "Улики | The Evidence S01E03",
     "examples": [
       {
         "en": "He thought he'd get away with cheating on his taxes.",
@@ -22,12 +24,19 @@
         "en": "She couldn't believe they let him get away with a warning.",
         "ru": "Она не могла поверить, что ему сошло с рук всего лишь предупреждение.",
         "ipa": "ʃi ˈkʊdnt bɪˈliːv ðeɪ let hɪm ɡet əˈweɪ wɪð ə ˈwɔːnɪŋ"
+      },
+      {
+        "en": "The thief got away with three valuable paintings.",
+        "ru": "Вор ушёл с тремя ценными картинами.",
+        "ipa": "ðə θiːf ɡɒt əˈweɪ wɪð θriː ˈvæljʊəbl ˈpeɪntɪŋz"
       }
     ]
   },
   {
     "word": "back off",
     "translation": "отступить, сбавить напор, прекратить давить",
+    "tags": ["phrasal_verb", "conflict"],
+    "theme": "Family Guy S03E05",
     "examples": [
       {
         "en": "Back off and give her some space to think.",
@@ -48,12 +57,19 @@
         "en": "You need to back off the throttle on icy roads.",
         "ru": "Нужно сбавить газ на обледенелой дороге.",
         "ipa": "ju niːd tuː bæk ɒf ðə ˈθrɒtl ɒn ˈaɪsi rəʊdz"
+      },
+      {
+        "en": "The police told the crowd to back off from the crime scene.",
+        "ru": "Полиция приказала толпе отступить от места преступления.",
+        "ipa": "ðə pəˈliːs təʊld ðə kraʊd tuː bæk ɒf frɒm ðə kraɪm siːn"
       }
     ]
   },
   {
     "word": "blow out",
     "translation": "задуть, лопнуть, сгореть, разгромить",
+    "tags": ["phrasal_verb", "sports", "accident"],
+    "theme": "NBA Finals 2023",
     "examples": [
       {
         "en": "She blew out the candles in one excited breath.",
@@ -74,6 +90,29 @@
         "en": "The transformer blew out and knocked power to the block.",
         "ru": "Трансформатор сгорел и обесточил квартал.",
         "ipa": "ðə trænsˈfɔːmə bluː aʊt ænd nɒkt ˈpaʊə tuː ðə blɒk"
+      }
+    ]
+  },
+  {
+    "word": "piece of cake",
+    "translation": "очень легко, проще простого",
+    "tags": ["idiom", "informal"],
+    "theme": "X-Files S02E10",
+    "examples": [
+      {
+        "en": "The exam was a piece of cake for her.",
+        "ru": "Экзамен был для неё проще простого.",
+        "ipa": "ði ɪɡˈzæm wəz ə piːs əv keɪk fɔː hɜː"
+      },
+      {
+        "en": "Fixing this should be a piece of cake for an expert.",
+        "ru": "Починить это будет проще простого для эксперта.",
+        "ipa": "ˈfɪksɪŋ ðɪs ʃʊd bi ə piːs əv keɪk fɔːr ən ˈɛkspɜːt"
+      },
+      {
+        "en": "Don't worry, this job is a piece of cake.",
+        "ru": "Не волнуйся, эта работа проще простого.",
+        "ipa": "dəʊnt ˈwʌri ðɪs dʒɒb ɪz ə piːs əv keɪk"
       }
     ]
   }
