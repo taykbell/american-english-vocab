@@ -1019,6 +1019,39 @@ max-width: 90%;
 padding: 20px;
 }
 }
+/* Расширение для самопроверки */
+.hide-ru .translation {
+display: none;
+}
+.show-translation-btn {
+display: none;
+padding: 6px 12px;
+margin-top: 8px;
+background: var(--panel);
+border: 1px solid var(--border);
+border-radius: 8px;
+color: var(--text);
+cursor: pointer;
+font-size: 13px;
+transition: all 0.2s;
+text-align: center;
+}
+.hide-ru .show-translation-btn {
+display: block;
+}
+.hide-ru .translation.shown {
+display: block;
+}
+.show-translation-btn.hidden {
+display: none;
+}
+@media (max-width: 768px) {
+.show-translation-btn {
+font-size: 12px;
+padding: 5px 10px;
+margin-top: 6px;
+}
+}
 </style>
 </head>
 <body>
@@ -1656,7 +1689,8 @@ return `
 <div class="en" data-speak="${ex.en}">${enText}</div>
 ${exampleSyllablesHTML}
 ${ipaHTML}
-<div class="ru">${ruText}</div>
+<div class="ru translation">${ruText}</div>
+<button class="show-translation-btn" onclick="showTranslation(this)">Show</button>
 </div>
 `;
 }).join("");
@@ -1678,6 +1712,7 @@ ${item.syllables.split('·').map((syllable, i) => `
 : '';
 const ipaHTML = item.ipa ? `<div class="ipa">${item.ipa}</div>` : '';
 const wordEnHTML = currentSearch ? highlightSearch(item.word, currentSearch) : item.word;
+const wordRuHTML = currentSearch ? highlightSearch(item.translation, currentSearch) : item.translation;
 const cardIndexHTML = isMobileView
 ? `
 <div class="card-index">
@@ -1752,7 +1787,8 @@ ${tagsHTML}
 <span class="word-en" data-speak="${item.word}">${wordEnHTML}</span>
 ${syllablesHTML}
 ${ipaHTML}
-<span class="word-ru">${item.translation}</span>
+<span class="word-ru translation">${wordRuHTML}</span>
+<button class="show-translation-btn" onclick="showTranslation(this)">Show</button>
 </div>
 <div class="examples">
 ${examplesHTML}
@@ -1823,6 +1859,22 @@ const txt = testMode
 : "🧠 Самопроверка";
 document.getElementById("testBtn").textContent = txt;
 document.getElementById("testBtnSide").textContent = txt;
+if (!testMode) {
+resetTranslations();
+}
+}
+
+function resetTranslations() {
+document.querySelectorAll('.translation').forEach(el => el.classList.remove('shown'));
+document.querySelectorAll('.show-translation-btn').forEach(btn => btn.classList.remove('hidden'));
+}
+
+function showTranslation(btn) {
+const translation = btn.previousElementSibling;
+if (translation && translation.classList.contains('translation')) {
+translation.classList.add('shown');
+btn.classList.add('hidden');
+}
 }
 
 const saved = localStorage.getItem("theme");
