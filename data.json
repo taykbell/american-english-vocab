@@ -1,2126 +1,318 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="utf-8">
-<title>American English Vocabulary</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-:root {
---bg: #fff1f6;
---card: #ffffff;
---panel: #ffffff;
---text: #3b1f2b;
---muted: #8b6f7a;
---accent: #db2777;
---green: #9d174d;
---border: #f2d5e3;
---shadow: 0 4px 12px rgba(219,39,119,.08);
---example-bg: rgba(251, 113, 133, 0.05);
-}
-[data-theme="dark"] {
---bg: #160a10;
---card: #1f0b15;
---panel: #190910;
---text: #f8e6ee;
---muted: #c9a4b2;
---accent: #fb7185;
---green: #f472b6;
---border: #3b1423;
---shadow: 0 4px 12px rgba(0,0,0,.25);
---example-bg: rgba(251, 113, 133, 0.08);
-}
-* { box-sizing: border-box; }
-body {
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
-margin: 0;
-padding: 40px 20px 60px;
-background: var(--bg);
-color: var(--text);
-transition: background .3s, color .3s;
-text-align: center;
-}
-h1 { margin: 0 0 8px; font-weight: 700; font-size: 2rem; }
-.header-subtitle {
-color: var(--muted);
-font-size: 0.95rem;
-margin-bottom: 20px;
-}
-/* ===== СЕКЦИЯ ПОИСКА ===== */
-.search-section {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-items: center;
-gap: 15px;
-margin-bottom: 20px;
-max-width: 720px;
-margin-left: auto;
-margin-right: auto;
-}
-.search-section .stats {
-font-size: 14px;
-color: var(--muted);
-padding: 6px 12px;
-background: var(--panel);
-border-radius: 8px;
-border: 1px solid var(--border);
-}
-.search-container {
-flex: 1;
-max-width: 400px;
-min-width: 250px;
-}
-#searchInput {
-width: 100%;
-padding: 10px 15px;
-border-radius: 10px;
-border: 1px solid var(--border);
-background: var(--panel);
-color: var(--text);
-font-size: 14px;
-transition: all 0.3s;
-}
-#searchInput:focus {
-outline: none;
-border-color: var(--accent);
-box-shadow: 0 0 0 3px rgba(219,39,119,0.1);
-}
-/* ===== СЕКЦИЯ БЫСТРОГО ПЕРЕХОДА ===== */
-.card-jump-section {
-display: flex;
-justify-content: center;
-align-items: center;
-margin: 0 auto 20px;
-max-width: 720px;
-}
-.card-jump-container {
-display: flex;
-align-items: center;
-gap: 0;
-width: 100%;
-max-width: 400px;
-background: var(--panel);
-border: 1px solid var(--border);
-border-radius: 12px;
-padding: 4px;
-box-shadow: var(--shadow);
-transition: all 0.3s ease;
-}
-.card-jump-container:hover {
-border-color: var(--accent);
-box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
-}
-.card-jump-icon {
-padding: 0 12px;
-color: var(--muted);
-font-size: 18px;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.card-jump-input {
-flex: 1;
-padding: 10px 12px;
-border: none;
-border-radius: 8px;
-background: transparent;
-color: var(--text);
-font-size: 14px;
-outline: none;
-transition: all 0.2s;
-}
-.card-jump-input:focus {
-background: rgba(219, 39, 119, 0.05);
-}
-.card-jump-btn {
-padding: 10px 16px;
-border: none;
-border-radius: 8px;
-background: var(--accent);
-color: white;
-cursor: pointer;
-font-size: 14px;
-font-weight: 500;
-transition: all 0.2s;
-display: flex;
-align-items: center;
-gap: 6px;
-}
-.card-jump-btn:hover {
-background: var(--green);
-transform: translateY(-1px);
-}
-/* Анимация для уведомлений */
-@keyframes fadeInOut {
-0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-10% { opacity: 1; transform: translateX(-50%) translateY(0); }
-90% { opacity: 1; transform: translateX(-50%) translateY(0); }
-100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-}
-/* ===== СЕКЦИЯ ФИЛЬТРОВ ===== */
-.filter-section {
-background: var(--panel);
-border: 1px solid var(--border);
-border-radius: 12px;
-padding: 16px;
-margin: 0 auto 20px;
-max-width: 720px;
-box-shadow: var(--shadow);
-}
-.filter-section h3 {
-margin: 0 0 12px;
-font-size: 16px;
-color: var(--accent);
-text-align: left;
-padding-left: 8px;
-}
-.filter-bar {
-display: flex;
-flex-wrap: wrap;
-gap: 15px;
-justify-content: space-between;
-align-items: flex-start;
-}
-.filter-container {
-flex: 1;
-min-width: 200px;
-}
-.filter-container label {
-display: block;
-margin-bottom: 6px;
-font-size: 13px;
-color: var(--muted);
-font-weight: 500;
-text-align: left;
-}
-#tagFilter, #themeFilter {
-width: 100%;
-padding: 10px 15px;
-border-radius: 10px;
-border: 1px solid var(--border);
-background: var(--panel);
-color: var(--text);
-font-size: 14px;
-cursor: pointer;
-transition: all 0.3s;
-}
-#tagFilter:hover, #themeFilter:hover {
-border-color: var(--accent);
-}
-#tagFilter:focus, #themeFilter:focus {
-outline: none;
-border-color: var(--accent);
-box-shadow: 0 0 0 3px rgba(219,39,119,0.1);
-}
-#tagFilter[multiple] {
-height: auto;
-min-height: 44px;
-max-height: 200px;
-overflow-y: auto;
-}
-#tagFilter option {
-padding: 8px 12px;
-cursor: pointer;
-}
-#tagFilter option:hover {
-background-color: var(--accent);
-color: white;
-}
-.selected-tags {
-display: flex;
-flex-wrap: wrap;
-gap: 6px;
-margin-top: 8px;
-}
-.tag-badge {
-background: var(--accent);
-color: white;
-padding: 4px 10px;
-border-radius: 20px;
-font-size: 12px;
-display: flex;
-align-items: center;
-gap: 5px;
-cursor: pointer;
-transition: all 0.2s;
-}
-.tag-badge:hover {
-background: var(--green);
-transform: translateY(-1px);
-}
-.tag-count {
-font-size: 10px;
-opacity: 0.9;
-background: rgba(255, 255, 255, 0.2);
-padding: 1px 4px;
-border-radius: 8px;
-margin-left: 4px;
-}
-.remove-tag {
-font-size: 14px;
-line-height: 1;
-margin-left: 3px;
-}
-.filter-stats {
-font-size: 11px;
-color: var(--muted);
-margin-top: 4px;
-text-align: left;
-}
-.clear-filters {
-padding: 8px 14px;
-border-radius: 10px;
-border: 1px solid var(--border);
-background: var(--panel);
-color: var(--text);
-cursor: pointer;
-font-size: 14px;
-transition: all 0.2s;
-white-space: nowrap;
-margin-top: 12px;
-}
-.clear-filters:hover {
-background: var(--accent);
-color: white;
-border-color: var(--accent);
-}
-/* Отображение тегов в карточках */
-.word-tags {
-display: flex;
-flex-wrap: wrap;
-gap: 6px;
-margin-bottom: 15px;
-margin-top: 10px;
-}
-.word-tag {
-background: rgba(219, 39, 119, 0.1);
-color: var(--accent);
-padding: 4px 10px;
-border-radius: 12px;
-font-size: 11px;
-border: 1px solid rgba(219, 39, 119, 0.2);
-cursor: pointer;
-transition: all 0.2s;
-}
-.word-tag:hover {
-background: rgba(219, 39, 119, 0.2);
-transform: translateY(-1px);
-}
-/* ===== КНОПКИ УПРАВЛЕНИЯ ===== */
-.control-buttons {
-display: flex;
-gap: 12px;
-justify-content: center;
-margin: 0 auto 20px;
-max-width: 720px;
-flex-wrap: wrap;
-}
-.test-toggle, .ipa-toggle, .syllables-toggle, .continuous-toggle {
-padding: 10px 18px;
-border-radius: 10px;
-border: 1px solid var(--border);
-background: var(--panel);
-color: var(--text);
-cursor: pointer;
-font-size: 14px;
-transition: all 0.2s;
-box-shadow: var(--shadow);
-}
-.test-toggle:hover, .ipa-toggle:hover, .syllables-toggle:hover, .continuous-toggle:hover {
-background: var(--accent);
-color: white;
-border-color: var(--accent);
-transform: translateY(-1px);
-}
-.continuous-active {
-background: var(--green) !important;
-color: white !important;
-border-color: var(--green) !important;
-animation: pulse 1.5s infinite;
-}
+[
+  {
+    "word": "get away with",
+    "translation": "избежать наказания, сойти с рук",
+    "syllables": "get·a·way·with",
+    "stress": 2,
+    "tags": ["phrasal_verb", "informal", "crime"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "He thought he'd get away with cheating on his taxes.",
+        "ru": "Он думал, что уклонение от налогов сойдёт ему с рук.",
+        "ipa": "hi θɔːt hiːd ɡet əˈweɪ wɪð ˈtʃiːtɪŋ ɒn hɪz ˈtæksɪz",
+        "syllables": "He·thought·he'd·get·a·way·with·cheat·ing·on·his·tax·es",
+        "stress": [1, 5, 9]
+      },
+      {
+        "en": "The kids tried to get away with staying up past midnight.",
+        "ru": "Дети попытались, чтобы им сошло с рук, что они не спали после полуночи.",
+        "ipa": "ðə kɪdz traɪd tuː ɡet əˈweɪ wɪð ˈsteɪɪŋ ʌp pɑːst ˈmɪdnaɪt",
+        "syllables": "The·kids·tried·to·get·a·way·with·stay·ing·up·past·mid·night",
+        "stress": [1, 3, 7, 11]
+      }
+    ]
+  },
+  {
+    "word": "cover up",
+    "translation": "скрывать, замалчивать",
+    "syllables": "cov·er·up",
+    "stress": 1,
+    "tags": ["phrasal_verb", "crime", "investigation"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The company tried to cover up the evidence of fraud.",
+        "ru": "Компания пыталась скрыть доказательства мошенничества.",
+        "ipa": "ðə ˈkʌmpəni traɪd tuː ˈkʌvər ʌp ði ˈevɪdəns əv frɔːd",
+        "syllables": "The·com·pa·ny·tried·to·cov·er·up·the·ev·i·dence·of·fraud",
+        "stress": [1, 6, 9, 13]
+      },
+      {
+        "en": "He helped cover up the crime for years.",
+        "ru": "Он годами помогал скрывать преступление.",
+        "ipa": "hi hɛlpt ˈkʌvər ʌp ðə kraɪm fɔːr jɪrz",
+        "syllables": "He·helped·cov·er·up·the·crime·for·years",
+        "stress": [1, 4, 7]
+      }
+    ]
+  },
+  {
+    "word": "break into",
+    "translation": "вломиться, проникнуть",
+    "syllables": "break·in·to",
+    "stress": 1,
+    "tags": ["phrasal_verb", "crime", "action"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "Someone broke into the office last night.",
+        "ru": "Кто-то вломился в офис прошлой ночью.",
+        "ipa": "ˈsʌmwʌn broʊk ˈɪntuː ði ˈɒfɪs læst naɪt",
+        "syllables": "Some·one·broke·in·to·the·of·fice·last·night",
+        "stress": [1, 3, 7]
+      },
+      {
+        "en": "They broke into the house through the back door.",
+        "ru": "Они проникли в дом через заднюю дверь.",
+        "ipa": "ðeɪ broʊk ˈɪntuː ðə haʊs θruː ðə bæk dɔːr",
+        "syllables": "They·broke·in·to·the·house·through·the·back·door",
+        "stress": [1, 4, 8]
+      }
+    ]
+  },
+  {
+    "word": "pin down",
+    "translation": "точно установить, прижать фактами",
+    "syllables": "pin·down",
+    "stress": 1,
+    "tags": ["phrasal_verb", "investigation", "formal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The detectives tried to pin down the exact time of death.",
+        "ru": "Детективы пытались точно установить время смерти.",
+        "ipa": "ðə dɪˈtɛktɪvz traɪd tuː pɪn daʊn ði ɪɡˈzækt taɪm əv dɛθ",
+        "syllables": "The·de·tec·tives·tried·to·pin·down·the·ex·act·time·of·death",
+        "stress": [1, 5, 8, 12]
+      },
+      {
+        "en": "It's hard to pin down what really happened.",
+        "ru": "Трудно точно понять, что на самом деле произошло.",
+        "ipa": "ɪts hɑːrd tuː pɪn daʊn wɒt ˈrɪəli ˈhæpənd",
+        "syllables": "It's·hard·to·pin·down·what·real·ly·hap·pened",
+        "stress": [1, 4, 7]
+      }
+    ]
+  },
+  {
+    "word": "turn out",
+    "translation": "оказаться, выясниться",
+    "syllables": "turn·out",
+    "stress": 1,
+    "tags": ["phrasal_verb", "neutral", "results"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The suspect turned out to be innocent.",
+        "ru": "Подозреваемый оказался невиновным.",
+        "ipa": "ðə ˈsʌspɛkt tɜːrnd aʊt tuː bi ˈɪnəsənt",
+        "syllables": "The·sus·pect·turned·out·to·be·in·no·cent",
+        "stress": [1, 4, 7]
+      },
+      {
+        "en": "It turned out that the evidence was fake.",
+        "ru": "Выяснилось, что улики были поддельными.",
+        "ipa": "ɪt tɜːrnd aʊt ðæt ði ˈevɪdəns wəz feɪk",
+        "syllables": "It·turned·out·that·the·ev·i·dence·was·fake",
+        "stress": [1, 3, 7]
+      }
+    ]
+  },
+  {
+    "word": "point to",
+    "translation": "указывать на, свидетельствовать о",
+    "syllables": "point·to",
+    "stress": 1,
+    "tags": ["phrasal_verb", "evidence", "formal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "All the clues point to an inside job.",
+        "ru": "Все улики указывают на инсайдерскую работу.",
+        "ipa": "ɔːl ðə kluːz pɔɪnt tuː ən ˈɪnsaɪd dʒɒb",
+        "syllables": "All·the·clues·point·to·an·in·side·job",
+        "stress": [1, 4, 7]
+      },
+      {
+        "en": "The evidence points to him as the main suspect.",
+        "ru": "Улики указывают на него как на главного подозреваемого.",
+        "ipa": "ði ˈevɪdəns pɔɪnts tuː hɪm æz ðə meɪn ˈsʌspɛkt",
+        "syllables": "The·ev·i·dence·points·to·him·as·the·main·sus·pect",
+        "stress": [1, 5, 9]
+      }
+    ]
+  },
 
-/* Боковая панель */
-.side-panel .continuous-toggle {
-padding: 10px 16px;
-border-radius: 10px;
-border: 1px solid var(--border);
-background: var(--panel);
-color: var(--text);
-cursor: pointer;
-font-size: 14px;
-transition: all 0.2s;
-text-align: center;
-width: 100%;
-}
-.side-panel .continuous-toggle:hover {
-background: var(--accent);
-color: white;
-border-color: var(--accent);
-transform: translateY(-1px);
-}
-.side-panel .continuous-active {
-background: var(--green) !important;
-color: white !important;
-border-color: var(--green) !important;
-}
+  {
+    "word": "track down",
+    "translation": "выследить, разыскать",
+    "syllables": "track·down",
+    "stress": 1,
+    "tags": ["phrasal_verb", "investigation", "action"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The police managed to track down the suspect.",
+        "ru": "Полиции удалось выследить подозреваемого.",
+        "ipa": "ðə pəˈliːs ˈmænɪdʒd tuː træk daʊn ðə ˈsʌspɛkt",
+        "syllables": "The·po·lice·man·aged·to·track·down·the·sus·pect",
+        "stress": [1, 5, 8]
+      },
+      {
+        "en": "She tracked down the witness after weeks of searching.",
+        "ru": "Она разыскала свидетеля после недель поисков.",
+        "ipa": "ʃiː trækt daʊn ðə ˈwɪtnɪs ˈæftər wiːks əv ˈsɜːrtʃɪŋ",
+        "syllables": "She·tracked·down·the·wit·ness·af·ter·weeks·of·search·ing",
+        "stress": [1, 4, 8]
+      }
+    ]
+  },
+  {
+    "word": "rule out",
+    "translation": "исключить (версию)",
+    "syllables": "rule·out",
+    "stress": 1,
+    "tags": ["phrasal_verb", "investigation", "formal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The police ruled out suicide.",
+        "ru": "Полиция исключила версию самоубийства.",
+        "ipa": "ðə pəˈliːs ruːld aʊt ˈsuːɪsaɪd",
+        "syllables": "The·po·lice·ruled·out·sui·cide",
+        "stress": [1, 4]
+      },
+      {
+        "en": "We can't rule out the possibility of a cover-up.",
+        "ru": "Мы не можем исключить возможность сокрытия.",
+        "ipa": "wiː kɑːnt ruːl aʊt ðə ˌpɒsəˈbɪləti əv ə ˈkʌvər ʌp",
+        "syllables": "We·can't·rule·out·the·pos·si·bil·i·ty·of·a·cov·er·up",
+        "stress": [1, 3, 7, 11]
+      }
+    ]
+  },
+  {
+    "word": "carry out",
+    "translation": "осуществить, провести",
+    "syllables": "car·ry·out",
+    "stress": 1,
+    "tags": ["phrasal_verb", "formal", "action"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The attack was carefully carried out.",
+        "ru": "Атака была тщательно спланирована и проведена.",
+        "ipa": "ði əˈtæk wəz ˈkeərfəli ˈkærid aʊt",
+        "syllables": "The·at·tack·was·care·ful·ly·car·ried·out",
+        "stress": [1, 4, 7]
+      },
+      {
+        "en": "They carried out a full investigation.",
+        "ru": "Они провели полное расследование.",
+        "ipa": "ðeɪ ˈkærid aʊt ə fʊl ɪnˌvɛstɪˈɡeɪʃən",
+        "syllables": "They·car·ried·out·a·full·in·ves·ti·ga·tion",
+        "stress": [1, 5, 8]
+      }
+    ]
+  },
+  {
+    "word": "hold up",
+    "translation": "ограбить; задержать",
+    "syllables": "hold·up",
+    "stress": 1,
+    "tags": ["phrasal_verb", "crime", "informal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The bank was held up at gunpoint.",
+        "ru": "Банк ограбили под угрозой оружия.",
+        "ipa": "ðə bæŋk wəz hɛld ʌp æt ˈɡʌnpɔɪnt",
+        "syllables": "The·bank·was·held·up·at·gun·point",
+        "stress": [1, 4, 7]
+      },
+      {
+        "en": "Traffic was held up for hours.",
+        "ru": "Движение было задержано на несколько часов.",
+        "ipa": "ˈtræfɪk wəz hɛld ʌp fər ˈaʊərz",
+        "syllables": "Traf·fic·was·held·up·for·hours",
+        "stress": [1, 4]
+      }
+    ]
+  },
 
-/* Анимация для активной кнопки */
-@keyframes pulse {
-0% { box-shadow: 0 0 0 0 rgba(251, 113, 133, 0.7); }
-70% { box-shadow: 0 0 0 8px rgba(251, 113, 133, 0); }
-100% { box-shadow: 0 0 0 0 rgba(251, 113, 133, 0); }
-}
+  {
+    "word": "confess to",
+    "translation": "признаться в",
+    "syllables": "con·fess·to",
+    "stress": 2,
+    "tags": ["verb", "crime", "formal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "He confessed to the murder.",
+        "ru": "Он признался в убийстве.",
+        "ipa": "hi kənˈfɛst tuː ðə ˈmɜːrdər",
+        "syllables": "He·con·fessed·to·the·mur·der",
+        "stress": [1, 3]
+      },
+      {
+        "en": "She refused to confess to anything.",
+        "ru": "Она отказалась признаваться в чём-либо.",
+        "ipa": "ʃi rɪˈfjuːzd tuː kənˈfɛs tuː ˈɛnɪθɪŋ",
+        "syllables": "She·re·fused·to·con·fess·to·a·ny·thing",
+        "stress": [1, 5, 8]
+      }
+    ]
+  },
 
-/* Подсветка текущего элемента при автопрокрутке */
-.highlight-playing {
-background-color: rgba(251, 113, 133, 0.15) !important;
-transition: background-color 0.3s;
-position: relative;
-}
-.highlight-playing::after {
-content: "▶";
-position: absolute;
-left: -15px;
-top: 50%;
-transform: translateY(-50%);
-color: var(--accent);
-font-size: 12px;
-}
+  {
+    "word": "set up",
+    "translation": "подставить; организовать",
+    "syllables": "set·up",
+    "stress": 1,
+    "tags": ["phrasal_verb", "crime", "informal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "He was set up by his own partner.",
+        "ru": "Его подставил собственный напарник.",
+        "ipa": "hi wəz sɛt ʌp baɪ hɪz oʊn ˈpɑːrtnər",
+        "syllables": "He·was·set·up·by·his·own·part·ner",
+        "stress": [1, 4, 7]
+      },
+      {
+        "en": "They set up a sting operation.",
+        "ru": "Они организовали операцию-ловушку.",
+        "ipa": "ðeɪ sɛt ʌp ə stɪŋ ˌɒpəˈreɪʃən",
+        "syllables": "They·set·up·a·sting·op·er·a·tion",
+        "stress": [1, 5, 8]
+      }
+    ]
+  },
 
-/* ===== СЕКЦИЯ НАСТРОЙКИ ОЗВУЧКИ ===== */
-.voice-section {
-background: var(--panel);
-border: 1px solid var(--border);
-border-radius: 12px;
-padding: 16px;
-margin: 0 auto 20px;
-max-width: 720px;
-box-shadow: var(--shadow);
-}
-.voice-section h3 {
-margin: 0 0 12px;
-font-size: 16px;
-color: var(--accent);
-text-align: left;
-padding-left: 8px;
-}
-.voice-controls {
-display: flex;
-flex-wrap: wrap;
-gap: 15px;
-align-items: center;
-}
-.voice-row {
-display: flex;
-align-items: center;
-gap: 15px;
-width: 100%;
-}
-.voice-item {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-min-width: 120px;
-}
-.voice-item label {
-font-size: 13px;
-color: var(--muted);
-margin-bottom: 6px;
-font-weight: 500;
-}
-#voiceSelect {
-width: 100%;
-padding: 8px 12px;
-border-radius: 8px;
-border: 1px solid var(--border);
-background: var(--card);
-color: var(--text);
-font-size: 14px;
-margin-bottom: 8px;
-}
-.slider-container {
-display: flex;
-align-items: center;
-gap: 8px;
-width: 100%;
-}
-.slider-with-value {
-display: flex;
-align-items: center;
-gap: 8px;
-width: 100%;
-}
-.slider-value {
-min-width: 40px;
-font-size: 13px;
-text-align: right;
-color: var(--text);
-font-weight: 500;
-}
-input[type="range"] {
-accent-color: var(--accent);
-width: 100%;
-flex: 1;
-}
-/* ===== КНОПКИ СПРАВА ===== */
-.theme-toggle, .settings-toggle {
-position: fixed;
-top: 18px;
-right: 18px;
-padding: 8px 12px;
-border-radius: 10px;
-border: 1px solid var(--border);
-cursor: pointer;
-background: var(--panel);
-color: var(--text);
-box-shadow: 0 2px 8px rgba(219,39,119,.12);
-z-index: 100;
-}
-.settings-toggle {
-top: 60px;
-}
-/* ===== БОКОВАЯ ПАНЕЛЬ ===== */
-.side-panel {
-position: fixed;
-top: 102px;
-right: 18px;
-background: var(--panel);
-border: 1px solid var(--border);
-border-radius: 12px;
-padding: 20px;
-box-shadow: var(--shadow);
-display: none;
-z-index: 99;
-width: 320px;
-flex-direction: column;
-gap: 18px;
-opacity: 0;
-transform: translateX(20px);
-transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.side-panel.open {
-opacity: 1;
-transform: translateX(0);
-}
-.side-panel > div {
-width: 100%;
-}
-.side-panel label {
-display: block;
-margin-bottom: 8px;
-font-size: 14px;
-color: var(--muted);
-font-weight: 500;
-text-align: left;
-}
-.side-panel select {
-width: 100%;
-padding: 10px 12px;
-border-radius: 10px;
-border: 1px solid var(--border);
-background: var(--card);
-color: var(--text);
-font-size: 14px;
-cursor: pointer;
-transition: all 0.3s;
-margin-bottom: 8px;
-}
-.side-panel select:focus {
-outline: none;
-border-color: var(--accent);
-box-shadow: 0 0 0 3px rgba(219,39,119,0.1);
-}
-/* Голосовые контролы внутри боковой панели */
-.side-panel .voice-controls {
-display: flex;
-flex-direction: column;
-gap: 16px;
-width: 100%;
-}
-.side-panel .voice-row {
-display: flex;
-flex-direction: column;
-gap: 16px;
-width: 100%;
-}
-.side-panel .voice-item {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-width: 100%;
-}
-.side-panel .slider-container {
-display: flex;
-flex-direction: column;
-gap: 8px;
-width: 100%;
-}
-.side-panel .slider-with-value {
-display: flex;
-align-items: center;
-gap: 12px;
-width: 100%;
-}
-.side-panel .slider-value {
-min-width: 40px;
-font-size: 14px;
-text-align: right;
-color: var(--text);
-font-weight: 500;
-}
-.side-panel input[type="range"] {
-accent-color: var(--accent);
-width: 100%;
-height: 6px;
-border-radius: 3px;
-background: var(--border);
-outline: none;
-}
-.side-panel input[type="range"]::-webkit-slider-thumb {
--webkit-appearance: none;
-width: 18px;
-height: 18px;
-border-radius: 50%;
-background: var(--accent);
-cursor: pointer;
-border: 2px solid var(--card);
-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-/* Кнопки внутри боковой панели */
-.side-panel .control-buttons {
-display: flex;
-flex-direction: column;
-gap: 10px;
-width: 100%;
-margin: 5px 0 0 0;
-}
-.side-panel .test-toggle,
-.side-panel .ipa-toggle,
-.side-panel .syllables-toggle {
-padding: 10px 16px;
-border-radius: 10px;
-border: 1px solid var(--border);
-background: var(--panel);
-color: var(--text);
-cursor: pointer;
-font-size: 14px;
-transition: all 0.2s;
-text-align: center;
-width: 100%;
-}
-.side-panel .test-toggle:hover,
-.side-panel .ipa-toggle:hover,
-.side-panel .syllables-toggle:hover {
-background: var(--accent);
-color: white;
-border-color: var(--accent);
-transform: translateY(-1px);
-}
-/* ===== Слоговое разделение ===== */
-.syllables {
-font-size: 18px;
-margin: 8px 0;
-color: var(--accent);
-font-weight: 600;
-text-align: left;
-}
-.syllable {
-display: inline-block;
-margin: 0 2px;
-}
-.syllable.stressed {
-text-decoration: underline;
-font-weight: 700;
-}
-.example-syllables {
-font-size: 16px;
-margin: 4px 0 8px 0;
-color: var(--accent);
-font-weight: 600;
-text-align: left;
-}
-/* ===== КАРТОЧКА ===== */
-#container {
-max-width: 720px;
-margin: 0 auto;
-}
-.card {
-background: var(--card);
-padding: 24px 28px;
-border-radius: 14px;
-border: 1px solid var(--border);
-box-shadow: var(--shadow);
-margin: 0 auto 20px auto;
-text-align: left;
-position: relative;
-transition: all 0.3s ease;
-}
-/* ===== НОМЕР + ИКОНКИ СЕРВИСОВ ===== */
-.card-index {
-position: absolute;
-top: 12px;
-right: 14px;
-font-size: 12px;
-line-height: 1.3;
-padding-bottom: 8px;
-}
-.card-index a {
-text-decoration: none;
-margin-right: 4px;
-transition: all 0.2s;
-display: inline-block;
-vertical-align: middle;
-}
-.service-icon {
-width: 20px;
-height: 20px;
-object-fit: contain;
-filter: grayscale(50%);
-opacity: 0.5;
-transition: all 0.2s;
-border-radius: 3px;
-background: var(--bg);
-padding: 2px;
-border: 1px solid var(--border);
-}
-.service-icon:hover {
-filter: grayscale(0%);
-opacity: 1;
-transform: translateY(-1px);
-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.index-num {
-color: var(--text);
-opacity: 0.15;
-margin-left: 8px;
-font-size: 12px;
-vertical-align: middle;
-}
-/* ===== АНГЛИЙСКОЕ СЛОВО И ПЕРЕВОД ===== */
-.word-line {
-font-size: 21px;
-margin-bottom: 20px;
-padding-bottom: 12px;
-text-align: left;
-}
-.word-en {
-color: var(--accent);
-cursor: pointer;
-font-weight: 700;
-display: block;
-}
-.word-ru {
-cursor: pointer;
-display: block;
-margin-top: 12px;
-}
-/* ===== ПРИМЕРЫ С ФОНОВЫМИ БЛОКАМИ ===== */
-.example {
-margin-bottom: 14px;
-background: var(--example-bg);
-border-radius: 10px;
-padding: 14px 16px;
-border: 1px solid var(--border);
-}
-.en {
-cursor: pointer;
-color: var(--green);
-font-weight: 600;
-margin-bottom: 8px;
-line-height: 1.4;
-font-size: 16px;
-}
-.ipa {
-font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif;
-color: var(--accent);
-font-size: 18px;
-margin-bottom: 8px;
-padding-left: 8px;
-border-left: 2px solid var(--accent);
-font-style: italic;
-opacity: 0.9;
-line-height: 1.3;
-text-align: left;
-}
-.ru {
-cursor: pointer;
-color: var(--muted);
-margin-bottom: 0;
-line-height: 1.4;
-}
-.hide-ru .ru {
-display: none;
-}
-.hide-ipa .ipa {
-display: none;
-}
-/* ===== ПАГИНАЦИЯ И СЧЁТЧИК СЛОВ ===== */
-.pagination-container {
-margin-top: 30px;
-}
-.pagination {
-display: flex;
-justify-content: center;
-gap: 10px;
-margin-bottom: 10px;
-flex-wrap: wrap;
-}
-.page-btn {
-padding: 8px 12px;
-border-radius: 8px;
-border: 1px solid var(--border);
-background: var(--panel);
-color: var(--text);
-cursor: pointer;
-font-size: 14px;
-min-width: 40px;
-}
-.page-btn.active {
-background: var(--accent);
-color: white;
-}
-.word-count {
-font-size: 14px;
-color: var(--muted);
-text-align: center;
-}
-/* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
-@media (max-width: 768px) {
-body {
-padding: 20px 10px 40px;
-}
-h1 {
-font-size: 1.5rem;
-margin: 0 0 8px;
-padding-top: 40px;
-}
-.header-subtitle {
-font-size: 0.85rem;
-margin-bottom: 15px;
-}
-.theme-toggle, .settings-toggle {
-position: fixed;
-top: 10px;
-right: 10px;
-padding: 6px 10px;
-font-size: 12px;
-}
-.settings-toggle {
-top: 50px;
-}
-.search-section {
-flex-direction: column;
-gap: 10px;
-margin-bottom: 15px;
-}
-.search-section .stats {
-width: 100%;
-text-align: center;
-font-size: 12px;
-padding: 5px 10px;
-}
-.search-container {
-width: 100%;
-max-width: 100%;
-}
-.filter-bar {
-flex-direction: column;
-gap: 10px;
-margin: 15px auto 10px;
-}
-.filter-container {
-width: 100%;
-max-width: 100%;
-}
-#tagFilter, #themeFilter {
-font-size: 13px;
-padding: 8px 12px;
-}
-.clear-filters {
-width: 100%;
-padding: 10px;
-margin-top: 10px;
-}
-.filter-container label {
-text-align: center;
-}
-.filter-stats {
-text-align: center;
-}
-.voice-row {
-flex-direction: column;
-gap: 10px;
-}
-.voice-item {
-width: 100%;
-max-width: 100%;
-}
-/* МОБИЛЬНАЯ КАРТОЧКА */
-.card {
-padding: 16px;
-margin-bottom: 15px;
-border-radius: 12px;
-}
-.word-line {
-font-size: 18px;
-margin-top: 20px;
-margin-bottom: 16px;
-padding-bottom: 10px;
-text-align: center;
-}
-.syllables, .ipa {
-text-align: center;
-}
-.word-tags {
-justify-content: center;
-margin-bottom: 10px;
-margin-top: 10px;
-}
-.example {
-margin-bottom: 12px;
-padding: 12px 14px;
-border-radius: 8px;
-}
-.en {
-font-size: 15px;
-margin-bottom: 6px;
-}
-.ipa {
-font-size: 16px;
-margin-bottom: 6px;
-}
-.ru {
-font-size: 13px;
-}
-/* ИКОНКИ СЕРВИСОВ НА МОБИЛЬНОМ */
-.card-index {
-position: relative;
-top: 0;
-right: 0;
-text-align: center;
-margin-bottom: 10px;
-padding-bottom: 0;
-}
-.card-index a {
-margin: 0 3px;
-}
-.service-icon {
-width: 18px;
-height: 18px;
-padding: 1px;
-}
-.index-num {
-display: block;
-margin-top: 5px;
-margin-left: 0;
-font-size: 11px;
-}
-/* БОКОВАЯ ПАНЕЛЬ НА МОБИЛЬНОМ */
-.side-panel {
-top: 70px;
-right: 10px;
-width: calc(100vw - 20px);
-max-width: 300px;
-padding: 16px;
-gap: 14px;
-}
-.side-panel .voice-controls {
-gap: 12px;
-}
-.side-panel .voice-row {
-gap: 12px;
-}
-.side-panel .slider-with-value {
-gap: 8px;
-}
-.side-panel .slider-value {
-font-size: 13px;
-min-width: 35px;
-}
-}
-@media (max-width: 480px) {
-h1 {
-font-size: 1.3rem;
-padding-top: 50px;
-}
-.theme-toggle, .settings-toggle {
-top: 5px;
-right: 5px;
-}
-.settings-toggle {
-top: 45px;
-}
-.card {
-padding: 12px;
-}
-.word-line {
-font-size: 16px;
-}
-.example {
-margin-bottom: 10px;
-padding: 10px 12px;
-}
-.en {
-font-size: 14px;
-}
-.ipa {
-font-size: 14px;
-margin-bottom: 6px;
-}
-.ru {
-font-size: 12px;
-}
-.control-buttons {
-flex-direction: column;
-}
-.test-toggle, .ipa-toggle, .syllables-toggle, .continuous-toggle {
-width: 100%;
-margin-bottom: 5px;
-}
-.pagination {
-gap: 3px;
-}
-.page-btn {
-padding: 5px 6px;
-font-size: 12px;
-min-width: 32px;
-}
-/* БОКОВАЯ ПАНЕЛЬ НА ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНАХ */
-.side-panel {
-padding: 14px;
-gap: 12px;
-max-width: 280px;
-}
-.side-panel label {
-font-size: 13px;
-}
-.side-panel select {
-padding: 8px 10px;
-font-size: 13px;
-}
-.side-panel .test-toggle,
-.side-panel .ipa-toggle,
-.side-panel .syllables-toggle,
-.side-panel .continuous-toggle {
-padding: 8px 12px;
-font-size: 13px;
-}
-}
-/* Для планшетов */
-@media (min-width: 769px) and (max-width: 1024px) {
-.voice-section, .filter-section {
-max-width: 90%;
-}
-#container {
-max-width: 90%;
-}
-.card {
-padding: 20px;
-}
-}
-</style>
-</head>
-<body>
-<button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙</button>
-<button class="settings-toggle" id="settingsBtn" onclick="toggleSettings()">🎙️</button>
-<h1>🇺🇸 American English Vocabulary</h1>
-<div class="header-subtitle">Изучение американского английского по словам и фразам</div>
-<!-- ===== СЕКЦИЯ БЫСТРОГО ПЕРЕХОДА ===== -->
-<div class="card-jump-section">
-<div class="card-jump-container">
-<span class="card-jump-icon">🔍</span>
-<input
-type="number"
-id="cardJumpInput"
-class="card-jump-input"
-placeholder="Введите номер слова"
-min="1"
-title="Введите номер слова, к которому хотите перейти"
->
-<button
-class="card-jump-btn"
-onclick="jumpToCard()"
-title="Перейти к указанному слову"
->
-➡️ Перейти
-</button>
-</div>
-</div>
-<!-- ===== СЕКЦИЯ ПОИСКА ===== -->
-<div class="search-section">
-<div class="search-container">
-<input type="text" id="searchInput" placeholder="🔍 Поиск слова или перевода...">
-</div>
-<div class="stats" id="totalStats">Всего слов: 0</div>
-</div>
-<!-- ===== СЕКЦИЯ ФИЛЬТРОВ ===== -->
-<div class="filter-section">
-<h3>🔍 Фильтры</h3>
-<div class="filter-bar">
-<div class="filter-container">
-<label>Теги</label>
-<select id="tagFilter" multiple size="1">
-<option value="">Все теги</option>
-</select>
-<div class="filter-stats" id="tagStats">
-Всего уникальных тегов: 0
-</div>
-<div class="selected-tags" id="selectedTags"></div>
-</div>
-<div class="filter-container">
-<label>Темы</label>
-<select id="themeFilter">
-<option value="">Все темы</option>
-</select>
-<div class="filter-stats" id="themeStats">
-Всего уникальных тем: 0
-</div>
-</div>
-<button class="clear-filters" id="clearFilters" onclick="clearAllFilters()">
-✕ Очистить фильтры
-</button>
-</div>
-</div>
-<!-- ===== СЕКЦИЯ НАСТРОЙКИ ОЗВУЧКИ ===== -->
-<div class="voice-section">
-<h3>🔊 Настройка озвучки</h3>
-<div class="voice-controls">
-<div class="voice-row">
-<div class="voice-item">
-<label>Голос:</label>
-<select id="voiceSelect"></select>
-</div>
-<div class="voice-item">
-<div class="slider-container">
-<label>Скорость:</label>
-<div class="slider-with-value">
-<input id="rateSlider" type="range" min="0.30" max="1.2" step="0.05">
-<span class="slider-value" id="rateLabel"></span>
-</div>
-</div>
-</div>
-<div class="voice-item">
-<div class="slider-container">
-<label>Высота голоса:</label>
-<div class="slider-with-value">
-<input id="pitchSlider" type="range" min="0.7" max="1.3" step="0.05">
-<span class="slider-value" id="pitchLabel"></span>
-</div>
-</div>
-</div>
-<div class="voice-item">
-<div class="slider-container">
-<label>Задержка:</label>
-<div class="slider-with-value">
-<input id="delaySlider" type="range" min="2" max="10" step="0.5">
-<span class="slider-value" id="delayLabel"></span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- ===== КНОПКИ УПРАВЛЕНИЯ ===== -->
-<div class="control-buttons">
-<button class="test-toggle" id="testBtn" onclick="toggleTestMode()">
-🧠 Самопроверка
-</button>
-<button class="ipa-toggle" id="ipaBtn" onclick="toggleIpaMode()">
-👁️ Показать IPA
-</button>
-<button class="syllables-toggle" id="syllablesBtn" onclick="toggleSyllablesMode()">
-🔤 Показать слоги
-</button>
-<button class="continuous-toggle" id="continuousBtn" onclick="toggleContinuousMode()">
-▶️ Автопрокрутка
-</button>
-</div>
-<!-- ===== БОКОВАЯ ПАНЕЛЬ ===== -->
-<div class="side-panel" id="sidePanel">
-<div>
-<label>Голос:</label>
-<select id="voiceSelectSide"></select>
-</div>
-<div class="voice-controls">
-<div class="voice-row">
-<div class="voice-item">
-<div class="slider-container">
-<label>Скорость:</label>
-<div class="slider-with-value">
-<input id="rateSliderSide" type="range" min="0.30" max="1.2" step="0.05">
-<span class="slider-value" id="rateLabelSide"></span>
-</div>
-</div>
-</div>
-<div class="voice-item">
-<div class="slider-container">
-<label>Высота голоса:</label>
-<div class="slider-with-value">
-<input id="pitchSliderSide" type="range" min="0.7" max="1.3" step="0.05">
-<span class="slider-value" id="pitchLabelSide"></span>
-</div>
-</div>
-</div>
-<div class="voice-item">
-<div class="slider-container">
-<label>Задержка:</label>
-<div class="slider-with-value">
-<input id="delaySliderSide" type="range" min="2" max="10" step="0.5">
-<span class="slider-value" id="delayLabelSide"></span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="control-buttons">
-<button class="test-toggle" id="testBtnSide" onclick="toggleTestMode()">
-🧠 Самопроверка
-</button>
-<button class="ipa-toggle" id="ipaBtnSide" onclick="toggleIpaMode()">
-👁️ Показать IPA
-</button>
-<button class="syllables-toggle" id="syllablesBtnSide" onclick="toggleSyllablesMode()">
-🔤 Показать слоги
-</button>
-<button class="continuous-toggle" id="continuousBtnSide" onclick="toggleContinuousMode()">
-▶️ Автопрокрутка
-</button>
-</div>
-</div>
-<div id="container"></div>
-<div class="pagination-container">
-<div class="pagination" id="pagination"></div>
-<div class="word-count" id="wordCount"></div>
-</div>
-<script>
-const PAGE_SIZE = 100;
-let allData = [];
-let filteredData = [];
-let currentPage = 1;
-let currentSearch = '';
-let showIpa = false;
-let showSyllables = false;
-let isAndroid = false;
-let isMobileView = false;
-let currentTags = [];
-let currentTheme = '';
-let allTags = new Set();
-let allThemes = new Set();
-let tagCounts = {};
-let themeCounts = {};
-
-// Глобальные переменные для режима автопрокрутки
-let continuousMode = false;
-let continuousPlaybackActive = false;
-let continuousElements = [];
-let currentContinuousIndex = -1;
-let continuousTimeout = null;
-let continuousDelay = 3; // Значение задержки в секундах по умолчанию
-
-function detectPlatform() {
-const userAgent = navigator.userAgent.toLowerCase();
-isAndroid = /android/.test(userAgent);
-isMobileView = window.innerWidth <= 768;
-}
-
-window.addEventListener('resize', handleResize);
-
-function handleResize() {
-const wasMobile = isMobileView;
-isMobileView = window.innerWidth <= 768;
-if (wasMobile !== isMobileView) {
-renderPage(currentPage);
-}
-}
-
-function updateStats() {
-const total = allData.length;
-const filtered = filteredData.length;
-const start = (currentPage - 1) * PAGE_SIZE + 1;
-const end = Math.min(start + PAGE_SIZE - 1, filtered);
-document.getElementById('totalStats').textContent =
-`Всего слов: ${total} (найдено: ${filtered})`;
-document.getElementById('wordCount').textContent =
-filtered > 0 ? `Показаны слова ${start}-${end} из ${filtered}` : 'Слова не найдены';
-}
-
-function extractTagsAndThemes() {
-allTags.clear();
-allThemes.clear();
-tagCounts = {};
-themeCounts = {};
-allData.forEach(item => {
-if (item.tags) {
-item.tags.forEach(tag => {
-allTags.add(tag);
-tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-});
-}
-if (item.theme) {
-allThemes.add(item.theme);
-themeCounts[item.theme] = (themeCounts[item.theme] || 0) + 1;
-}
-});
-document.getElementById('tagStats').textContent =
-`Всего уникальных тегов: ${allTags.size}`;
-document.getElementById('themeStats').textContent =
-`Всего уникальных тем: ${allThemes.size}`;
-populateFilterDropdowns();
-}
-
-function populateFilterDropdowns() {
-const tagFilter = document.getElementById('tagFilter');
-const themeFilter = document.getElementById('themeFilter');
-const sortedTags = Array.from(allTags).sort();
-tagFilter.innerHTML = '<option value="">Все теги</option>';
-sortedTags.forEach(tag => {
-const option = document.createElement('option');
-option.value = tag;
-const count = tagCounts[tag] || 0;
-option.textContent = `${tag} (${count})`;
-option.title = `${tag} — ${count} слов`;
-tagFilter.appendChild(option);
-});
-tagFilter.setAttribute('multiple', 'multiple');
-const sortedThemes = Array.from(allThemes).sort();
-themeFilter.innerHTML = '<option value="">Все темы</option>';
-sortedThemes.forEach(theme => {
-const option = document.createElement('option');
-option.value = theme;
-const count = themeCounts[theme] || 0;
-const displayName = theme.length > 35 ? theme.substring(0, 35) + '...' : theme;
-option.textContent = `${displayName} (${count})`;
-option.title = `${theme} — ${count} слов`;
-themeFilter.appendChild(option);
-});
-}
-
-function updateSelectedTagsDisplay() {
-const container = document.getElementById('selectedTags');
-container.innerHTML = '';
-const filterTitle = document.querySelector('.filter-container:first-child label');
-if (filterTitle) {
-filterTitle.textContent = `Теги (выбрано: ${currentTags.length})`;
-}
-currentTags.forEach(tag => {
-const count = tagCounts[tag] || 0;
-const badge = document.createElement('div');
-badge.className = 'tag-badge';
-badge.innerHTML = `${tag} <span class="tag-count">${count}</span> <span class="remove-tag" onclick="removeTag('${tag}')">×</span>`;
-container.appendChild(badge);
-});
-}
-
-function removeTag(tagToRemove) {
-currentTags = currentTags.filter(tag => tag !== tagToRemove);
-const tagFilter = document.getElementById('tagFilter');
-Array.from(tagFilter.options).forEach(option => {
-if (option.value === tagToRemove) {
-option.selected = false;
-}
-});
-updateSelectedTagsDisplay();
-applyFilters();
-}
-
-function clearAllFilters() {
-currentTags = [];
-currentTheme = '';
-const tagFilter = document.getElementById('tagFilter');
-const themeFilter = document.getElementById('themeFilter');
-Array.from(tagFilter.options).forEach(option => {
-option.selected = false;
-});
-tagFilter.selectedIndex = 0;
-themeFilter.selectedIndex = 0;
-const filterTitle = document.querySelector('.filter-container:first-child label');
-if (filterTitle) {
-filterTitle.textContent = 'Теги';
-}
-updateSelectedTagsDisplay();
-applyFilters();
-}
-
-function applyFilters() {
-filteredData = allData.filter(item => {
-if (currentSearch) {
-const searchLower = currentSearch.toLowerCase();
-const inWord = item.word.toLowerCase().includes(searchLower);
-const inTranslation = item.translation.toLowerCase().includes(searchLower);
-const inExamples = item.examples.some(ex =>
-ex.en.toLowerCase().includes(searchLower) ||
-ex.ru.toLowerCase().includes(searchLower)
-);
-if (!inWord && !inTranslation && !inExamples) return false;
-}
-if (currentTags.length > 0) {
-if (!item.tags || !item.tags.length) return false;
-const hasAllTags = currentTags.every(tag => item.tags.includes(tag));
-if (!hasAllTags) return false;
-}
-if (currentTheme) {
-if (!item.theme || item.theme !== currentTheme) return false;
-}
-return true;
-});
-updateStats();
-renderPage(currentPage);
-buildPagination();
-}
-
-function initFilters() {
-const tagFilter = document.getElementById('tagFilter');
-const themeFilter = document.getElementById('themeFilter');
-tagFilter.addEventListener('change', function() {
-currentTags = Array.from(this.selectedOptions)
-.map(opt => opt.value)
-.filter(val => val !== "");
-updateSelectedTagsDisplay();
-applyFilters();
-});
-themeFilter.addEventListener('change', function() {
-currentTheme = this.value;
-applyFilters();
-});
-}
-
-function toggleIpaMode() {
-showIpa = !showIpa;
-document.body.classList.toggle("hide-ipa", !showIpa);
-const txt = showIpa
-? "🙈 Скрыть IPA"
-: "👁️ Показать IPA";
-document.getElementById("ipaBtn").textContent = txt;
-document.getElementById("ipaBtnSide").textContent = txt;
-localStorage.setItem("show_ipa", showIpa);
-}
-
-function toggleSyllablesMode() {
-showSyllables = !showSyllables;
-document.body.classList.toggle("show-syllables", showSyllables);
-const txt = showSyllables
-? "🔤 Скрыть слоги"
-: "🔤 Показать слоги";
-document.getElementById("syllablesBtn").textContent = txt;
-document.getElementById("syllablesBtnSide").textContent = txt;
-localStorage.setItem("show_syllables", showSyllables);
-renderPage(currentPage);
-}
-
-function selectNode(el){
-const range = document.createRange();
-range.selectNodeContents(el);
-const sel = window.getSelection();
-sel.removeAllRanges();
-sel.addRange(range);
-}
-
-function selectSingleWordFromEvent(e, el){
-const text = el.textContent;
-const node = el.firstChild;
-if (!node || node.nodeType !== Node.TEXT_NODE) return text.trim();
-const pos = document.caretPositionFromPoint
-? document.caretPositionFromPoint(e.clientX, e.clientY)
-: null;
-if (!pos || pos.offsetNode !== node) {
-return text.trim().split(/\s+/)[0];
-}
-const i = pos.offset;
-let L = i;
-while (L > 0 && /[\w'-]/.test(text[L-1])) L--;
-let R = i;
-while (R < text.length && /[\w'-]/.test(text[R])) R++;
-const range = document.createRange();
-range.setStart(node, L);
-range.setEnd(node, R);
-const sel = window.getSelection();
-sel.removeAllRanges();
-sel.addRange(range);
-return text.slice(L, R).trim();
-}
-
-function highlightSearch(text, search) {
-if (!search) return text;
-const regex = new RegExp(search, 'gi');
-return text.replace(regex, match =>
-`<span style="background: rgba(251, 113, 133, 0.3); border-radius: 3px; padding: 0 2px;">${match}</span>`
-);
-}
-
-function jumpToCard() {
-const cardNumber = parseInt(document.getElementById('cardJumpInput').value);
-// Проверка корректности номера
-if (!cardNumber || cardNumber < 1) {
-const errorMessage = document.createElement('div');
-errorMessage.style.cssText = `
-position: fixed;
-top: 20px;
-left: 50%;
-transform: translateX(-50%);
-background: rgba(255, 100, 100, 0.9);
-color: white;
-padding: 12px 20px;
-border-radius: 8px;
-font-size: 14px;
-z-index: 1000;
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-animation: fadeInOut 3s ease-in-out;
-`;
-errorMessage.textContent = '❌ Введите корректный номер слова';
-document.body.appendChild(errorMessage);
-setTimeout(() => {
-errorMessage.remove();
-}, 3000);
-return;
-}
-// Рассчитываем страницу и рендерим её
-const pageNumber = Math.ceil(cardNumber / PAGE_SIZE);
-currentPage = pageNumber;
-renderPage(pageNumber);
-// После рендера прокручиваем к нужной карточке
-setTimeout(() => {
-const cardIndex = (cardNumber - 1) % PAGE_SIZE;
-const cards = document.querySelectorAll('.card');
-if (cards[cardIndex]) {
-// Плавная прокрутка к карточке
-cards[cardIndex].scrollIntoView({
-behavior: 'smooth',
-block: 'center'
-});
-// Подсветка карточки
-cards[cardIndex].style.transition = 'all 0.3s ease';
-cards[cardIndex].style.boxShadow = '0 0 0 3px var(--accent)';
-cards[cardIndex].style.transform = 'scale(1.01)';
-// Возвращаем карточку в исходное состояние через 2 секунды
-setTimeout(() => {
-cards[cardIndex].style.boxShadow = '';
-cards[cardIndex].style.transform = '';
-}, 2000);
-// Фокусируемся обратно на поле ввода
-document.getElementById('cardJumpInput').focus();
-}
-}, 300);
-}
-
-// Остановка непрерывного воспроизведения
-function stopContinuousPlayback() {
-continuousPlaybackActive = false;
-if (continuousTimeout) {
-clearTimeout(continuousTimeout);
-continuousTimeout = null;
-}
-// Убираем подсветку со всех элементов
-document.querySelectorAll('.highlight-playing').forEach(el => {
-el.classList.remove('highlight-playing');
-});
-}
-
-// Запуск непрерывного воспроизведения с указанного элемента
-function startContinuousPlayback(elements, startIndex) {
-// Останавливаем текущее воспроизведение, если оно активно
-stopContinuousPlayback();
-continuousPlaybackActive = true;
-continuousElements = elements;
-currentContinuousIndex = startIndex;
-// Запускаем воспроизведение
-playNextInSequence();
-}
-
-// Воспроизведение следующего элемента в последовательности
-function playNextInSequence() {
-if (!continuousPlaybackActive || currentContinuousIndex >= continuousElements.length) {
-stopContinuousPlayback();
-return;
-}
-
-const element = continuousElements[currentContinuousIndex];
-// Убираем подсветку с предыдущего элемента
-document.querySelectorAll('.highlight-playing').forEach(el => {
-el.classList.remove('highlight-playing');
-});
-
-// Добавляем подсветку текущему элементу
-element.classList.add('highlight-playing');
-
-// Прокручиваем к текущему элементу, если он вне поля зрения
-if (continuousMode && currentContinuousIndex > 0) {
-element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-// Воспроизводим текст
-if (element.dataset.speak) {
-speakText(element.dataset.speak, () => {
-if (continuousPlaybackActive) {
-continuousTimeout = setTimeout(() => {
-currentContinuousIndex++;
-playNextInSequence();
-}, continuousDelay * 1000); // Используем настраиваемую задержку
-}
-});
-}
-}
-
-// Обработчик клика для элементов в режиме непрерывного воспроизведения
-function handleSpeakElementClick(el, e) {
-e.stopPropagation();
-if (continuousMode) {
-// Если уже воспроизводится эта карточка, останавливаем
-if (continuousPlaybackActive && continuousElements.includes(el)) {
-stopContinuousPlayback();
-return;
-}
-// Находим индекс текущего элемента во всем списке
-const allElements = Array.from(document.querySelectorAll('.word-en, .en'));
-const startIndex = allElements.indexOf(el);
-if (startIndex !== -1) {
-// Запускаем непрерывное воспроизведение с этого элемента
-startContinuousPlayback(allElements, startIndex);
-}
-} else {
-// Обычный режим
-selectNode(el);
-speakText(el.dataset.speak);
-}
-}
-
-// Переключение режима непрерывного воспроизведения
-function toggleContinuousMode() {
-continuousMode = !continuousMode;
-const isActive = continuousMode;
-const mainBtn = document.getElementById("continuousBtn");
-const sideBtn = document.getElementById("continuousBtnSide");
-if (isActive) {
-mainBtn.classList.add("continuous-active");
-sideBtn.classList.add("continuous-active");
-mainBtn.textContent = "⏹️ Автопрокрутка";
-sideBtn.textContent = "⏹️ Автопрокрутка";
-} else {
-mainBtn.classList.remove("continuous-active");
-sideBtn.classList.remove("continuous-active");
-mainBtn.textContent = "▶️ Автопрокрутка";
-sideBtn.textContent = "▶️ Автопрокрутка";
-// Остановка текущего воспроизведения при выключении режима
-stopContinuousPlayback();
-}
-localStorage.setItem("continuous_mode", continuousMode);
-}
-
-function renderPage(page){
-currentPage = page;
-const container = document.getElementById("container");
-container.innerHTML = "";
-stopContinuousPlayback(); // Останавливаем воспроизведение при смене страницы
-if (filteredData.length === 0) {
-container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--muted);">📭 По вашему запросу ничего не найдено</div>';
-updateStats();
-return;
-}
-const start = (page-1) * PAGE_SIZE;
-const slice = filteredData.slice(start, start + PAGE_SIZE);
-slice.forEach((item, i) => {
-const globalIndex = allData.findIndex(d => d.word === item.word) + 1;
-const encoded20 = encodeURIComponent(item.word);
-const encodedPlus = item.word.replace(/ /g, '+');
-const encodedUnder = item.word.replace(/ /g, '_');
-const youglish = `https://youglish.com/pronounce/${encodedUnder}/english`;
-const playphrase = `https://www.playphrase.me/#/search?q=${encodedPlus}&language=en`;
-const yandexTrans = `https://translate.yandex.ru/?source_lang=en&target_lang=ru&text=${encoded20}`;
-const transRu = `https://www.translate.ru/контексты/английский-русский/${encoded20}`;
-const kartaslov = `https://en.kartaslov.ru/перевод-в-контексте/${encodedPlus}`;
-const reverso = `https://context.reverso.net/перевод/английский-русский/${encodedPlus}`;
-const wooordhunt = `https://wooordhunt.ru/word/${encoded20}`;
-const forvo = `https://ru.forvo.com/search/${encoded20}/`;
-const yandexImages = `https://yandex.ru/images/search?text=${encoded20}`;
-const card = document.createElement("div");
-card.className = "card";
-const examplesToShow = (currentTags.length === 0 && !currentTheme && !currentSearch)
-? item.examples.slice(0, 4)
-: item.examples;
-const examplesHTML = examplesToShow.map(ex => {
-const ipaText = ex.ipa ? ex.ipa : '';
-const ipaHTML = ipaText ? `<div class="ipa">${ipaText}</div>` : '';
-const exampleSyllablesHTML = showSyllables && ex.syllables
-? `
-<div class="example-syllables">
-${ex.syllables.split('·').map((syllable, i) => `
-<span class="syllable ${ex.stress && ex.stress.includes(i) ? 'stressed' : ''}">${syllable}</span>
-`).join('·')}
-</div>
-`
-: '';
-const enText = currentSearch ? highlightSearch(ex.en, currentSearch) : ex.en;
-const ruText = currentSearch ? highlightSearch(ex.ru, currentSearch) : ex.ru;
-return `
-<div class="example">
-<div class="en" data-speak="${ex.en}">${enText}</div>
-${exampleSyllablesHTML}
-${ipaHTML}
-<div class="ru">${ruText}</div>
-</div>
-`;
-}).join("");
-const tagsHTML = item.tags && item.tags.length > 0 ? `
-<div class="word-tags">
-${item.tags.map(tag => `
-<span class="word-tag" onclick="addTagFromCard('${tag.replace(/'/g, "\\'")}')">${tag}</span>
-`).join('')}
-</div>
-` : '';
-const syllablesHTML = item.syllables && showSyllables
-? `
-<div class="syllables">
-${item.syllables.split('·').map((syllable, i) => `
-<span class="syllable ${i === item.stress ? 'stressed' : ''}">${syllable}</span>
-`).join('·')}
-</div>
-`
-: '';
-const ipaHTML = item.ipa ? `<div class="ipa">${item.ipa}</div>` : '';
-const wordEnHTML = currentSearch ? highlightSearch(item.word, currentSearch) : item.word;
-const cardIndexHTML = isMobileView
-? `
-<div class="card-index">
-<div>
-<a href="${youglish}" target="_blank" title="YouGlish">
-<img src="img/youglish.png" alt="YouGlish" class="service-icon">
-</a>
-<a href="${playphrase}" target="_blank" title="PlayPhrase">
-<img src="img/playphrase.png" alt="PlayPhrase" class="service-icon">
-</a>
-<a href="${yandexTrans}" target="_blank" title="Яндекс Переводчик">
-<img src="img/yandex.png" alt="Яндекс Переводчик" class="service-icon">
-</a>
-<a href="${transRu}" target="_blank" title="Translate.ru">
-<img src="img/translateru.png" alt="Translate.ru" class="service-icon">
-</a>
-<a href="${kartaslov}" target="_blank" title="Kartaslov">
-<img src="img/kartaslov.png" alt="Kartaslov" class="service-icon">
-</a>
-<a href="${reverso}" target="_blank" title="Reverso Context">
-<img src="img/reverso.png" alt="Reverso" class="service-icon">
-</a>
-<a href="${wooordhunt}" target="_blank" title="WooordHunt">
-<img src="img/wooordhunt.png" alt="WooordHunt" class="service-icon">
-</a>
-<a href="${forvo}" target="_blank" title="Forvo">
-<img src="img/forvo.png" alt="Forvo" class="service-icon">
-</a>
-<a href="${yandexImages}" target="_blank" title="Яндекс Картинки">
-<img src="img/yandex-images.png" alt="Яндекс Картинки" class="service-icon">
-</a>
-</div>
-<span class="index-num">${globalIndex}</span>
-</div>
-`
-: `
-<div class="card-index">
-<a href="${youglish}" target="_blank" title="YouGlish - примеры произношения из видео">
-<img src="img/youglish.png" alt="YouGlish" class="service-icon">
-</a>
-<a href="${playphrase}" target="_blank" title="PlayPhrase - фразы из фильмов">
-<img src="img/playphrase.png" alt="PlayPhrase" class="service-icon">
-</a>
-<a href="${yandexTrans}" target="_blank" title="Яндекс Переводчик">
-<img src="img/yandex.png" alt="Яндекс Переводчик" class="service-icon">
-</a>
-<a href="${transRu}" target="_blank" title="Translate.ru">
-<img src="img/translateru.png" alt="Translate.ru" class="service-icon">
-</a>
-<a href="${kartaslov}" target="_blank" title="Kartaslov - перевод в контексте">
-<img src="img/kartaslov.png" alt="Kartaslov" class="service-icon">
-</a>
-<a href="${reverso}" target="_blank" title="Reverso Context">
-<img src="img/reverso.png" alt="Reverso" class="service-icon">
-</a>
-<a href="${wooordhunt}" target="_blank" title="WooordHunt">
-<img src="img/wooordhunt.png" alt="WooordHunt" class="service-icon">
-</a>
-<a href="${forvo}" target="_blank" title="Forvo - произношение от носителей">
-<img src="img/forvo.png" alt="Forvo" class="service-icon">
-</a>
-<a href="${yandexImages}" target="_blank" title="Яндекс Картинки">
-<img src="img/yandex-images.png" alt="Яндекс Картинки" class="service-icon">
-</a>
-<span class="index-num">${globalIndex}</span>
-</div>
-`;
-card.innerHTML = `
-${cardIndexHTML}
-${tagsHTML}
-<div class="word-line">
-<span class="word-en" data-speak="${item.word}">${wordEnHTML}</span>
-${syllablesHTML}
-${ipaHTML}
-<span class="word-ru">${item.translation}</span>
-</div>
-<div class="examples">
-${examplesHTML}
-</div>
-`;
-container.appendChild(card);
-});
-document.querySelectorAll(".word-en, .en").forEach(el => {
-el.onclick = (e) => handleSpeakElementClick(el, e);
-el.ondblclick = e => {
-e.preventDefault();
-e.stopPropagation();
-// Всегда останавливаем непрерывное воспроизведение при двойном клике
-stopContinuousPlayback();
-const w = selectSingleWordFromEvent(e, el);
-speakText(w);
-};
-el.title = continuousMode ?
-"Нажмите для начала автопрокрутки с этого места. Двойной клик для озвучки одного слова." :
-el.title;
-});
-document.querySelectorAll(".word-ru, .ru")
-.forEach(el => el.onclick = () => selectNode(el));
-updateStats();
-updatePaginationUI();
-}
-
-function addTagFromCard(tag) {
-if (!currentTags.includes(tag)) {
-currentTags.push(tag);
-const tagFilter = document.getElementById('tagFilter');
-Array.from(tagFilter.options).forEach(option => {
-if (option.value === tag) {
-option.selected = true;
-}
-});
-updateSelectedTagsDisplay();
-applyFilters();
-}
-}
-
-function buildPagination() {
-const total = Math.ceil(filteredData.length / PAGE_SIZE);
-const pag = document.getElementById("pagination");
-pag.innerHTML = "";
-for (let i = 1; i <= total; i++) {
-const b = document.createElement("button");
-b.textContent = i;
-b.className = "page-btn";
-b.onclick = () => renderPage(i);
-pag.appendChild(b);
-}
-}
-
-function updatePaginationUI() {
-document.querySelectorAll(".page-btn")
-.forEach(btn => {
-btn.classList.toggle("active", btn.textContent == currentPage);
-});
-}
-
-let testMode = false;
-function toggleTestMode() {
-testMode = !testMode;
-document.body.classList.toggle("hide-ru", testMode);
-const txt = testMode
-? "👀 Показать переводы"
-: "🧠 Самопроверка";
-document.getElementById("testBtn").textContent = txt;
-document.getElementById("testBtnSide").textContent = txt;
-}
-
-const saved = localStorage.getItem("theme");
-if (saved) document.documentElement.setAttribute("data-theme", saved);
-
-function toggleTheme() {
-const cur = document.documentElement.getAttribute("data-theme");
-const next = cur === "dark" ? "light" : "dark";
-document.documentElement.setAttribute("data-theme", next);
-localStorage.setItem("theme", next);
-}
-
-let isSettingsOpen = false;
-function toggleSettings() {
-const panel = document.getElementById("sidePanel");
-if (isSettingsOpen) {
-panel.classList.remove("open");
-setTimeout(() => panel.style.display = "none", 300);
-} else {
-panel.style.display = "flex";
-setTimeout(() => panel.classList.add("open"), 10);
-}
-isSettingsOpen = !isSettingsOpen;
-}
-
-const rateSlider = document.getElementById("rateSlider");
-const pitchSlider = document.getElementById("pitchSlider");
-const rateLabel = document.getElementById("rateLabel");
-const pitchLabel = document.getElementById("pitchLabel");
-const rateSliderSide = document.getElementById("rateSliderSide");
-const pitchSliderSide = document.getElementById("pitchSliderSide");
-const rateLabelSide = document.getElementById("rateLabelSide");
-const pitchLabelSide = document.getElementById("pitchLabelSide");
-const delaySlider = document.getElementById("delaySlider");
-const delaySliderSide = document.getElementById("delaySliderSide");
-const delayLabel = document.getElementById("delayLabel");
-const delayLabelSide = document.getElementById("delayLabelSide");
-
-// Загрузка сохраненного состояния режима автопрокрутки
-const savedContinuousMode = localStorage.getItem("continuous_mode");
-if (savedContinuousMode !== null) {
-continuousMode = savedContinuousMode === "true";
-}
-
-// Загрузка сохраненного значения задержки
-const savedDelay = localStorage.getItem("continuous_delay");
-if (savedDelay !== null) {
-continuousDelay = parseFloat(savedDelay);
-}
-
-rateSlider.value = localStorage.getItem("tts_rate") || 0.9;
-pitchSlider.value = localStorage.getItem("tts_pitch") || 1.02;
-delaySlider.value = continuousDelay;
-rateSliderSide.value = rateSlider.value;
-pitchSliderSide.value = pitchSlider.value;
-delaySliderSide.value = continuousDelay;
-
-function updateLabels() {
-rateLabel.textContent = `x${parseFloat(rateSlider.value).toFixed(2)}`;
-pitchLabel.textContent = parseFloat(pitchSlider.value).toFixed(2);
-delayLabel.textContent = `${parseFloat(delaySlider.value).toFixed(1)}s`;
-rateLabelSide.textContent = `x${parseFloat(rateSliderSide.value).toFixed(2)}`;
-pitchLabelSide.textContent = parseFloat(pitchSliderSide.value).toFixed(2);
-delayLabelSide.textContent = `${parseFloat(delaySliderSide.value).toFixed(1)}s`;
-}
-updateLabels();
-
-rateSlider.oninput = () => {
-rateSliderSide.value = rateSlider.value;
-localStorage.setItem("tts_rate", rateSlider.value);
-updateLabels();
-};
-
-pitchSlider.oninput = () => {
-pitchSliderSide.value = pitchSlider.value;
-localStorage.setItem("tts_pitch", pitchSlider.value);
-updateLabels();
-};
-
-delaySlider.oninput = () => {
-continuousDelay = parseFloat(delaySlider.value);
-delaySliderSide.value = continuousDelay;
-localStorage.setItem("continuous_delay", continuousDelay);
-updateLabels();
-};
-
-rateSliderSide.oninput = () => {
-rateSlider.value = rateSliderSide.value;
-localStorage.setItem("tts_rate", rateSlider.value);
-updateLabels();
-};
-
-pitchSliderSide.oninput = () => {
-pitchSlider.value = pitchSliderSide.value;
-localStorage.setItem("tts_pitch", pitchSlider.value);
-updateLabels();
-};
-
-delaySliderSide.oninput = () => {
-continuousDelay = parseFloat(delaySliderSide.value);
-delaySlider.value = continuousDelay;
-localStorage.setItem("continuous_delay", continuousDelay);
-updateLabels();
-};
-
-const voiceSelect = document.getElementById("voiceSelect");
-const voiceSelectSide = document.getElementById("voiceSelectSide");
-let VOICES = [];
-const NAME_MAP = {
-"Ava": "Ava", "Nathan": "Nathan", "Alex": "Алекс", "Алекс": "Алекс",
-"Zoe": "Зои", "Зои": "Зои", "Nikki": "Никки", "Nicky": "Никки",
-"Никки": "Никки", "Samantha": "Саманта", "Саманта": "Саманта",
-"Susan": "Сьюзен", "Сьюзен": "Сьюзен", "Tom": "Том", "Том": "Том",
-"Evan": "Эван", "Эван": "Эван", "Alison": "Элисон", "Элисон": "Элисон"
-};
-const GENDER_ICON = {
-"Том": "👨", "Эван": "👨", "Nathan": "👨", "Алекс": "👨",
-"Никки": "👩", "Саманта": "👩", "Зои": "👩", "Ava": "👩",
-"Сьюзен": "👩", "Элисон": "👩"
-};
-const DISPLAY_ORDER = [
-"Том", "Эван", "Nathan", "Алекс", "SEPARATOR",
-"Никки", "Саманта", "Зои", "Ava", "Сьюзен", "Элисон"
-];
-
-function populateDesktopVoices() {
-const allVoices = window.speechSynthesis.getVoices();
-if (!allVoices.length) return;
-const matched = allVoices.filter(v =>
-v.lang === "en-US" &&
-Object.keys(NAME_MAP).some(k => v.name.includes(k))
-);
-VOICES = matched;
-voiceSelect.innerHTML = "";
-voiceSelectSide.innerHTML = "";
-const items = VOICES.map((v, i) => {
-const short =
-Object.entries(NAME_MAP).find(([k]) => v.name.includes(k))?.[1] || v.name;
-const icon = GENDER_ICON[short] || "";
-return { index: i, label: icon ? `${icon} ${short}` : short, short };
-});
-DISPLAY_ORDER.forEach(name => {
-if (name === "SEPARATOR") {
-const s = document.createElement("option");
-s.textContent = "──────────";
-s.disabled = true;
-voiceSelect.appendChild(s);
-voiceSelectSide.appendChild(s.cloneNode(true));
-return;
-}
-const f = items.find(it => it.short === name);
-if (f) {
-const o = document.createElement("option");
-o.value = f.index;
-o.textContent = f.label;
-voiceSelect.appendChild(o);
-voiceSelectSide.appendChild(o.cloneNode(true));
-}
-});
-const mute = document.createElement("option");
-mute.value = "mute";
-mute.textContent = "🔇 Без озвучки";
-voiceSelect.appendChild(mute);
-voiceSelectSide.appendChild(mute.cloneNode(true));
-const savedVoice = localStorage.getItem("tts_voice");
-const tom = VOICES.findIndex(v => v.name.includes("Tom"));
-const def = tom !== -1 ? tom : "mute";
-voiceSelect.value = savedVoice || def;
-voiceSelectSide.value = savedVoice || def;
-}
-
-function populateAndroidVoices() {
-voiceSelect.innerHTML = "";
-voiceSelectSide.innerHTML = "";
-const mute = document.createElement("option");
-mute.value = "mute";
-mute.textContent = "🔇 Без озвучки";
-voiceSelect.appendChild(mute);
-voiceSelectSide.appendChild(mute.cloneNode(true));
-const systemOption = document.createElement("option");
-systemOption.value = "system";
-systemOption.textContent = "📱 Системный Google TTS (Android)";
-voiceSelect.appendChild(systemOption);
-voiceSelectSide.appendChild(systemOption.cloneNode(true));
-voiceSelect.value = "system";
-voiceSelectSide.value = "system";
-localStorage.setItem("tts_voice", "system");
-}
-
-function initVoices() {
-if (isAndroid) {
-populateAndroidVoices();
-} else {
-window.addEventListener("load", () => {
-const warmup = new SpeechSynthesisUtterance(" ");
-warmup.volume = 0;
-window.speechSynthesis.speak(warmup);
-setTimeout(populateDesktopVoices, 300);
-setTimeout(populateDesktopVoices, 800);
-setTimeout(populateDesktopVoices, 1500);
-});
-window.speechSynthesis.onvoiceschanged = populateDesktopVoices;
-}
-}
-
-voiceSelect.onchange = () => {
-voiceSelectSide.value = voiceSelect.value;
-localStorage.setItem("tts_voice", voiceSelect.value);
-};
-
-voiceSelectSide.onchange = () => {
-voiceSelect.value = voiceSelectSide.value;
-localStorage.setItem("tts_voice", voiceSelect.value);
-};
-
-function speakText(text, onEndCallback) {
-if (voiceSelect.value === "mute") {
-if (onEndCallback) onEndCallback();
-return;
-}
-const synth = window.speechSynthesis;
-synth.cancel();
-if (isAndroid) {
-const u = new SpeechSynthesisUtterance(text);
-u.lang = "en-US";
-u.rate = parseFloat(rateSlider.value);
-u.pitch = parseFloat(pitchSlider.value);
-u.volume = 1.0;
-if (onEndCallback) {
-u.onend = onEndCallback;
-}
-synth.speak(u);
-} else {
-const idx = parseInt(voiceSelect.value, 10);
-const voice = VOICES[idx] || VOICES[0];
-const u = new SpeechSynthesisUtterance(text);
-u.voice = voice;
-u.lang = "en-US";
-u.rate = parseFloat(rateSlider.value);
-u.pitch = parseFloat(pitchSlider.value);
-u.volume = 1.0;
-if (onEndCallback) {
-u.onend = onEndCallback;
-}
-synth.speak(u);
-}
-}
-
-document.getElementById('searchInput').addEventListener('input', function(e) {
-currentSearch = e.target.value.trim();
-currentPage = 1;
-applyFilters();
-});
-
-fetch("data.json")
-.then(r => r.json())
-.then(data => {
-allData = data;
-filteredData = [...allData];
-detectPlatform();
-initVoices();
-extractTagsAndThemes();
-initFilters();
-const savedIpa = localStorage.getItem("show_ipa");
-if (savedIpa !== null) {
-showIpa = savedIpa === "true";
-document.body.classList.toggle("hide-ipa", !showIpa);
-const txt = showIpa
-? "🙈 Скрыть IPA"
-: "👁️ Показать IPA";
-document.getElementById("ipaBtn").textContent = txt;
-document.getElementById("ipaBtnSide").textContent = txt;
-}
-const savedSyllables = localStorage.getItem("show_syllables");
-if (savedSyllables !== null) {
-showSyllables = savedSyllables === "true";
-document.body.classList.toggle("show-syllables", showSyllables);
-const txt = showSyllables
-? "🔤 Скрыть слоги"
-: "🔤 Показать слоги";
-document.getElementById("syllablesBtn").textContent = txt;
-document.getElementById("syllablesBtnSide").textContent = txt;
-}
-// Обновление состояния кнопки непрерывного воспроизведения
-if (continuousMode) {
-document.getElementById("continuousBtn").classList.add("continuous-active");
-document.getElementById("continuousBtnSide").classList.add("continuous-active");
-document.getElementById("continuousBtn").textContent = "⏹️ Автопрокрутка";
-document.getElementById("continuousBtnSide").textContent = "⏹️ Автопрокрутка";
-}
-updateStats();
-renderPage(1);
-buildPagination();
-})
-.catch(err => {
-console.error('Ошибка загрузки данных:', err);
-document.getElementById('container').innerHTML =
-'<div style="text-align: center; padding: 40px; color: var(--muted);">⚠️ Ошибка загрузки данных. Проверьте наличие файла data.json</div>';
-});
-</script>
-</body>
-</html>
+  {
+    "word": "lock up",
+    "translation": "запереть; посадить в тюрьму",
+    "syllables": "lock·up",
+    "stress": 1,
+    "tags": ["phrasal_verb", "crime", "informal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "They locked him up for ten years.",
+        "ru": "Его посадили в тюрьму на десять лет.",
+        "ipa": "ðeɪ lɒkt hɪm ʌp fər tɛn jɪrz",
+        "syllables": "They·locked·him·up·for·ten·years",
+        "stress": [1, 4]
+      },
+      {
+        "en": "Make sure to lock up the evidence room.",
+        "ru": "Убедись, что комната с уликами заперта.",
+        "ipa": "meɪk ʃʊr tuː lɒk ʌp ði ˈevɪdəns ruːm",
+        "syllables": "Make·sure·to·lock·up·the·ev·i·dence·room",
+        "stress": [1, 4, 8]
+      }
+    ]
+  }
+]
