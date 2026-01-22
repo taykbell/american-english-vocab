@@ -2,117 +2,316 @@
   {
     "word": "get away with",
     "translation": "избежать наказания, сойти с рук",
+    "syllables": "get·a·way·with",
+    "stress": 2,
     "tags": ["phrasal_verb", "informal", "crime"],
     "theme": "Улики | The Evidence S01E03",
     "examples": [
       {
         "en": "He thought he'd get away with cheating on his taxes.",
         "ru": "Он думал, что уклонение от налогов сойдёт ему с рук.",
-        "ipa": "hi θɔːt hiːd ɡet əˈweɪ wɪð ˈtʃiːtɪŋ ɒn hɪz ˈtæksɪz"
+        "ipa": "hi θɔːt hiːd ɡet əˈweɪ wɪð ˈtʃiːtɪŋ ɒn hɪz ˈtæksɪz",
+        "syllables": "He·thought·he'd·get·a·way·with·cheat·ing·on·his·tax·es",
+        "stress": [1, 5, 9]
       },
       {
         "en": "The kids tried to get away with staying up past midnight.",
         "ru": "Дети попытались, чтобы им сошло с рук, что они не спали после полуночи.",
-        "ipa": "ðə kɪdz traɪd tuː ɡet əˈweɪ wɪð ˈsteɪɪŋ ʌp pɑːst ˈmɪdnaɪt"
-      },
-      {
-        "en": "No one should get away with mistreating their employees like that.",
-        "ru": "Никому не должно сходить с рук такое обращение с сотрудниками.",
-        "ipa": "nəʊ wʌn ʃʊd ɡet əˈweɪ wɪð mɪsˈtriːtɪŋ ðeər ˌɛmplɔɪˈiːz laɪk ðæt"
-      },
-      {
-        "en": "She couldn't believe they let him get away with a warning.",
-        "ru": "Она не могла поверить, что ему сошло с рук всего лишь предупреждение.",
-        "ipa": "ʃi ˈkʊdnt bɪˈliːv ðeɪ let hɪm ɡet əˈweɪ wɪð ə ˈwɔːnɪŋ"
-      },
-      {
-        "en": "The thief got away with three valuable paintings.",
-        "ru": "Вор ушёл с тремя ценными картинами.",
-        "ipa": "ðə θiːf ɡɒt əˈweɪ wɪð θriː ˈvæljʊəbl ˈpeɪntɪŋz"
+        "ipa": "ðə kɪdz traɪd tuː ɡet əˈweɪ wɪð ˈsteɪɪŋ ʌp pɑːst ˈmɪdnaɪt",
+        "syllables": "The·kids·tried·to·get·a·way·with·stay·ing·up·past·mid·night",
+        "stress": [1, 3, 7, 11]
       }
     ]
   },
   {
-    "word": "back off",
-    "translation": "отступить, сбавить напор, прекратить давить",
-    "tags": ["phrasal_verb", "conflict"],
-    "theme": "Family Guy S03E05",
+    "word": "cover up",
+    "translation": "скрывать, замалчивать",
+    "syllables": "cov·er·up",
+    "stress": 1,
+    "tags": ["phrasal_verb", "crime", "investigation"],
+    "theme": "Улики | The Evidence S01E03",
     "examples": [
       {
-        "en": "Back off and give her some space to think.",
-        "ru": "Отступи и дай ей пространство, чтобы подумать.",
-        "ipa": "bæk ɒf ænd ɡɪv hɜː sʌm speɪs tuː θɪŋk"
+        "en": "The company tried to cover up the evidence of fraud.",
+        "ru": "Компания пыталась скрыть доказательства мошенничества.",
+        "ipa": "ðə ˈkʌmpəni traɪd tuː ˈkʌvər ʌp ði ˈevɪdəns əv frɔːd",
+        "syllables": "The·com·pa·ny·tried·to·cov·er·up·the·ev·i·dence·of·fraud",
+        "stress": [1, 6, 9, 13]
       },
       {
-        "en": "The pit bull finally backed off when the owner approached.",
-        "ru": "Питбуль наконец отступил, когда подошёл хозяин.",
-        "ipa": "ðə pɪt bʊl ˈfaɪnəli bækt ɒf wen ði ˈəʊnə əˈprəʊtʃt"
-      },
-      {
-        "en": "Investors backed off after the market showed early volatility.",
-        "ru": "Инвесторы умерили пыл после ранней волатильности рынка.",
-        "ipa": "ɪnˈvɛstəz bækt ɒf ˈɑːftə ðə ˈmɑːkɪt ʃəʊd ˈɜːli ˌvɒləˈtɪləti"
-      },
-      {
-        "en": "You need to back off the throttle on icy roads.",
-        "ru": "Нужно сбавить газ на обледенелой дороге.",
-        "ipa": "ju niːd tuː bæk ɒf ðə ˈθrɒtl ɒn ˈaɪsi rəʊdz"
-      },
-      {
-        "en": "The police told the crowd to back off from the crime scene.",
-        "ru": "Полиция приказала толпе отступить от места преступления.",
-        "ipa": "ðə pəˈliːs təʊld ðə kraʊd tuː bæk ɒf frɒm ðə kraɪm siːn"
+        "en": "He helped cover up the crime for years.",
+        "ru": "Он годами помогал скрывать преступление.",
+        "ipa": "hi hɛlpt ˈkʌvər ʌp ðə kraɪm fɔːr jɪrz",
+        "syllables": "He·helped·cov·er·up·the·crime·for·years",
+        "stress": [1, 4, 7]
       }
     ]
   },
   {
-    "word": "blow out",
-    "translation": "задуть, лопнуть, сгореть, разгромить",
-    "tags": ["phrasal_verb", "sports", "accident"],
-    "theme": "NBA Finals 2023",
+    "word": "break into",
+    "translation": "вломиться, проникнуть",
+    "syllables": "break·in·to",
+    "stress": 1,
+    "tags": ["phrasal_verb", "crime", "action"],
+    "theme": "Улики | The Evidence S01E03",
     "examples": [
       {
-        "en": "She blew out the candles in one excited breath.",
-        "ru": "Она одним вздохом задула все свечи.",
-        "ipa": "ʃi bluː aʊt ðə ˈkændlz ɪn wʌn ɪkˈsaɪtɪd breθ"
+        "en": "Someone broke into the office last night.",
+        "ru": "Кто-то вломился в офис прошлой ночью.",
+        "ipa": "ˈsʌmwʌn broʊk ˈɪntuː ði ˈɒfɪs læst naɪt",
+        "syllables": "Some·one·broke·in·to·the·of·fice·last·night",
+        "stress": [1, 3, 7]
       },
       {
-        "en": "His front tire blew out halfway through the desert trip.",
-        "ru": "Передняя шина лопнула на середине поездки по пустыне.",
-        "ipa": "hɪz frʌnt ˈtaɪə bluː aʊt ˈhɑːfweɪ θruː ðə ˈdɛzət trɪp"
-      },
-      {
-        "en": "The Warriors blew out their rivals by thirty points.",
-        "ru": "«Уорриорз» разгромили соперников на тридцать очков.",
-        "ipa": "ðə ˈwɒriəz bluː aʊt ðeə ˈraɪvəlz baɪ ˈθɜːti pɔɪnts"
-      },
-      {
-        "en": "The transformer blew out and knocked power to the block.",
-        "ru": "Трансформатор сгорел и обесточил квартал.",
-        "ipa": "ðə trænsˈfɔːmə bluː aʊt ænd nɒkt ˈpaʊə tuː ðə blɒk"
+        "en": "They broke into the house through the back door.",
+        "ru": "Они проникли в дом через заднюю дверь.",
+        "ipa": "ðeɪ broʊk ˈɪntuː ðə haʊs θruː ðə bæk dɔːr",
+        "syllables": "They·broke·in·to·the·house·through·the·back·door",
+        "stress": [1, 4, 8]
       }
     ]
   },
   {
-    "word": "piece of cake",
-    "translation": "очень легко, проще простого",
-    "tags": ["idiom", "informal"],
-    "theme": "X-Files S02E10",
+    "word": "pin down",
+    "translation": "точно установить, прижать фактами",
+    "syllables": "pin·down",
+    "stress": 1,
+    "tags": ["phrasal_verb", "investigation", "formal"],
+    "theme": "Улики | The Evidence S01E03",
     "examples": [
       {
-        "en": "The exam was a piece of cake for her.",
-        "ru": "Экзамен был для неё проще простого.",
-        "ipa": "ði ɪɡˈzæm wəz ə piːs əv keɪk fɔː hɜː"
+        "en": "The detectives tried to pin down the exact time of death.",
+        "ru": "Детективы пытались точно установить время смерти.",
+        "ipa": "ðə dɪˈtɛktɪvz traɪd tuː pɪn daʊn ði ɪɡˈzækt taɪm əv dɛθ",
+        "syllables": "The·de·tec·tives·tried·to·pin·down·the·ex·act·time·of·death",
+        "stress": [1, 5, 8, 12]
       },
       {
-        "en": "Fixing this should be a piece of cake for an expert.",
-        "ru": "Починить это будет проще простого для эксперта.",
-        "ipa": "ˈfɪksɪŋ ðɪs ʃʊd bi ə piːs əv keɪk fɔːr ən ˈɛkspɜːt"
+        "en": "It's hard to pin down what really happened.",
+        "ru": "Трудно точно понять, что на самом деле произошло.",
+        "ipa": "ɪts hɑːrd tuː pɪn daʊn wɒt ˈrɪəli ˈhæpənd",
+        "syllables": "It's·hard·to·pin·down·what·real·ly·hap·pened",
+        "stress": [1, 4, 7]
+      }
+    ]
+  },
+  {
+    "word": "turn out",
+    "translation": "оказаться, выясниться",
+    "syllables": "turn·out",
+    "stress": 1,
+    "tags": ["phrasal_verb", "neutral", "results"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The suspect turned out to be innocent.",
+        "ru": "Подозреваемый оказался невиновным.",
+        "ipa": "ðə ˈsʌspɛkt tɜːrnd aʊt tuː bi ˈɪnəsənt",
+        "syllables": "The·sus·pect·turned·out·to·be·in·no·cent",
+        "stress": [1, 4, 7]
       },
       {
-        "en": "Don't worry, this job is a piece of cake.",
-        "ru": "Не волнуйся, эта работа проще простого.",
-        "ipa": "dəʊnt ˈwʌri ðɪs dʒɒb ɪz ə piːs əv keɪk"
+        "en": "It turned out that the evidence was fake.",
+        "ru": "Выяснилось, что улики были поддельными.",
+        "ipa": "ɪt tɜːrnd aʊt ðæt ði ˈevɪdəns wəz feɪk",
+        "syllables": "It·turned·out·that·the·ev·i·dence·was·fake",
+        "stress": [1, 3, 7]
+      }
+    ]
+  },
+  {
+    "word": "point to",
+    "translation": "указывать на, свидетельствовать о",
+    "syllables": "point·to",
+    "stress": 1,
+    "tags": ["phrasal_verb", "evidence", "formal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "All the clues point to an inside job.",
+        "ru": "Все улики указывают на инсайдерскую работу.",
+        "ipa": "ɔːl ðə kluːz pɔɪnt tuː ən ˈɪnsaɪd dʒɒb",
+        "syllables": "All·the·clues·point·to·an·in·side·job",
+        "stress": [1, 4, 7]
+      },
+      {
+        "en": "The evidence points to him as the main suspect.",
+        "ru": "Улики указывают на него как на главного подозреваемого.",
+        "ipa": "ði ˈevɪdəns pɔɪnts tuː hɪm æz ðə meɪn ˈsʌspɛkt",
+        "syllables": "The·ev·i·dence·points·to·him·as·the·main·sus·pect",
+        "stress": [1, 5, 9]
+      }
+    ]
+  },
+
+  {
+    "word": "track down",
+    "translation": "выследить, разыскать",
+    "syllables": "track·down",
+    "stress": 1,
+    "tags": ["phrasal_verb", "investigation", "action"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The police managed to track down the suspect.",
+        "ru": "Полиции удалось выследить подозреваемого.",
+        "ipa": "ðə pəˈliːs ˈmænɪdʒd tuː træk daʊn ðə ˈsʌspɛkt",
+        "syllables": "The·po·lice·man·aged·to·track·down·the·sus·pect",
+        "stress": [1, 5, 8]
+      },
+      {
+        "en": "She tracked down the witness after weeks of searching.",
+        "ru": "Она разыскала свидетеля после недель поисков.",
+        "ipa": "ʃiː trækt daʊn ðə ˈwɪtnɪs ˈæftər wiːks əv ˈsɜːrtʃɪŋ",
+        "syllables": "She·tracked·down·the·wit·ness·af·ter·weeks·of·search·ing",
+        "stress": [1, 4, 8]
+      }
+    ]
+  },
+  {
+    "word": "rule out",
+    "translation": "исключить (версию)",
+    "syllables": "rule·out",
+    "stress": 1,
+    "tags": ["phrasal_verb", "investigation", "formal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The police ruled out suicide.",
+        "ru": "Полиция исключила версию самоубийства.",
+        "ipa": "ðə pəˈliːs ruːld aʊt ˈsuːɪsaɪd",
+        "syllables": "The·po·lice·ruled·out·sui·cide",
+        "stress": [1, 4]
+      },
+      {
+        "en": "We can't rule out the possibility of a cover-up.",
+        "ru": "Мы не можем исключить возможность сокрытия.",
+        "ipa": "wiː kɑːnt ruːl aʊt ðə ˌpɒsəˈbɪləti əv ə ˈkʌvər ʌp",
+        "syllables": "We·can't·rule·out·the·pos·si·bil·i·ty·of·a·cov·er·up",
+        "stress": [1, 3, 7, 11]
+      }
+    ]
+  },
+  {
+    "word": "carry out",
+    "translation": "осуществить, провести",
+    "syllables": "car·ry·out",
+    "stress": 1,
+    "tags": ["phrasal_verb", "formal", "action"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The attack was carefully carried out.",
+        "ru": "Атака была тщательно спланирована и проведена.",
+        "ipa": "ði əˈtæk wəz ˈkeərfəli ˈkærid aʊt",
+        "syllables": "The·at·tack·was·care·ful·ly·car·ried·out",
+        "stress": [1, 4, 7]
+      },
+      {
+        "en": "They carried out a full investigation.",
+        "ru": "Они провели полное расследование.",
+        "ipa": "ðeɪ ˈkærid aʊt ə fʊl ɪnˌvɛstɪˈɡeɪʃən",
+        "syllables": "They·car·ried·out·a·full·in·ves·ti·ga·tion",
+        "stress": [1, 5, 8]
+      }
+    ]
+  },
+  {
+    "word": "hold up",
+    "translation": "ограбить; задержать",
+    "syllables": "hold·up",
+    "stress": 1,
+    "tags": ["phrasal_verb", "crime", "informal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "The bank was held up at gunpoint.",
+        "ru": "Банк ограбили под угрозой оружия.",
+        "ipa": "ðə bæŋk wəz hɛld ʌp æt ˈɡʌnpɔɪnt",
+        "syllables": "The·bank·was·held·up·at·gun·point",
+        "stress": [1, 4, 7]
+      },
+      {
+        "en": "Traffic was held up for hours.",
+        "ru": "Движение было задержано на несколько часов.",
+        "ipa": "ˈtræfɪk wəz hɛld ʌp fər ˈaʊərz",
+        "syllables": "Traf·fic·was·held·up·for·hours",
+        "stress": [1, 4]
+      }
+    ]
+  },
+
+  {
+    "word": "confess to",
+    "translation": "признаться в",
+    "syllables": "con·fess·to",
+    "stress": 2,
+    "tags": ["verb", "crime", "formal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "He confessed to the murder.",
+        "ru": "Он признался в убийстве.",
+        "ipa": "hi kənˈfɛst tuː ðə ˈmɜːrdər",
+        "syllables": "He·con·fessed·to·the·mur·der",
+        "stress": [1, 3]
+      },
+      {
+        "en": "She refused to confess to anything.",
+        "ru": "Она отказалась признаваться в чём-либо.",
+        "ipa": "ʃi rɪˈfjuːzd tuː kənˈfɛs tuː ˈɛnɪθɪŋ",
+        "syllables": "She·re·fused·to·con·fess·to·a·ny·thing",
+        "stress": [1, 5, 8]
+      }
+    ]
+  },
+
+  {
+    "word": "set up",
+    "translation": "подставить; организовать",
+    "syllables": "set·up",
+    "stress": 1,
+    "tags": ["phrasal_verb", "crime", "informal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "He was set up by his own partner.",
+        "ru": "Его подставил собственный напарник.",
+        "ipa": "hi wəz sɛt ʌp baɪ hɪz oʊn ˈpɑːrtnər",
+        "syllables": "He·was·set·up·by·his·own·part·ner",
+        "stress": [1, 4, 7]
+      },
+      {
+        "en": "They set up a sting operation.",
+        "ru": "Они организовали операцию-ловушку.",
+        "ipa": "ðeɪ sɛt ʌp ə stɪŋ ˌɒpəˈreɪʃən",
+        "syllables": "They·set·up·a·sting·op·er·a·tion",
+        "stress": [1, 5, 8]
+      }
+    ]
+  },
+
+  {
+    "word": "lock up",
+    "translation": "запереть; посадить в тюрьму",
+    "syllables": "lock·up",
+    "stress": 1,
+    "tags": ["phrasal_verb", "crime", "informal"],
+    "theme": "Улики | The Evidence S01E03",
+    "examples": [
+      {
+        "en": "They locked him up for ten years.",
+        "ru": "Его посадили в тюрьму на десять лет.",
+        "ipa": "ðeɪ lɒkt hɪm ʌp fər tɛn jɪrz",
+        "syllables": "They·locked·him·up·for·ten·years",
+        "stress": [1, 4]
+      },
+      {
+        "en": "Make sure to lock up the evidence room.",
+        "ru": "Убедись, что комната с уликами заперта.",
+        "ipa": "meɪk ʃʊr tuː lɒk ʌp ði ˈevɪdəns ruːm",
+        "syllables": "Make·sure·to·lock·up·the·ev·i·dence·room",
+        "stress": [1, 4, 8]
       }
     ]
   }
