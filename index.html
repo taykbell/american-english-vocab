@@ -94,7 +94,88 @@ h1 { margin: 0 0 8px; font-weight: 700; font-size: 2rem; }
 #searchInput:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(219,39,119,0.1);
+}
+
+/* ===== СЕКЦИЯ БЫСТРОГО ПЕРЕХОДА ===== */
+.card-jump-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
+  max-width: 720px;
+}
+
+.card-jump-container {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  max-width: 400px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.card-jump-container:hover {
+  border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
+}
+
+.card-jump-icon {
+  padding: 0 12px;
+  color: var(--muted);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-jump-input {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.card-jump-input:focus {
+  background: rgba(219, 39, 119, 0.05);
+}
+
+.card-jump-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-jump-btn:hover {
+  background: var(--green);
+  transform: translateY(-1px);
+}
+
+/* Анимация для уведомлений */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
 }
 
 /* ===== СЕКЦИЯ ФИЛЬТРОВ ===== */
@@ -278,7 +359,7 @@ h1 { margin: 0 0 8px; font-weight: 700; font-size: 2rem; }
   flex-wrap: wrap;
 }
 
-.test-toggle, .ipa-toggle {
+.test-toggle, .ipa-toggle, .syllables-toggle {
   padding: 10px 18px;
   border-radius: 10px;
   border: 1px solid var(--border);
@@ -290,7 +371,7 @@ h1 { margin: 0 0 8px; font-weight: 700; font-size: 2rem; }
   box-shadow: var(--shadow);
 }
 
-.test-toggle:hover, .ipa-toggle:hover {
+.test-toggle:hover, .ipa-toggle:hover, .syllables-toggle:hover {
   background: var(--accent);
   color: white;
   border-color: var(--accent);
@@ -456,7 +537,7 @@ input[type="range"] {
 .side-panel select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
+  box-shadow: 0 0 0 3px rgba(219,39,119,0.1);
 }
 
 /* Голосовые контролы внутри боковой панели */
@@ -533,7 +614,8 @@ input[type="range"] {
 }
 
 .side-panel .test-toggle,
-.side-panel .ipa-toggle {
+.side-panel .ipa-toggle,
+.side-panel .syllables-toggle {
   padding: 10px 16px;
   border-radius: 10px;
   border: 1px solid var(--border);
@@ -547,11 +629,39 @@ input[type="range"] {
 }
 
 .side-panel .test-toggle:hover,
-.side-panel .ipa-toggle:hover {
+.side-panel .ipa-toggle:hover,
+.side-panel .syllables-toggle:hover {
   background: var(--accent);
   color: white;
   border-color: var(--accent);
   transform: translateY(-1px);
+}
+
+/* ===== Слоговое разделение ===== */
+.syllables {
+  font-size: 18px;
+  margin: 8px 0;
+  color: var(--accent);
+  font-weight: 600;
+  text-align: left;
+}
+
+.syllable {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.syllable.stressed {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.example-syllables {
+  font-size: 16px;
+  margin: 4px 0 8px 0;
+  color: var(--accent);
+  font-weight: 600;
+  text-align: left;
 }
 
 /* ===== КАРТОЧКА ===== */
@@ -569,6 +679,7 @@ input[type="range"] {
   margin: 0 auto 20px auto;
   text-align: left;
   position: relative;
+  transition: all 0.3s ease;
 }
 
 /* ===== НОМЕР + ИКОНКИ СЕРВИСОВ ===== */
@@ -622,17 +733,20 @@ input[type="range"] {
   font-size: 21px;
   margin-bottom: 20px;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
+  text-align: left;
 }
 
 .word-en {
   color: var(--accent);
   cursor: pointer;
   font-weight: 700;
+  display: block;
 }
 
 .word-ru {
   cursor: pointer;
+  display: block;
+  margin-top: 12px;
 }
 
 /* ===== ПРИМЕРЫ С ФОНОВЫМИ БЛОКАМИ ===== */
@@ -650,18 +764,20 @@ input[type="range"] {
   font-weight: 600;
   margin-bottom: 8px;
   line-height: 1.4;
+  font-size: 16px;
 }
 
 .ipa {
   font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif;
   color: var(--accent);
-  font-size: 13px;
+  font-size: 18px;
   margin-bottom: 8px;
   padding-left: 8px;
   border-left: 2px solid var(--accent);
   font-style: italic;
   opacity: 0.9;
   line-height: 1.3;
+  text-align: left;
 }
 
 .ru {
@@ -813,6 +929,11 @@ input[type="range"] {
     margin-top: 20px;
     margin-bottom: 16px;
     padding-bottom: 10px;
+    text-align: center;
+  }
+
+  .syllables, .ipa {
+    text-align: center;
   }
 
   .word-tags {
@@ -833,7 +954,7 @@ input[type="range"] {
   }
 
   .ipa {
-    font-size: 13px;
+    font-size: 16px;
     margin-bottom: 6px;
   }
 
@@ -877,26 +998,25 @@ input[type="range"] {
     padding: 16px;
     gap: 14px;
   }
-  
+
   .side-panel .voice-controls {
     gap: 12px;
   }
-  
+
   .side-panel .voice-row {
     gap: 12px;
   }
-  
+
   .side-panel .slider-with-value {
     gap: 8px;
   }
-  
+
   .side-panel .slider-value {
     font-size: 13px;
     min-width: 35px;
   }
 }
 
-/* Дополнительные медиазапросы для очень маленьких экранов */
 @media (max-width: 480px) {
   h1 {
     font-size: 1.3rem;
@@ -930,7 +1050,8 @@ input[type="range"] {
   }
 
   .ipa {
-    font-size: 12px;
+    font-size: 14px;
+    margin-bottom: 6px;
   }
 
   .ru {
@@ -941,7 +1062,7 @@ input[type="range"] {
     flex-direction: column;
   }
 
-  .test-toggle, .ipa-toggle {
+  .test-toggle, .ipa-toggle, .syllables-toggle {
     width: 100%;
     margin-bottom: 5px;
   }
@@ -962,18 +1083,19 @@ input[type="range"] {
     gap: 12px;
     max-width: 280px;
   }
-  
+
   .side-panel label {
     font-size: 13px;
   }
-  
+
   .side-panel select {
     padding: 8px 10px;
     font-size: 13px;
   }
-  
+
   .side-panel .test-toggle,
-  .side-panel .ipa-toggle {
+  .side-panel .ipa-toggle,
+  .side-panel .syllables-toggle {
     padding: 8px 12px;
     font-size: 13px;
   }
@@ -1002,6 +1124,29 @@ input[type="range"] {
 <button class="settings-toggle" id="settingsBtn" onclick="toggleSettings()">🎙️</button>
 <h1>🇺🇸 American English Vocabulary</h1>
 <div class="header-subtitle">Изучение американского английского по словам и фразам</div>
+
+<!-- ===== СЕКЦИЯ БЫСТРОГО ПЕРЕХОДА ===== -->
+<div class="card-jump-section">
+  <div class="card-jump-container">
+    <span class="card-jump-icon">🔍</span>
+    <input
+      type="number"
+      id="cardJumpInput"
+      class="card-jump-input"
+      placeholder="Введите номер карточки (1-30000)..."
+      min="1"
+      max="30000"
+      title="Введите номер карточки, к которой хотите перейти"
+    >
+    <button
+      class="card-jump-btn"
+      onclick="jumpToCard()"
+      title="Перейти к указанной карточке"
+    >
+      ➡️ Перейти
+    </button>
+  </div>
+</div>
 
 <!-- ===== СЕКЦИЯ ПОИСКА ===== -->
 <div class="search-section">
@@ -1081,6 +1226,9 @@ input[type="range"] {
   <button class="ipa-toggle" id="ipaBtn" onclick="toggleIpaMode()">
     👁️ Показать IPA
   </button>
+  <button class="syllables-toggle" id="syllablesBtn" onclick="toggleSyllablesMode()">
+    🔤 Показать слоги
+  </button>
 </div>
 
 <!-- ===== БОКОВАЯ ПАНЕЛЬ ===== -->
@@ -1120,6 +1268,9 @@ input[type="range"] {
     <button class="ipa-toggle" id="ipaBtnSide" onclick="toggleIpaMode()">
       👁️ Показать IPA
     </button>
+    <button class="syllables-toggle" id="syllablesBtnSide" onclick="toggleSyllablesMode()">
+      🔤 Показать слоги
+    </button>
   </div>
 </div>
 
@@ -1137,6 +1288,7 @@ let filteredData = [];
 let currentPage = 1;
 let currentSearch = '';
 let showIpa = false;
+let showSyllables = false;
 let isAndroid = false;
 let isMobileView = false;
 let currentTags = [];
@@ -1300,8 +1452,7 @@ function applyFilters() {
       const inTranslation = item.translation.toLowerCase().includes(searchLower);
       const inExamples = item.examples.some(ex =>
         ex.en.toLowerCase().includes(searchLower) ||
-        ex.ru.toLowerCase().includes(searchLower) ||
-        (ex.ipa && ex.ipa.toLowerCase().includes(searchLower))
+        ex.ru.toLowerCase().includes(searchLower)
       );
 
       if (!inWord && !inTranslation && !inExamples) return false;
@@ -1358,6 +1509,21 @@ function toggleIpaMode() {
   localStorage.setItem("show_ipa", showIpa);
 }
 
+function toggleSyllablesMode() {
+  showSyllables = !showSyllables;
+  document.body.classList.toggle("show-syllables", showSyllables);
+
+  const txt = showSyllables
+    ? "🔤 Скрыть слоги"
+    : "🔤 Показать слоги";
+
+  document.getElementById("syllablesBtn").textContent = txt;
+  document.getElementById("syllablesBtnSide").textContent = txt;
+
+  localStorage.setItem("show_syllables", showSyllables);
+  renderPage(currentPage);
+}
+
 function selectNode(el){
   const range = document.createRange();
   range.selectNodeContents(el);
@@ -1396,6 +1562,80 @@ function selectSingleWordFromEvent(e, el){
   return text.slice(L, R).trim();
 }
 
+function highlightSearch(text, search) {
+  if (!search) return text;
+
+  const regex = new RegExp(search, 'gi');
+  return text.replace(regex, match =>
+    `<span style="background: rgba(251, 113, 133, 0.3); border-radius: 3px; padding: 0 2px;">${match}</span>`
+  );
+}
+
+function jumpToCard() {
+  const cardNumber = parseInt(document.getElementById('cardJumpInput').value);
+
+  // Проверка корректности номера
+  if (!cardNumber || cardNumber < 1 || cardNumber > 30000) {
+    const errorMessage = document.createElement('div');
+    errorMessage.style.cssText = `
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 100, 100, 0.9);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      animation: fadeInOut 3s ease-in-out;
+    `;
+
+    errorMessage.textContent = '❌ Введите номер карточки от 1 до 30000';
+    document.body.appendChild(errorMessage);
+
+    setTimeout(() => {
+      errorMessage.remove();
+    }, 3000);
+
+    return;
+  }
+
+  // Рассчитываем страницу и рендерим её
+  const pageNumber = Math.ceil(cardNumber / PAGE_SIZE);
+  currentPage = pageNumber;
+  renderPage(pageNumber);
+
+  // После рендера прокручиваем к нужной карточке
+  setTimeout(() => {
+    const cardIndex = (cardNumber - 1) % PAGE_SIZE;
+    const cards = document.querySelectorAll('.card');
+
+    if (cards[cardIndex]) {
+      // Плавная прокрутка к карточке
+      cards[cardIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+
+      // Подсветка карточки
+      cards[cardIndex].style.transition = 'all 0.3s ease';
+      cards[cardIndex].style.boxShadow = '0 0 0 3px var(--accent)';
+      cards[cardIndex].style.transform = 'scale(1.01)';
+
+      // Возвращаем карточку в исходное состояние через 2 секунды
+      setTimeout(() => {
+        cards[cardIndex].style.boxShadow = '';
+        cards[cardIndex].style.transform = '';
+      }, 2000);
+
+      // Фокусируемся обратно на поле ввода
+      document.getElementById('cardJumpInput').focus();
+    }
+  }, 300);
+}
+
 function renderPage(page){
   currentPage = page;
   const container = document.getElementById("container");
@@ -1410,7 +1650,7 @@ function renderPage(page){
   const start = (page-1) * PAGE_SIZE;
   const slice = filteredData.slice(start, start + PAGE_SIZE);
 
-  slice.forEach((item, i)=>{
+  slice.forEach((item, i) => {
     const globalIndex = allData.findIndex(d => d.word === item.word) + 1;
 
     const encoded20 = encodeURIComponent(item.word);
@@ -1427,8 +1667,8 @@ function renderPage(page){
     const forvo = `https://ru.forvo.com/search/${encoded20}/`;
     const yandexImages = `https://yandex.ru/images/search?text=${encoded20}`;
 
-    const card=document.createElement("div");
-    card.className="card";
+    const card = document.createElement("div");
+    card.className = "card";
 
     const examplesToShow = (currentTags.length === 0 && !currentTheme && !currentSearch)
       ? item.examples.slice(0, 4)
@@ -1437,11 +1677,26 @@ function renderPage(page){
     const examplesHTML = examplesToShow.map(ex => {
       const ipaText = ex.ipa ? ex.ipa : '';
       const ipaHTML = ipaText ? `<div class="ipa">${ipaText}</div>` : '';
+
+      const exampleSyllablesHTML = showSyllables && ex.syllables
+        ? `
+          <div class="example-syllables">
+            ${ex.syllables.split('·').map((syllable, i) => `
+              <span class="syllable ${ex.stress && ex.stress.includes(i) ? 'stressed' : ''}">${syllable}</span>
+            `).join('·')}
+          </div>
+        `
+        : '';
+
+      const enText = currentSearch ? highlightSearch(ex.en, currentSearch) : ex.en;
+      const ruText = currentSearch ? highlightSearch(ex.ru, currentSearch) : ex.ru;
+
       return `
         <div class="example">
-          <div class="en" data-speak="${ex.en}">${ex.en}</div>
+          <div class="en" data-speak="${ex.en}">${enText}</div>
+          ${exampleSyllablesHTML}
           ${ipaHTML}
-          <div class="ru">${ex.ru}</div>
+          <div class="ru">${ruText}</div>
         </div>
       `;
     }).join("");
@@ -1453,6 +1708,20 @@ function renderPage(page){
         `).join('')}
       </div>
     ` : '';
+
+    const syllablesHTML = item.syllables && showSyllables
+      ? `
+        <div class="syllables">
+          ${item.syllables.split('·').map((syllable, i) => `
+            <span class="syllable ${i === item.stress ? 'stressed' : ''}">${syllable}</span>
+          `).join('·')}
+        </div>
+      `
+      : '';
+
+    const ipaHTML = item.ipa ? `<div class="ipa">${item.ipa}</div>` : '';
+
+    const wordEnHTML = currentSearch ? highlightSearch(item.word, currentSearch) : item.word;
 
     const cardIndexHTML = isMobileView
       ? `
@@ -1522,12 +1791,13 @@ function renderPage(page){
         </div>
       `;
 
-    card.innerHTML=`
+    card.innerHTML = `
       ${cardIndexHTML}
       ${tagsHTML}
       <div class="word-line">
-        <span class="word-en" data-speak="${item.word}">${item.word}</span>
-        –
+        <span class="word-en" data-speak="${item.word}">${wordEnHTML}</span>
+        ${syllablesHTML}
+        ${ipaHTML}
         <span class="word-ru">${item.translation}</span>
       </div>
 
@@ -1538,7 +1808,7 @@ function renderPage(page){
     container.appendChild(card);
   });
 
-  document.querySelectorAll(".word-en, .en").forEach(el=>{
+  document.querySelectorAll(".word-en, .en").forEach(el => {
     el.onclick = e => {
       selectNode(el);
       speakText(el.dataset.speak);
@@ -1553,7 +1823,7 @@ function renderPage(page){
   });
 
   document.querySelectorAll(".word-ru, .ru")
-    .forEach(el=> el.onclick = ()=> selectNode(el));
+    .forEach(el => el.onclick = () => selectNode(el));
 
   updateStats();
   updatePaginationUI();
@@ -1575,29 +1845,29 @@ function addTagFromCard(tag) {
   }
 }
 
-function buildPagination(){
+function buildPagination() {
   const total = Math.ceil(filteredData.length / PAGE_SIZE);
   const pag = document.getElementById("pagination");
-  pag.innerHTML="";
+  pag.innerHTML = "";
 
-  for(let i=1;i<=total;i++){
-    const b=document.createElement("button");
-    b.textContent=i;
-    b.className="page-btn";
-    b.onclick=()=>renderPage(i);
+  for (let i = 1; i <= total; i++) {
+    const b = document.createElement("button");
+    b.textContent = i;
+    b.className = "page-btn";
+    b.onclick = () => renderPage(i);
     pag.appendChild(b);
   }
 }
 
-function updatePaginationUI(){
+function updatePaginationUI() {
   document.querySelectorAll(".page-btn")
-    .forEach(btn=>{
-      btn.classList.toggle("active", btn.textContent==currentPage);
+    .forEach(btn => {
+      btn.classList.toggle("active", btn.textContent == currentPage);
     });
 }
 
 let testMode = false;
-function toggleTestMode(){
+function toggleTestMode() {
   testMode = !testMode;
   document.body.classList.toggle("hide-ru", testMode);
   const txt = testMode
@@ -1610,7 +1880,7 @@ function toggleTestMode(){
 const saved = localStorage.getItem("theme");
 if (saved) document.documentElement.setAttribute("data-theme", saved);
 
-function toggleTheme(){
+function toggleTheme() {
   const cur = document.documentElement.getAttribute("data-theme");
   const next = cur === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", next);
@@ -1618,7 +1888,7 @@ function toggleTheme(){
 }
 
 let isSettingsOpen = false;
-function toggleSettings(){
+function toggleSettings() {
   const panel = document.getElementById("sidePanel");
   if (isSettingsOpen) {
     panel.classList.remove("open");
@@ -1645,7 +1915,7 @@ pitchSlider.value = localStorage.getItem("tts_pitch") || 1.02;
 rateSliderSide.value = rateSlider.value;
 pitchSliderSide.value = pitchSlider.value;
 
-function updateLabels(){
+function updateLabels() {
   rateLabel.textContent = `x${parseFloat(rateSlider.value).toFixed(2)}`;
   pitchLabel.textContent = parseFloat(pitchSlider.value).toFixed(2);
   rateLabelSide.textContent = `x${parseFloat(rateSliderSide.value).toFixed(2)}`;
@@ -1682,55 +1952,55 @@ const voiceSelectSide = document.getElementById("voiceSelectSide");
 let VOICES = [];
 
 const NAME_MAP = {
-  "Ava":"Ava","Nathan":"Nathan","Alex":"Алекс","Алекс":"Алекс",
-  "Zoe":"Зои","Зои":"Зои","Nikki":"Никки","Nicky":"Никки",
-  "Никки":"Никки","Samantha":"Саманта","Саманта":"Саманта",
-  "Susan":"Сьюзен","Сьюзен":"Сьюзен","Tom":"Том","Том":"Том",
-  "Evan":"Эван","Эван":"Эван","Alison":"Элисон","Элисон":"Элисон"
+  "Ava": "Ava", "Nathan": "Nathan", "Alex": "Алекс", "Алекс": "Алекс",
+  "Zoe": "Зои", "Зои": "Зои", "Nikki": "Никки", "Nicky": "Никки",
+  "Никки": "Никки", "Samantha": "Саманта", "Саманта": "Саманта",
+  "Susan": "Сьюзен", "Сьюзен": "Сьюзен", "Tom": "Том", "Том": "Том",
+  "Evan": "Эван", "Эван": "Эван", "Alison": "Элисон", "Элисон": "Элисон"
 };
 
 const GENDER_ICON = {
-  "Том":"👨","Эван":"👨","Nathan":"👨","Алекс":"👨",
-  "Никки":"👩","Саманта":"👩","Зои":"👩","Ava":"👩",
-  "Сьюзен":"👩","Элисон":"👩"
+  "Том": "👨", "Эван": "👨", "Nathan": "👨", "Алекс": "👨",
+  "Никки": "👩", "Саманта": "👩", "Зои": "👩", "Ava": "👩",
+  "Сьюзен": "👩", "Элисон": "👩"
 };
 
 const DISPLAY_ORDER = [
-  "Том","Эван","Nathan","Алекс","SEPARATOR",
-  "Никки","Саманта","Зои","Ava","Сьюзен","Элисон"
+  "Том", "Эван", "Nathan", "Алекс", "SEPARATOR",
+  "Никки", "Саманта", "Зои", "Ava", "Сьюзен", "Элисон"
 ];
 
-function populateDesktopVoices(){
+function populateDesktopVoices() {
   const allVoices = window.speechSynthesis.getVoices();
   if (!allVoices.length) return;
 
   const matched = allVoices.filter(v =>
-    v.lang==="en-US" &&
-    Object.keys(NAME_MAP).some(k=>v.name.includes(k))
+    v.lang === "en-US" &&
+    Object.keys(NAME_MAP).some(k => v.name.includes(k))
   );
 
   VOICES = matched;
   voiceSelect.innerHTML = "";
   voiceSelectSide.innerHTML = "";
 
-  const items = VOICES.map((v,i)=>{
+  const items = VOICES.map((v, i) => {
     const short =
-      Object.entries(NAME_MAP).find(([k])=>v.name.includes(k))?.[1] || v.name;
+      Object.entries(NAME_MAP).find(([k]) => v.name.includes(k))?.[1] || v.name;
     const icon = GENDER_ICON[short] || "";
-    return {index:i,label:icon?`${icon} ${short}`:short,short};
+    return { index: i, label: icon ? `${icon} ${short}` : short, short };
   });
 
-  DISPLAY_ORDER.forEach(name=>{
-    if(name==="SEPARATOR"){
+  DISPLAY_ORDER.forEach(name => {
+    if (name === "SEPARATOR") {
       const s = document.createElement("option");
-      s.textContent="──────────";
-      s.disabled=true;
+      s.textContent = "──────────";
+      s.disabled = true;
       voiceSelect.appendChild(s);
       voiceSelectSide.appendChild(s.cloneNode(true));
       return;
     }
-    const f = items.find(it=>it.short===name);
-    if(f){
+    const f = items.find(it => it.short === name);
+    if (f) {
       const o = document.createElement("option");
       o.value = f.index;
       o.textContent = f.label;
@@ -1740,32 +2010,32 @@ function populateDesktopVoices(){
   });
 
   const mute = document.createElement("option");
-  mute.value="mute";
-  mute.textContent="🔇 Без озвучки";
+  mute.value = "mute";
+  mute.textContent = "🔇 Без озвучки";
   voiceSelect.appendChild(mute);
   voiceSelectSide.appendChild(mute.cloneNode(true));
 
   const savedVoice = localStorage.getItem("tts_voice");
-  const tom = VOICES.findIndex(v=>v.name.includes("Tom"));
-  const def = tom!==-1 ? tom : "mute";
+  const tom = VOICES.findIndex(v => v.name.includes("Tom"));
+  const def = tom !== -1 ? tom : "mute";
 
   voiceSelect.value = savedVoice || def;
   voiceSelectSide.value = savedVoice || def;
 }
 
-function populateAndroidVoices(){
+function populateAndroidVoices() {
   voiceSelect.innerHTML = "";
   voiceSelectSide.innerHTML = "";
 
   const mute = document.createElement("option");
-  mute.value="mute";
-  mute.textContent="🔇 Без озвучки";
+  mute.value = "mute";
+  mute.textContent = "🔇 Без озвучки";
   voiceSelect.appendChild(mute);
   voiceSelectSide.appendChild(mute.cloneNode(true));
 
   const systemOption = document.createElement("option");
-  systemOption.value="system";
-  systemOption.textContent="📱 Системный Google TTS (Android)";
+  systemOption.value = "system";
+  systemOption.textContent = "📱 Системный Google TTS (Android)";
   voiceSelect.appendChild(systemOption);
   voiceSelectSide.appendChild(systemOption.cloneNode(true));
 
@@ -1800,8 +2070,8 @@ voiceSelectSide.onchange = () => {
   localStorage.setItem("tts_voice", voiceSelect.value);
 };
 
-function speakText(text){
-  if(voiceSelect.value==="mute") return;
+function speakText(text) {
+  if (voiceSelect.value === "mute") return;
 
   const synth = window.speechSynthesis;
   synth.cancel();
@@ -1814,7 +2084,7 @@ function speakText(text){
     u.volume = 1.0;
     synth.speak(u);
   } else {
-    const idx = parseInt(voiceSelect.value,10);
+    const idx = parseInt(voiceSelect.value, 10);
     const voice = VOICES[idx] || VOICES[0];
 
     const u = new SpeechSynthesisUtterance(text);
@@ -1834,8 +2104,8 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
 });
 
 fetch("data.json")
-  .then(r=>r.json())
-  .then(data=>{
+  .then(r => r.json())
+  .then(data => {
     allData = data;
     filteredData = [...allData];
 
@@ -1856,6 +2126,19 @@ fetch("data.json")
 
       document.getElementById("ipaBtn").textContent = txt;
       document.getElementById("ipaBtnSide").textContent = txt;
+    }
+
+    const savedSyllables = localStorage.getItem("show_syllables");
+    if (savedSyllables !== null) {
+      showSyllables = savedSyllables === "true";
+      document.body.classList.toggle("show-syllables", showSyllables);
+
+      const txt = showSyllables
+        ? "🔤 Скрыть слоги"
+        : "🔤 Показать слоги";
+
+      document.getElementById("syllablesBtn").textContent = txt;
+      document.getElementById("syllablesBtnSide").textContent = txt;
     }
 
     updateStats();
