@@ -1,0 +1,2321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Режим карточек | American English Vocabulary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+--bg: #fff1f6;
+--card: #ffffff;
+--panel: #ffffff;
+--text: #3b1f2b;
+--muted: #8b6f7a;
+--accent: #db2777;
+--green: #10b981;
+--yellow: #f59e0b;
+--red: #ef4444;
+--border: #f2d5e3;
+--shadow: 0 4px 12px rgba(219,39,119,.08);
+--example-bg: rgba(251, 113, 133, 0.05);
+}
+
+[data-theme="dark"] {
+--bg: #160a10;
+--card: #1f0b15;
+--panel: #190910;
+--text: #f8e6ee;
+--muted: #c9a4b2;
+--accent: #fb7185;
+--green: #34d399;
+--yellow: #fbbf24;
+--red: #f87171;
+--border: #3b1423;
+--shadow: 0 4px 12px rgba(0,0,0,.25);
+--example-bg: rgba(251, 113, 133, 0.08);
+}
+
+* { 
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background .3s, color .3s;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ===== ШАПКА ===== */
+.main-header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top: 40px;
+}
+
+.header-title h1 {
+  margin: 0 0 8px;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--text);
+}
+
+.header-subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* ===== КНОПКИ ТЕМЫ И НАСТРОЕК ===== */
+.theme-toggle, .settings-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(219,39,119,.12);
+  z-index: 100;
+}
+
+.settings-toggle {
+  top: 60px;
+}
+
+/* ===== КОНТЕЙНЕР КАРТОЧКИ ===== */
+#flashcard-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ===== КАРТОЧКА (как в index.html) ===== */
+.card {
+  background: var(--card);
+  padding: 24px 28px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  margin: 0 auto 20px auto;
+  text-align: left;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* ===== НОМЕР СЕССИИ + ИКОНКИ СЕРВИСОВ ===== */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.session-info {
+  font-size: 14px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.session-current {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 16px;
+}
+
+.srs-level {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--green);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.srs-level.level-0 { 
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--red);
+}
+.srs-level.level-1 { 
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--yellow);
+}
+.srs-level.level-2 { 
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--yellow);
+}
+.srs-level.level-3 { 
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--green);
+}
+.srs-level.level-4 { 
+  background: rgba(16, 185, 129, 0.07);
+  color: var(--green);
+}
+.srs-level.level-5 { 
+  background: rgba(16, 185, 129, 0.05);
+  color: var(--green);
+}
+
+.card-index {
+  text-align: right;
+  font-size: 12px;
+  line-height: 1.3;
+  padding-bottom: 8px;
+}
+
+.card-index a {
+  text-decoration: none;
+  margin-right: 4px;
+  transition: all 0.2s;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.service-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: grayscale(50%);
+  opacity: 0.5;
+  transition: all 0.2s;
+  border-radius: 3px;
+  background: var(--bg);
+  padding: 2px;
+  border: 1px solid var(--border);
+}
+
+.service-icon:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.index-num {
+  color: var(--text);
+  opacity: 0.15;
+  margin-left: 8px;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+/* ===== ТЕГИ ===== */
+.word-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.word-tag {
+  background: rgba(219, 39, 119, 0.1);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  border: 1px solid rgba(219, 39, 119, 0.2);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.word-tag:hover {
+  background: rgba(219, 39, 119, 0.2);
+  transform: translateY(-1px);
+}
+
+/* ===== Слоговое разделение ===== */
+.syllables {
+  font-size: 18px;
+  margin: 8px 0;
+  color: var(--accent);
+  font-weight: 600;
+  text-align: left;
+}
+
+.syllable {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.syllable.stressed {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.example-syllables {
+  font-size: 16px;
+  margin: 4px 0 8px 0;
+  color: var(--accent);
+  font-weight: 600;
+  text-align: left;
+}
+
+/* ===== СОДЕРЖАНИЕ КАРТОЧКИ ===== */
+.word-line {
+  font-size: 21px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  text-align: left;
+}
+
+.word-en {
+  color: var(--accent);
+  cursor: pointer;
+  font-weight: 700;
+  display: block;
+}
+
+.word-ru {
+  cursor: pointer;
+  display: block;
+  margin-top: 12px;
+}
+
+/* ===== ПРИМЕРЫ С ФОНОВЫМИ БЛОКАМИ ===== */
+.example {
+  margin-bottom: 14px;
+  background: var(--example-bg);
+  border-radius: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+}
+
+.en {
+  cursor: pointer;
+  color: #9d174d; /* Цвет как в index.html */
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  font-size: 16px;
+}
+
+[data-theme="dark"] .en {
+  color: var(--green); /* В темной теме используем переменную green */
+}
+
+.ipa {
+  font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif;
+  color: var(--accent);
+  font-size: 18px;
+  margin-bottom: 8px;
+  padding-left: 8px;
+  border-left: 2px solid var(--accent);
+  font-style: italic;
+  opacity: 0.9;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.ru {
+  cursor: pointer;
+  color: var(--muted);
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
+/* ===== КНОПКИ SRS ===== */
+.srs-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px auto;
+  max-width: 720px;
+  flex-wrap: wrap;
+}
+
+.srs-btn {
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 160px;
+  justify-content: center;
+}
+
+.srs-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(219,39,119,.12);
+}
+
+.srs-btn-remember {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+.srs-btn-unsure {
+  background: var(--yellow);
+  color: white;
+  border-color: var(--yellow);
+}
+
+.srs-btn-forgot {
+  background: var(--red);
+  color: white;
+  border-color: var(--red);
+}
+
+/* ===== РЕЖИМ ПЕЧАТИ ===== */
+.print-mode-container {
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 20px auto;
+  max-width: 720px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  display: none;
+}
+
+.print-russian-container {
+  text-align: center;
+  margin: 30px auto;
+  padding: 25px;
+  background: var(--example-bg);
+  border-radius: 16px;
+  border: 2px dashed var(--border);
+  display: none;
+  max-width: 720px;
+}
+
+.print-russian-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.print-russian-text {
+  font-size: 28px;
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+/* ===== КНОПКА ПОВТОРА АУДИО (полностью прозрачная) ===== */
+.repeat-audio-btn {
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Убираем псевдоэлемент, который создавал затемнение */
+.repeat-audio-btn::before {
+  display: none;
+}
+
+.repeat-audio-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: var(--text);
+}
+
+.repeat-audio-btn:active {
+  transform: scale(0.95);
+}
+
+.repeat-audio-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Анимация при клике */
+.repeat-audio-btn.clicked {
+  animation: pulse-animation 0.3s ease;
+}
+
+@keyframes pulse-animation {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* В темной теме */
+[data-theme="dark"] .repeat-audio-btn {
+  color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .repeat-audio-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.print-hint {
+  font-size: 16px;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.print-input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.print-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 16px;
+  transition: all 0.3s;
+  font-family: 'Courier New', monospace;
+}
+
+.print-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(219,39,119,0.1);
+}
+
+.comparison-result {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 20px 0;
+  border: 1px solid var(--border);
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  min-height: 80px;
+}
+
+/* Стили для сравнения в стиле Anki */
+.comparison-user-line, .comparison-correct-line {
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  min-height: 32px;
+}
+
+.comparison-arrow {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  margin: 2px 0;
+  opacity: 0.7;
+}
+
+.char-anki {
+  padding: 2px 3px;
+  border-radius: 3px;
+  transition: all 0.3s;
+  display: inline-block;
+  min-width: 10px;
+  text-align: center;
+  margin: 1px;
+}
+
+/* Верхняя строка: введенный текст */
+.char-correct {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: var(--green);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.char-incorrect {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  text-decoration: line-through;
+}
+
+.char-missing.invisible {
+  opacity: 0.3;
+  color: #9ca3af;
+  border: 1px dashed rgba(156, 163, 175, 0.3);
+}
+
+/* Нижняя строка: эталонный текст */
+.char-match {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.char-mismatch {
+  background-color: rgba(156, 163, 175, 0.2);
+  color: #9ca3af;
+  border: 1px solid rgba(156, 163, 175, 0.3);
+}
+
+.char-extra {
+  width: 10px;
+  height: 1px;
+  display: inline-block;
+}
+
+/* Улучшенное отображение пробелов */
+.char-anki.space {
+  min-width: 8px;
+  background-color: rgba(156, 163, 175, 0.1);
+  border-radius: 2px;
+  position: relative;
+}
+
+.char-anki.space::after {
+  content: '·';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+  font-size: 12px;
+}
+
+/* Для правильных пробелов */
+.char-correct.space {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.char-correct.space::after {
+  color: var(--green);
+}
+
+/* Для неправильных пробелов */
+.char-incorrect.space {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.char-incorrect.space::after {
+  color: var(--red);
+}
+
+/* ===== БОКОВАЯ ПАНЕЛЬ ===== */
+.side-panel {
+  position: fixed;
+  top: 102px;
+  right: 18px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  display: none;
+  z-index: 99;
+  width: 320px;
+  flex-direction: column;
+  gap: 18px;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.side-panel.open {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.close-panel {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.close-panel:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.panel-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panel-section {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid var(--border);
+}
+
+.panel-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ===== СТАТИСТИКА ===== */
+.stats-container {
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 30px auto;
+  max-width: 720px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.stats-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  
+  .main-header {
+    padding-top: 60px;
+  }
+  
+  .header-title h1 {
+    font-size: 1.5rem;
+    margin: 0 0 8px;
+  }
+  
+  .theme-toggle, .settings-toggle {
+    top: 10px;
+    right: 10px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  
+  .settings-toggle {
+    top: 50px;
+  }
+  
+  .card {
+    padding: 16px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+  }
+  
+  .word-line {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+  
+  .word-tags {
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  
+  .example {
+    margin-bottom: 12px;
+    padding: 12px 14px;
+    border-radius: 8px;
+  }
+  
+  .en {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  
+  .ru {
+    font-size: 13px;
+  }
+  
+  .srs-controls {
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 16px;
+  }
+  
+  .srs-btn {
+    width: 100%;
+    min-width: auto;
+    padding: 14px;
+  }
+  
+  .side-panel {
+    top: 70px;
+    right: 10px;
+    width: calc(100vw - 20px);
+    max-width: 300px;
+    padding: 16px;
+    gap: 14px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .print-russian-container {
+    padding: 20px;
+    margin: 20px auto;
+  }
+  
+  .print-russian-text {
+    font-size: 22px;
+  }
+  
+  .repeat-audio-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+  
+  .print-russian-content {
+    gap: 15px;
+  }
+  
+  .comparison-user-line, .comparison-correct-line {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title h1 {
+    font-size: 1.3rem;
+    padding-top: 10px;
+  }
+  
+  .theme-toggle, .settings-toggle {
+    top: 5px;
+    right: 5px;
+  }
+  
+  .settings-toggle {
+    top: 45px;
+  }
+  
+  .card {
+    padding: 12px;
+  }
+  
+  .word-line {
+    font-size: 16px;
+  }
+  
+  .example {
+    margin-bottom: 10px;
+    padding: 10px 12px;
+  }
+  
+  .en {
+    font-size: 14px;
+  }
+  
+  .ru {
+    font-size: 12px;
+  }
+  
+  .srs-controls {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .print-russian-text {
+    font-size: 20px;
+  }
+  
+  .print-russian-content {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .repeat-audio-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 19px;
+  }
+  
+  .comparison-user-line, .comparison-correct-line {
+    font-size: 15px;
+  }
+}
+
+/* ===== РЕЖИМЫ ОТОБРАЖЕНИЯ ===== */
+.hide-ru .word-ru,
+.hide-ru .ru {
+  display: none;
+}
+
+.hide-ru .translation {
+  display: none;
+}
+
+.show-translation-btn {
+  display: none;
+  padding: 6px 12px;
+  margin-top: 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.hide-ru .show-translation-btn {
+  display: block;
+}
+
+.hide-ru .translation.shown {
+  display: block;
+}
+
+.show-translation-btn.hidden {
+  display: none;
+}
+
+.hide-ipa .ipa,
+.hide-ipa .example-ipa {
+  display: none;
+}
+
+.show-syllables .syllables,
+.show-syllables .example-syllables {
+  display: block;
+}
+</style>
+</head>
+<body>
+<div class="main-header">
+  <div class="header-title">
+    <h1>🃏 Режим карточек | SRS</h1>
+  </div>
+  <div class="header-subtitle">
+    Изучение английских слов с интервальными повторениями
+  </div>
+</div>
+
+<button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙</button>
+<button class="settings-toggle" id="settingsBtn" onclick="toggleSettings()">🎙️</button>
+
+<div id="flashcard-container">
+  <div class="card" id="currentFlashcard">
+    <!-- Содержимое будет заполнено динамически -->
+  </div>
+</div>
+
+<div class="print-russian-container" id="printRussianContainer">
+  <div class="print-russian-content">
+    <div class="print-russian-text" id="printRussianText"></div>
+    <button class="repeat-audio-btn" onclick="repeatAudio()" title="Повторить озвучку" id="repeatAudioBtn">
+      🔄
+    </button>
+  </div>
+  <div class="print-hint">Введите английскую фразу, которую услышали</div>
+</div>
+
+<div class="print-mode-container" id="printModeContainer">
+  <div class="print-input-group">
+    <input type="text" class="print-input" id="printInput" placeholder="Введите английскую фразу, которую услышали...">
+  </div>
+  <div class="comparison-result" id="comparisonResult"></div>
+</div>
+
+<div class="srs-controls">
+  <button class="srs-btn srs-btn-forgot" onclick="markAsForgot()">
+    ❌ Не вспомнил
+  </button>
+  <button class="srs-btn srs-btn-unsure" onclick="markAsUnsure()">
+    ❓ Сомневался
+  </button>
+  <button class="srs-btn srs-btn-remember" onclick="markAsRemembered()">
+    ✅ Вспомнил
+  </button>
+</div>
+
+<div class="stats-container">
+  <div class="stats-title">
+    📊 Статистика изучения
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">
+        📚 Всего слов
+      </div>
+      <div class="stat-value" id="totalWords">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">
+        📅 На повторение
+      </div>
+      <div class="stat-value" id="dueToday">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">
+        🎯 Прогресс
+      </div>
+      <div class="stat-value" id="progressPercent">0%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">
+        🏆 Выучено
+      </div>
+      <div class="stat-value" id="learnedWords">0</div>
+    </div>
+  </div>
+  <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 20px;">
+    <button class="srs-btn srs-btn-unsure" style="padding: 10px 20px; min-width: auto;" onclick="exportProgress()">
+      💾 Экспорт
+    </button>
+    <button class="srs-btn srs-btn-unsure" style="padding: 10px 20px; min-width: auto;" onclick="importProgress()">
+      📥 Импорт
+    </button>
+    <button class="srs-btn srs-btn-forgot" style="padding: 10px 20px; min-width: auto;" onclick="resetProgress()">
+      🔄 Сбросить
+    </button>
+    <button class="srs-btn srs-btn-remember" style="padding: 10px 20px; min-width: auto;" onclick="goBackToIndex()">
+      📚 К списку
+    </button>
+  </div>
+</div>
+
+<div class="side-panel" id="sidePanel">
+  <div class="panel-header">
+    <h3><span>⚙️</span> Настройки</h3>
+    <button class="close-panel" onclick="toggleSettings()">×</button>
+  </div>
+  <div class="panel-content">
+    <div class="panel-section">
+      <h4><span>🔊</span> Озвучка</h4>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div>
+          <label style="display: block; margin-bottom: 8px; color: var(--muted); font-size: 13px;">Голос</label>
+          <select id="voiceSelectSide" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 14px;">
+            <!-- Опции будут добавлены динамически -->
+          </select>
+        </div>
+        <div>
+          <label style="display: block; margin-bottom: 8px; color: var(--muted); font-size: 13px;">Скорость: <span id="rateLabelSide">x1.0</span></label>
+          <input id="rateSliderSide" type="range" min="0.5" max="2" step="0.1" value="1" style="width: 100%; accent-color: var(--accent);">
+        </div>
+        <div>
+          <label style="display: block; margin-bottom: 8px; color: var(--muted); font-size: 13px;">Высота тона: <span id="pitchLabelSide">1.0</span></label>
+          <input id="pitchSliderSide" type="range" min="0.5" max="1.5" step="0.1" value="1" style="width: 100%; accent-color: var(--accent);">
+        </div>
+      </div>
+    </div>
+    <div class="panel-section">
+      <h4><span>👁️</span> Отображение</h4>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button class="srs-btn srs-btn-unsure" style="width: 100%; padding: 10px;" onclick="toggleTestMode()" id="testBtnSide">
+          🧠 Самопроверка
+        </button>
+        <button class="srs-btn srs-btn-unsure" style="width: 100%; padding: 10px;" onclick="toggleIpaMode()" id="ipaBtnSide">
+          👁️ Показать IPA
+        </button>
+        <button class="srs-btn srs-btn-unsure" style="width: 100%; padding: 10px;" onclick="toggleSyllablesMode()" id="syllablesBtnSide">
+          🔤 Показать слоги
+        </button>
+        <button class="srs-btn srs-btn-unsure" style="width: 100%; padding: 10px;" onclick="togglePrintMode()" id="printModeBtn">
+          📝 Режим печати
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Глобальные переменные
+let allData = [];
+let currentCardIndex = 0;
+let currentWordData = null;
+let printModeActive = false;
+let showIpa = false;
+let showSyllables = false;
+let testMode = false;
+let srsProgress = {};
+let dueCards = [];
+let sessionDeck = [];
+let currentSessionIndex = 0;
+let VOICES = [];
+let currentAudioText = ''; // Текст для повторной озвучки в режиме печати
+
+// Константы SRS
+const SRS_INTERVALS = [0, 1, 3, 7, 14, 30, 60];
+
+// Storage ключи
+const STORAGE_KEYS = {
+  THEME: 'theme',
+  SHOW_IPA: 'show_ipa',
+  SHOW_SYLLABLES: 'show_syllables',
+  TTS_VOICE: 'tts_voice',
+  TTS_RATE: 'tts_rate',
+  TTS_PITCH: 'tts_pitch',
+  PRINT_MODE: 'print_mode'
+};
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', async () => {
+  await initStorage();
+  await loadData();
+  loadSettings();
+  initVoices();
+  initEventListeners();
+  loadNextCard();
+  updateStats();
+});
+
+// Инициализация хранилища
+async function initStorage() {
+  return new Promise((resolve) => {
+    const request = indexedDB.open('srsProgressDB', 1);
+    
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains('progress')) {
+        db.createObjectStore('progress', { keyPath: 'wordId' });
+      }
+    };
+    
+    request.onsuccess = async (event) => {
+      const db = event.target.result;
+      
+      // Загружаем прогресс
+      const transaction = db.transaction('progress', 'readonly');
+      const store = transaction.objectStore('progress');
+      const getAllRequest = store.getAll();
+      
+      getAllRequest.onsuccess = () => {
+        srsProgress = Object.fromEntries(getAllRequest.result.map(p => [p.wordId, p]));
+        resolve();
+      };
+      
+      getAllRequest.onerror = () => {
+        srsProgress = {};
+        resolve();
+      };
+    };
+    
+    request.onerror = () => {
+      srsProgress = {};
+      resolve();
+    };
+  });
+}
+
+// Загрузка данных
+async function loadData() {
+  try {
+    const response = await fetch('data.json');
+    allData = await response.json();
+    console.log(`Загружено ${allData.length} слов`);
+  } catch (error) {
+    console.error('Ошибка загрузки данных:', error);
+    showError('Не удалось загрузить данные. Проверьте файл data.json');
+  }
+}
+
+// Загрузка настроек
+function loadSettings() {
+  // Тема
+  const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME);
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    const themeBtn = document.getElementById('themeBtn');
+    if (themeBtn) {
+      themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    }
+  }
+  
+  // Режимы отображения
+  showIpa = localStorage.getItem(STORAGE_KEYS.SHOW_IPA) === 'true';
+  if (showIpa) {
+    document.body.classList.remove('hide-ipa');
+    const ipaBtnSide = document.getElementById('ipaBtnSide');
+    if (ipaBtnSide) {
+      ipaBtnSide.textContent = '🙈 Скрыть IPA';
+    }
+  } else {
+    document.body.classList.add('hide-ipa');
+    const ipaBtnSide = document.getElementById('ipaBtnSide');
+    if (ipaBtnSide) {
+      ipaBtnSide.textContent = '👁️ Показать IPA';
+    }
+  }
+  
+  showSyllables = localStorage.getItem(STORAGE_KEYS.SHOW_SYLLABLES) === 'true';
+  if (showSyllables) {
+    document.body.classList.add('show-syllables');
+    const syllablesBtnSide = document.getElementById('syllablesBtnSide');
+    if (syllablesBtnSide) {
+      syllablesBtnSide.textContent = '🔤 Скрыть слоги';
+    }
+  } else {
+    document.body.classList.remove('show-syllables');
+    const syllablesBtnSide = document.getElementById('syllablesBtnSide');
+    if (syllablesBtnSide) {
+      syllablesBtnSide.textContent = '🔤 Показать слоги';
+    }
+  }
+  
+  // Режим печати
+  printModeActive = localStorage.getItem(STORAGE_KEYS.PRINT_MODE) === 'true';
+  if (printModeActive) {
+    const printModeBtn = document.getElementById('printModeBtn');
+    if (printModeBtn) {
+      printModeBtn.textContent = '📝 Обычный режим';
+    }
+  }
+  
+  // Настройки TTS
+  const rateSlider = document.getElementById('rateSliderSide');
+  const pitchSlider = document.getElementById('pitchSliderSide');
+  if (rateSlider) {
+    rateSlider.value = localStorage.getItem(STORAGE_KEYS.TTS_RATE) || 1;
+  }
+  if (pitchSlider) {
+    pitchSlider.value = localStorage.getItem(STORAGE_KEYS.TTS_PITCH) || 1;
+  }
+  updateTTSLabels();
+}
+
+// Инициализация голосов
+function initVoices() {
+  if ('speechSynthesis' in window) {
+    // Ждем загрузки голосов
+    setTimeout(() => {
+      const voices = speechSynthesis.getVoices();
+      VOICES = voices.filter(v => v.lang.startsWith('en-'));
+      
+      const voiceSelect = document.getElementById('voiceSelectSide');
+      if (voiceSelect) {
+        voiceSelect.innerHTML = '';
+        
+        VOICES.forEach((voice, index) => {
+          const option = document.createElement('option');
+          option.value = index;
+          option.textContent = `${voice.name} (${voice.lang})`;
+          voiceSelect.appendChild(option);
+        });
+        
+        // Добавляем опцию без озвучки
+        const muteOption = document.createElement('option');
+        muteOption.value = 'mute';
+        muteOption.textContent = '🔇 Без озвучки';
+        voiceSelect.appendChild(muteOption);
+        
+        // Устанавливаем сохраненный голос
+        const savedVoice = localStorage.getItem(STORAGE_KEYS.TTS_VOICE);
+        if (savedVoice) {
+          voiceSelect.value = savedVoice;
+        }
+      }
+    }, 500);
+    
+    // Обработчик для обновления голосов
+    speechSynthesis.onvoiceschanged = () => {
+      const voices = speechSynthesis.getVoices();
+      VOICES = voices.filter(v => v.lang.startsWith('en-'));
+    };
+  }
+}
+
+// Инициализация обработчиков событий
+function initEventListeners() {
+  // Слайдеры TTS
+  const rateSlider = document.getElementById('rateSliderSide');
+  const pitchSlider = document.getElementById('pitchSliderSide');
+  const voiceSelect = document.getElementById('voiceSelectSide');
+  
+  if (rateSlider) {
+    rateSlider.addEventListener('input', (e) => {
+      localStorage.setItem(STORAGE_KEYS.TTS_RATE, e.target.value);
+      updateTTSLabels();
+    });
+  }
+  
+  if (pitchSlider) {
+    pitchSlider.addEventListener('input', (e) => {
+      localStorage.setItem(STORAGE_KEYS.TTS_PITCH, e.target.value);
+      updateTTSLabels();
+    });
+  }
+  
+  if (voiceSelect) {
+    voiceSelect.addEventListener('change', (e) => {
+      localStorage.setItem(STORAGE_KEYS.TTS_VOICE, e.target.value);
+    });
+  }
+  
+  // Ввод в режиме печати
+  const printInput = document.getElementById('printInput');
+  if (printInput) {
+    printInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        checkPrintAnswer();
+      }
+    });
+  }
+}
+
+// Обновление меток TTS
+function updateTTSLabels() {
+  const rateSlider = document.getElementById('rateSliderSide');
+  const pitchSlider = document.getElementById('pitchSliderSide');
+  const rateLabel = document.getElementById('rateLabelSide');
+  const pitchLabel = document.getElementById('pitchLabelSide');
+  
+  if (rateSlider && rateLabel) {
+    rateLabel.textContent = `x${parseFloat(rateSlider.value).toFixed(1)}`;
+  }
+  
+  if (pitchSlider && pitchLabel) {
+    pitchLabel.textContent = parseFloat(pitchSlider.value).toFixed(1);
+  }
+}
+
+// Перемешивание массива
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// Создание сессии
+function createSession() {
+  dueCards = calculateDueCards();
+  sessionDeck = shuffleArray([...dueCards]);
+  currentSessionIndex = 0;
+}
+
+// Расчет карточек на повторение
+function calculateDueCards() {
+  const now = Date.now();
+  const dueWords = [];
+  
+  allData.forEach(word => {
+    const progress = srsProgress[word.word];
+    if (!progress || progress.nextReview <= now) {
+      dueWords.push(word);
+    }
+  });
+  
+  return dueWords;
+}
+
+// Сброс поля ввода в режиме печати
+function resetPrintInput() {
+  const input = document.getElementById('printInput');
+  const resultDiv = document.getElementById('comparisonResult');
+  
+  if (input) {
+    input.value = '';
+    input.disabled = false;
+    input.style.opacity = '1';
+    input.style.cursor = 'text';
+  }
+  
+  if (resultDiv) {
+    resultDiv.innerHTML = '';
+  }
+  
+  // Удаляем сохраненный результат проверки
+  if (currentWordData) {
+    delete currentWordData.lastPrintResult;
+  }
+}
+
+// Загрузка следующей карточки
+function loadNextCard() {
+  // Сбрасываем состояние печати перед загрузкой новой карточки
+  if (printModeActive) {
+    resetPrintInput();
+  }
+  
+  // Если сессия пуста, создаем новую
+  if (sessionDeck.length === 0) {
+    createSession();
+  }
+  
+  // Если в сессии нет карточек
+  if (sessionDeck.length === 0) {
+    showCompletionMessage();
+    return;
+  }
+  
+  // Если дошли до конца сессии, начинаем сначала
+  if (currentSessionIndex >= sessionDeck.length) {
+    currentSessionIndex = 0;
+  }
+  
+  currentWordData = sessionDeck[currentSessionIndex];
+  currentCardIndex = allData.findIndex(item => item.word === currentWordData.word) + 1;
+  
+  renderFlashcard();
+  
+  // В режиме печати автоматически озвучиваем первый пример
+  if (printModeActive && currentWordData.examples && currentWordData.examples.length > 0) {
+    const firstExample = currentWordData.examples[0];
+    currentAudioText = firstExample.en; // Сохраняем текст для повторной озвучки
+    speakText(currentAudioText);
+    
+    // Показываем русский перевод этого примера
+    const printRussianText = document.getElementById('printRussianText');
+    if (printRussianText) {
+      printRussianText.textContent = firstExample.ru;
+    }
+  } else if (printModeActive) {
+    // Если нет примеров, озвучиваем слово
+    currentAudioText = currentWordData.word; // Сохраняем текст для повторной озвучки
+    speakText(currentAudioText);
+    const printRussianText = document.getElementById('printRussianText');
+    if (printRussianText) {
+      printRussianText.textContent = currentWordData.translation;
+    }
+  } else {
+    // В обычном режиме озвучиваем слово
+    speakText(currentWordData.word);
+  }
+  
+  currentSessionIndex++;
+}
+
+// Повторить озвучку (режим печати)
+function repeatAudio() {
+  if (currentAudioText) {
+    speakText(currentAudioText);
+    
+    // Добавляем анимацию клика
+    const repeatBtn = document.getElementById('repeatAudioBtn');
+    if (repeatBtn) {
+      repeatBtn.classList.add('clicked');
+      setTimeout(() => {
+        repeatBtn.classList.remove('clicked');
+      }, 300);
+    }
+  }
+}
+
+// Проверка ответа в режиме печати
+function checkPrintAnswer() {
+  const input = document.getElementById('printInput');
+  const resultDiv = document.getElementById('comparisonResult');
+  
+  if (!currentWordData || !currentWordData.examples || currentWordData.examples.length === 0) {
+    return;
+  }
+  
+  const userAnswer = input.value.trim();
+  const correctAnswer = currentWordData.examples[0].en;
+  
+  // Сравниваем строки
+  const comparison = compareStringsAnkiStyle(userAnswer, correctAnswer);
+  if (resultDiv) {
+    resultDiv.innerHTML = comparison;
+  }
+  
+  // Блокируем поле ввода после проверки
+  if (input) {
+    input.disabled = true;
+    input.style.opacity = '0.7';
+    input.style.cursor = 'not-allowed';
+  }
+  
+  // Сохраняем результат проверки для возможного использования
+  currentWordData.lastPrintResult = userAnswer.toLowerCase() === correctAnswer.toLowerCase();
+}
+
+// Сравнение строк в стиле Anki (две строки: верхняя - введенная, нижняя - эталонная)
+function compareStringsAnkiStyle(user, correct) {
+  const userChars = user.split('');
+  const correctChars = correct.split('');
+  
+  let userLine = '';
+  let correctLine = '';
+  
+  // Максимальная длина для итерации
+  const maxLength = Math.max(userChars.length, correctChars.length);
+  
+  // Первая строка: введенная фраза пользователя
+  userLine = '<div class="comparison-user-line">';
+  
+  for (let i = 0; i < maxLength; i++) {
+    const userChar = userChars[i] || '';
+    const correctChar = correctChars[i] || '';
+    
+    // Проверяем, является ли символ пробелом
+    const isSpace = userChar === ' ' || correctChar === ' ';
+    const spaceClass = isSpace ? ' space' : '';
+    
+    if (userChar && correctChar && userChar.toLowerCase() === correctChar.toLowerCase()) {
+      // Правильный символ
+      userLine += `<span class="char-anki char-correct${spaceClass}">${userChar === ' ' ? ' ' : userChar}</span>`;
+    } else if (userChar) {
+      // Неправильный символ
+      userLine += `<span class="char-anki char-incorrect${spaceClass}">${userChar === ' ' ? ' ' : userChar}</span>`;
+    } else {
+      // Пропущенный символ (пользователь не ввел)
+      // Для пробелов показываем видимый индикатор
+      if (correctChar === ' ') {
+        userLine += `<span class="char-anki char-missing space"> </span>`;
+      } else {
+        userLine += `<span class="char-anki char-missing invisible">${correctChar}</span>`;
+      }
+    }
+  }
+  userLine += '</div>';
+  
+  // Стрелка-разделитель
+  const arrow = '<div class="comparison-arrow">↓</div>';
+  
+  // Вторая строка: эталонная фраза
+  correctLine = '<div class="comparison-correct-line">';
+  
+  for (let i = 0; i < maxLength; i++) {
+    const userChar = userChars[i] || '';
+    const correctChar = correctChars[i] || '';
+    
+    // Проверяем, является ли символ пробелом
+    const isSpace = correctChar === ' ';
+    const spaceClass = isSpace ? ' space' : '';
+    
+    if (userChar && correctChar && userChar.toLowerCase() === correctChar.toLowerCase()) {
+      // Правильный символ (совпадает с введенным)
+      correctLine += `<span class="char-anki char-match${spaceClass}">${correctChar === ' ' ? ' ' : correctChar}</span>`;
+    } else if (correctChar) {
+      // Неправильный символ или пропущенный пользователем
+      correctLine += `<span class="char-anki char-mismatch${spaceClass}">${correctChar === ' ' ? ' ' : correctChar}</span>`;
+    } else {
+      // Лишний символ, введенный пользователем (в нижней строке не показываем)
+      correctLine += `<span class="char-anki char-extra"></span>`;
+    }
+  }
+  correctLine += '</div>';
+  
+  return userLine + arrow + correctLine;
+}
+
+// Отрисовка карточки (обычный режим)
+function renderFlashcard() {
+  const card = document.getElementById('currentFlashcard');
+  const printRussianContainer = document.getElementById('printRussianContainer');
+  const printModeContainer = document.getElementById('printModeContainer');
+  
+  if (!currentWordData) return;
+  
+  const progress = srsProgress[currentWordData.word] || { level: 0 };
+  
+  // Показываем/скрываем контейнеры в зависимости от режима
+  if (printModeActive) {
+    if (printRussianContainer) {
+      printRussianContainer.style.display = 'block';
+    }
+    if (printModeContainer) {
+      printModeContainer.style.display = 'block';
+    }
+    if (card) {
+      card.style.display = 'none';
+    }
+    
+    // Очищаем поле ввода
+    const printInput = document.getElementById('printInput');
+    const comparisonResult = document.getElementById('comparisonResult');
+    if (printInput) {
+      printInput.value = '';
+      printInput.focus();
+    }
+    if (comparisonResult) {
+      comparisonResult.innerHTML = '';
+    }
+    
+    return; // Не рендерим обычную карточку в режиме печати
+  } else {
+    if (printRussianContainer) {
+      printRussianContainer.style.display = 'none';
+    }
+    if (printModeContainer) {
+      printModeContainer.style.display = 'none';
+    }
+    if (card) {
+      card.style.display = 'block';
+    }
+  }
+  
+  // Создаем HTML карточки для обычного режима (как в index.html)
+  let html = `
+    <div class="card-header">
+      <div class="session-info">
+        <span class="session-current">${currentSessionIndex}</span> из <span>${sessionDeck.length}</span>
+        <div class="srs-level level-${progress.level}">Уровень ${progress.level}</div>
+      </div>
+      <div class="card-index">
+        ${createServiceIcons()}
+        <span class="index-num">${currentCardIndex}</span>
+      </div>
+    </div>
+  `;
+  
+  // Теги
+  if (currentWordData.tags && currentWordData.tags.length > 0) {
+    html += `<div class="word-tags">`;
+    currentWordData.tags.forEach(tag => {
+      html += `<span class="word-tag">${tag}</span>`;
+    });
+    html += `</div>`;
+  }
+  
+  // Тема
+  if (currentWordData.theme) {
+    html += `<div class="word-tags"><span class="word-tag">${currentWordData.theme}</span></div>`;
+  }
+  
+  // Основное слово
+  html += `
+    <div class="word-line">
+      <span class="word-en" data-speak="${currentWordData.word}">${currentWordData.word}</span>
+  `;
+  
+  // Слоги
+  if (showSyllables && currentWordData.syllables) {
+    html += `<div class="syllables">`;
+    const syllables = currentWordData.syllables.split('·');
+    syllables.forEach((syllable, i) => {
+      const isStressed = i === currentWordData.stress;
+      html += `<span class="syllable ${isStressed ? 'stressed' : ''}">${syllable}</span>`;
+    });
+    html += `</div>`;
+  }
+  
+  // IPA основного слова
+  if (currentWordData.ipa) {
+    html += `<div class="ipa">${currentWordData.ipa}</div>`;
+  }
+  
+  // Русский перевод
+  html += `<span class="word-ru translation">${currentWordData.translation}</span>`;
+  html += `<button class="show-translation-btn" onclick="showTranslation(this)">Show</button>`;
+  html += `</div>`;
+  
+  // Примеры
+  if (currentWordData.examples && currentWordData.examples.length > 0) {
+    html += `<div class="examples">`;
+    
+    // Показываем первые 2 примера
+    currentWordData.examples.slice(0, 2).forEach(example => {
+      html += `
+        <div class="example">
+          <div class="en" data-speak="${example.en}">${example.en}</div>
+      `;
+      
+      // IPA для примера
+      if (example.ipa) {
+        html += `<div class="ipa">${example.ipa}</div>`;
+      }
+      
+      // Слоги для примера
+      if (showSyllables && example.syllables) {
+        html += `<div class="example-syllables">`;
+        const exampleSyllables = example.syllables.split('·');
+        exampleSyllables.forEach((syllable, i) => {
+          const isStressed = example.stress && example.stress.includes(i);
+          html += `<span class="syllable ${isStressed ? 'stressed' : ''}">${syllable}</span>`;
+        });
+        html += `</div>`;
+      }
+      
+      // Русский перевод
+      html += `<div class="ru translation">${example.ru}</div>`;
+      html += `<button class="show-translation-btn" onclick="showTranslation(this)">Show</button>`;
+      html += `</div>`;
+    });
+    
+    html += `</div>`;
+  }
+  
+  if (card) {
+    card.innerHTML = html;
+  }
+  
+  // Применяем режим самопроверки
+  if (testMode) {
+    document.body.classList.add('hide-ru');
+  } else {
+    document.body.classList.remove('hide-ru');
+  }
+  
+  // Добавляем обработчики событий для озвучки
+  setTimeout(() => {
+    document.querySelectorAll('.word-en, .en').forEach(el => {
+      el.addEventListener('click', (e) => handleSpeakClick(el, e));
+      el.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const word = selectWordFromEvent(e, el);
+        speakText(word);
+      });
+    });
+    
+    // Обработчики для переводов
+    document.querySelectorAll('.word-ru, .ru')
+      .forEach(el => el.addEventListener('click', () => selectNode(el)));
+  }, 100);
+}
+
+// Выделение текста
+function selectNode(el) {
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
+// Выбор слова из события
+function selectWordFromEvent(event, element) {
+  const text = element.textContent;
+  const node = element.firstChild;
+  if (!node || node.nodeType !== Node.TEXT_NODE) return text.trim();
+  
+  // Простая реализация - выбираем первое слово
+  const firstWord = text.split(/\s+/)[0];
+  return firstWord;
+}
+
+// Создание иконок сервисов (как в index.html)
+function createServiceIcons() {
+  if (!currentWordData) return '';
+  
+  const word = encodeURIComponent(currentWordData.word);
+  const wordPlus = currentWordData.word.replace(/ /g, '+');
+  const wordUnder = currentWordData.word.replace(/ /g, '_');
+  
+  const isMobile = window.innerWidth <= 768;
+  
+  const services = [
+    { url: `https://youglish.com/pronounce/${wordUnder}/english`, icon: 'img/youglish.png', title: 'YouGlish' },
+    { url: `https://www.playphrase.me/#/search?q=${wordPlus}&language=en`, icon: 'img/playphrase.png', title: 'PlayPhrase' },
+    { url: `https://translate.yandex.ru/?source_lang=en&target_lang=ru&text=${word}`, icon: 'img/yandex.png', title: 'Яндекс Переводчик' },
+    { url: `https://www.translate.ru/контексты/английский-русский/${word}`, icon: 'img/translateru.png', title: 'Translate.ru' },
+    { url: `https://en.kartaslov.ru/перевод-в-контексте/${wordPlus}`, icon: 'img/kartaslov.png', title: 'Kartaslov' },
+    { url: `https://context.reverso.net/перевод/английский-русский/${wordPlus}`, icon: 'img/reverso.png', title: 'Reverso Context' },
+    { url: `https://wooordhunt.ru/word/${word}`, icon: 'img/wooordhunt.png', title: 'WooordHunt' },
+    { url: `https://ru.forvo.com/search/${word}/`, icon: 'img/forvo.png', title: 'Forvo' },
+    { url: `https://yandex.ru/images/search?text=${word}`, icon: 'img/yandex-images.png', title: 'Яндекс Картинки' }
+  ];
+  
+  let html = '';
+  
+  if (isMobile) {
+    html += '<div>';
+    services.slice(0, 4).forEach(service => {
+      html += `
+        <a href="${service.url}" target="_blank" title="${service.title}">
+          <img src="${service.icon}" alt="${service.title}" class="service-icon">
+        </a>
+      `;
+    });
+    html += '</div>';
+  } else {
+    services.forEach(service => {
+      html += `
+        <a href="${service.url}" target="_blank" title="${service.title}">
+          <img src="${service.icon}" alt="${service.title}" class="service-icon">
+        </a>
+      `;
+    });
+  }
+  
+  return html;
+}
+
+// Обработчик клика для озвучки
+function handleSpeakClick(element, event) {
+  event.stopPropagation();
+  const text = element.dataset.speak;
+  if (text) {
+    speakText(text);
+  }
+}
+
+// Озвучка текста
+function speakText(text) {
+  if (!('speechSynthesis' in window)) {
+    console.warn('Speech synthesis not supported');
+    return;
+  }
+  
+  const voiceSelect = document.getElementById('voiceSelectSide');
+  if (voiceSelect && voiceSelect.value === 'mute') return;
+  
+  speechSynthesis.cancel();
+  
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'en-US';
+  
+  const rateSlider = document.getElementById('rateSliderSide');
+  const pitchSlider = document.getElementById('pitchSliderSide');
+  
+  if (rateSlider) {
+    utterance.rate = parseFloat(rateSlider.value);
+  }
+  if (pitchSlider) {
+    utterance.pitch = parseFloat(pitchSlider.value);
+  }
+  
+  if (voiceSelect && voiceSelect.value !== 'mute' && VOICES[voiceSelect.value]) {
+    utterance.voice = VOICES[voiceSelect.value];
+  }
+  
+  speechSynthesis.speak(utterance);
+}
+
+// SRS функции
+function markAsRemembered() {
+  // В режиме печати учитываем результат сравнения
+  if (printModeActive && currentWordData && currentWordData.lastPrintResult !== undefined) {
+    // Если в режиме печати и был результат сравнения, используем его
+    updateSRSProgress(currentWordData.lastPrintResult, currentWordData.lastPrintResult ? false : true);
+  } else {
+    // В обычном режиме или если нет результата печати
+    updateSRSProgress(true);
+  }
+  loadNextCard();
+  updateStats();
+  resetPrintInput();
+}
+
+function markAsUnsure() {
+  // В режиме печати всегда отмечаем как "сомневался", независимо от результата
+  updateSRSProgress(false, true);
+  loadNextCard();
+  updateStats();
+  resetPrintInput();
+}
+
+function markAsForgot() {
+  // В режиме печати всегда отмечаем как "не вспомнил", независимо от результата
+  updateSRSProgress(false, false);
+  loadNextCard();
+  updateStats();
+  resetPrintInput();
+}
+
+function updateSRSProgress(remembered, unsure = false) {
+  if (!currentWordData) return;
+  
+  const wordId = currentWordData.word;
+  let progress = srsProgress[wordId] || {
+    level: 0,
+    lastReview: Date.now(),
+    nextReview: Date.now(),
+    printModeCount: 0, // Добавляем счетчик для режима печати
+    printModeCorrect: 0 // Добавляем счетчик правильных ответов в режиме печати
+  };
+  
+  // Если это режим печати, обновляем статистику печати
+  if (printModeActive) {
+    progress.printModeCount = (progress.printModeCount || 0) + 1;
+    if (remembered && !unsure) {
+      progress.printModeCorrect = (progress.printModeCorrect || 0) + 1;
+    }
+  }
+  
+  if (remembered) {
+    progress.level = Math.min(progress.level + 1, SRS_INTERVALS.length - 1);
+  } else if (unsure) {
+    progress.level = Math.max(0, progress.level - 1);
+  } else {
+    progress.level = 0;
+  }
+  
+  const days = SRS_INTERVALS[progress.level];
+  progress.lastReview = Date.now();
+  progress.nextReview = Date.now() + (days * 24 * 60 * 60 * 1000);
+  
+  srsProgress[wordId] = progress;
+  saveProgress(wordId, progress);
+}
+
+// Сохранение прогресса
+async function saveProgress(wordId, progress) {
+  return new Promise((resolve) => {
+    const request = indexedDB.open('srsProgressDB', 1);
+    
+    request.onsuccess = (event) => {
+      const db = event.target.result;
+      const transaction = db.transaction('progress', 'readwrite');
+      const store = transaction.objectStore('progress');
+      store.put({ wordId, ...progress });
+      
+      transaction.oncomplete = resolve;
+      transaction.onerror = () => {
+        console.error('Ошибка сохранения прогресса');
+        resolve();
+      };
+    };
+    
+    request.onerror = () => {
+      console.error('Ошибка открытия базы данных');
+      resolve();
+    };
+  });
+}
+
+// Показать перевод
+function showTranslation(btn) {
+  const translation = btn.previousElementSibling;
+  if (translation && translation.classList.contains('translation')) {
+    translation.classList.add('shown');
+    btn.classList.add('hidden');
+  }
+}
+
+// Режим печати
+function togglePrintMode() {
+  printModeActive = !printModeActive;
+  const btn = document.getElementById('printModeBtn');
+  
+  if (btn) {
+    if (printModeActive) {
+      btn.textContent = '📝 Обычный режим';
+    } else {
+      btn.textContent = '📝 Режим печати';
+    }
+  }
+  
+  localStorage.setItem(STORAGE_KEYS.PRINT_MODE, printModeActive);
+  
+  // Сбрасываем состояние печати при переключении режима
+  resetPrintInput();
+  
+  loadNextCard();
+}
+
+// Обновление статистики
+function updateStats() {
+  const totalWords = allData.length;
+  const dueToday = calculateDueCards().length;
+  
+  // Считаем прогресс по уровням
+  let newWords = 0;
+  let learnedWords = 0;
+  let totalProgress = 0;
+  
+  Object.values(srsProgress).forEach(progress => {
+    if (progress.level === 0) newWords++;
+    if (progress.level >= 3) learnedWords++;
+    totalProgress += progress.level;
+  });
+  
+  const averageProgress = Object.keys(srsProgress).length > 0 
+    ? Math.round((totalProgress / (Object.keys(srsProgress).length * 6)) * 100)
+    : 0;
+  
+  const overallProgress = totalWords > 0 ? Math.round((learnedWords / totalWords) * 100) : 0;
+  
+  // Обновляем элементы
+  const totalWordsEl = document.getElementById('totalWords');
+  const dueTodayEl = document.getElementById('dueToday');
+  const progressPercentEl = document.getElementById('progressPercent');
+  const learnedWordsEl = document.getElementById('learnedWords');
+  
+  if (totalWordsEl) totalWordsEl.textContent = totalWords;
+  if (dueTodayEl) dueTodayEl.textContent = dueToday;
+  if (progressPercentEl) progressPercentEl.textContent = `${averageProgress}%`;
+  if (learnedWordsEl) learnedWordsEl.textContent = learnedWords;
+}
+
+// Сообщение о завершении
+function showCompletionMessage() {
+  const card = document.getElementById('currentFlashcard');
+  const printRussianContainer = document.getElementById('printRussianContainer');
+  const printModeContainer = document.getElementById('printModeContainer');
+  const srsControls = document.querySelector('.srs-controls');
+  
+  // Сбрасываем состояние печати
+  resetPrintInput();
+  
+  if (printModeActive) {
+    if (printRussianContainer) {
+      printRussianContainer.style.display = 'none';
+    }
+    if (printModeContainer) {
+      printModeContainer.style.display = 'none';
+    }
+  }
+  
+  if (card) {
+    card.style.display = 'block';
+    card.innerHTML = `
+      <div style="text-align: center; padding: 40px 32px;">
+        <div style="font-size: 48px; margin-bottom: 24px;">🎉</div>
+        <h2 style="margin-bottom: 16px; color: var(--accent);">Отличная работа!</h2>
+        <p style="color: var(--muted); margin-bottom: 32px; font-size: 18px;">
+          Вы повторили все слова на сегодня.<br>
+          Возвращайтесь завтра для следующей сессии.
+        </p>
+        <button class="srs-btn srs-btn-remember" onclick="startNewSession()" style="margin: 0 auto;">
+          Начать новую сессию
+        </button>
+      </div>
+    `;
+  }
+  
+  if (srsControls) {
+    srsControls.style.display = 'none';
+  }
+}
+
+// Начать новую сессию
+function startNewSession() {
+  createSession();
+  const srsControls = document.querySelector('.srs-controls');
+  if (srsControls) {
+    srsControls.style.display = 'flex';
+  }
+  loadNextCard();
+}
+
+// Функции управления темой
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem(STORAGE_KEYS.THEME, next);
+  
+  const btn = document.getElementById('themeBtn');
+  if (btn) {
+    btn.textContent = next === 'dark' ? '☀️' : '🌙';
+  }
+}
+
+// Функции управления настройками
+function toggleSettings() {
+  const panel = document.getElementById('sidePanel');
+  if (panel) {
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) {
+      panel.style.display = 'flex';
+    } else {
+      setTimeout(() => {
+        panel.style.display = 'none';
+      }, 300);
+    }
+  }
+}
+
+function toggleTestMode() {
+  testMode = !testMode;
+  const btn = document.getElementById('testBtnSide');
+  if (btn) {
+    btn.textContent = testMode ? '👀 Показать переводы' : '🧠 Самопроверка';
+  }
+  renderFlashcard();
+}
+
+function toggleIpaMode() {
+  showIpa = !showIpa;
+  
+  if (showIpa) {
+    document.body.classList.remove('hide-ipa');
+  } else {
+    document.body.classList.add('hide-ipa');
+  }
+  
+  const ipaBtnSide = document.getElementById('ipaBtnSide');
+  if (ipaBtnSide) {
+    ipaBtnSide.textContent = showIpa ? '🙈 Скрыть IPA' : '👁️ Показать IPA';
+  }
+  
+  localStorage.setItem(STORAGE_KEYS.SHOW_IPA, showIpa);
+  renderFlashcard();
+}
+
+function toggleSyllablesMode() {
+  showSyllables = !showSyllables;
+  
+  if (showSyllables) {
+    document.body.classList.add('show-syllables');
+  } else {
+    document.body.classList.remove('show-syllables');
+  }
+  
+  const syllablesBtnSide = document.getElementById('syllablesBtnSide');
+  if (syllablesBtnSide) {
+    syllablesBtnSide.textContent = showSyllables ? '🔤 Скрыть слоги' : '🔤 Показать слоги';
+  }
+  
+  localStorage.setItem(STORAGE_KEYS.SHOW_SYLLABLES, showSyllables);
+  renderFlashcard();
+}
+
+// Экспорт/импорт прогресса
+async function exportProgress() {
+  try {
+    const progressData = {
+      version: 1,
+      exportedAt: Date.now(),
+      progress: srsProgress
+    };
+    
+    const blob = new Blob([JSON.stringify(progressData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `srs-progress-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    showMessage('Прогресс успешно экспортирован!', 'success');
+  } catch (error) {
+    console.error('Ошибка экспорта:', error);
+    showMessage('Ошибка при экспорте прогресса', 'error');
+  }
+}
+
+async function importProgress() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+  
+  input.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    
+    reader.onload = async (event) => {
+      try {
+        const content = JSON.parse(event.target.result);
+        
+        if (content.progress) {
+          srsProgress = content.progress;
+          
+          // Сохраняем в IndexedDB
+          const request = indexedDB.open('srsProgressDB', 1);
+          
+          request.onsuccess = (event) => {
+            const db = event.target.result;
+            const transaction = db.transaction('progress', 'readwrite');
+            const store = transaction.objectStore('progress');
+            
+            // Очищаем старое
+            store.clear();
+            
+            // Сохраняем новое
+            Object.entries(srsProgress).forEach(([wordId, progress]) => {
+              store.put({ wordId, ...progress });
+            });
+            
+            transaction.oncomplete = () => {
+              updateStats();
+              createSession();
+              loadNextCard();
+              showMessage('Прогресс успешно импортирован!', 'success');
+            };
+            
+            transaction.onerror = () => {
+              showMessage('Ошибка при сохранении прогресса', 'error');
+            };
+          };
+        } else {
+          showMessage('Неверный формат файла', 'error');
+        }
+      } catch (error) {
+        console.error('Ошибка импорта:', error);
+        showMessage('Ошибка при импорте прогресса', 'error');
+      }
+    };
+    
+    reader.readAsText(file);
+  };
+  
+  input.click();
+}
+
+function resetProgress() {
+  if (confirm('Вы уверены, что хотите сбросить весь прогресс SRS? Это действие нельзя отменить.')) {
+    const request = indexedDB.open('srsProgressDB', 1);
+    
+    request.onsuccess = (event) => {
+      const db = event.target.result;
+      const transaction = db.transaction('progress', 'readwrite');
+      const store = transaction.objectStore('progress');
+      store.clear();
+      
+      transaction.oncomplete = () => {
+        srsProgress = {};
+        updateStats();
+        createSession();
+        loadNextCard();
+        showMessage('Прогресс успешно сброшен!', 'success');
+      };
+    };
+  }
+}
+
+// Вспомогательные функции
+function goBackToIndex() {
+  window.location.href = 'index.html';
+}
+
+function showError(message) {
+  const card = document.getElementById('currentFlashcard');
+  if (card) {
+    card.innerHTML = `
+      <div style="text-align: center; padding: 40px 32px;">
+        <div style="color: var(--red); font-size: 48px; margin-bottom: 24px;">⚠️</div>
+        <h3 style="margin-bottom: 16px; color: var(--accent);">Ошибка</h3>
+        <p style="color: var(--muted); margin-bottom: 24px;">${message}</p>
+        <button class="srs-btn srs-btn-remember" onclick="location.reload()">
+          Обновить страницу
+        </button>
+      </div>
+    `;
+  }
+}
+
+function showMessage(message, type = 'info') {
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: ${type === 'success' ? 'var(--green)' : 'var(--red)'};
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    z-index: 10000;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  `;
+  
+  notification.innerHTML = `
+    <span>${type === 'success' ? '✅' : '❌'}</span>
+    <span>${message}</span>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.opacity = '0';
+    notification.style.transform = 'translateX(-50%) translateY(-20px)';
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 300);
+  }, 3000);
+}
+</script>
+</body>
+</html>
